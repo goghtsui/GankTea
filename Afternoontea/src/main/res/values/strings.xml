@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">下午茶</string>
+    <string name="action_settings">设置</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="notifyTitle">提示</string>
+    <string name="notifyMsg">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
+    <string name="setting">设置</string>
+    <string name="theme">主题</string>
+    <string name="done">完成</string>
+    <string name="cancel">取消</string>
+
+    <string name="translation_element_name">translation_element_name</string>
+
+    <string name="action_copy_url">复制链接</string>
+    <string name="action_open_url">从浏览器打开链接</string>
+
+    <string name="toast_copy_done">复制成功</string>
+    <string name="toast_open_fail">打开链接失败</string>
+
+    <string name="home_activity_tab_tile_android">Android</string>
+    <string name="home_activity_tab_tile_ios">iOS</string>
+    <string name="home_activity_tab_tile_web">前端</string>
+    <string name="home_activity_tab_tile_recognized">推荐</string>
+    <string name="home_activity_tab_tile_welfare">福利</string>
+    <string name="home_activity_tab_tile_material">拓展资源</string>
+    <string name="home_activity_tab_tile_recommend">瞎推荐</string>
+    <string name="home_activity_tab_tile_video">休息视频</string>
+
+    <string name="gank_list_item_load_more">正在加载...</string>
+    <string name="gank_list_item_reload">点击重新加载</string>
+
+    <string name="gank_list_item_author_name_unknown">未知</string>
+
+</resources>

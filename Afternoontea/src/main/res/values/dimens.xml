@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+
+    <dimen name="gank_list_item_standard_margin_left">5dp</dimen>
+
+    <dimen name="gank_list_item_nopic_author_text">14sp</dimen>
+
+    <dimen name="gank_list_item_title_text">20sp</dimen>
+
+</resources>
