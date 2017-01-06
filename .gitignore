@@ -30,7 +30,7 @@ proguard/
 .navigation/
 
 # Android Studio captures folder
-captures/
+captures/初始化
 
 # Intellij
 *.iml
@@ -62,3 +62,9 @@ settings.gradle
 /GankTheme/
 /gradle/
 /MarvelLauncher/
+!/build.gradle
+!/gradle.properties
+!/gradlew
+!/gradlew.bat
+/gradlew.bat
+/gradlew
