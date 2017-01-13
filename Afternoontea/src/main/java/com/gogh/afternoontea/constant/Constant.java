@@ -18,4 +18,5 @@ public interface Constant {
     String USER_AGENT_VALUE = "Android/6.0 (compatible;xiaofeng.site)";
     String APIKE_VALUE = "6326ed4955dbb108d8682d6144727afc";
 
+    String THEME_KEY = "user_theme";
 }

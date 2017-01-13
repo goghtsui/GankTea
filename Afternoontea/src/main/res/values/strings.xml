@@ -12,6 +12,7 @@
 
     <string name="translation_element_name">translation_element_name</string>
 
+    <string name="action_share_url">分享</string>
     <string name="action_copy_url">复制链接</string>
     <string name="action_open_url">从浏览器打开链接</string>
 
@@ -31,5 +32,53 @@
     <string name="gank_list_item_reload">点击重新加载</string>
 
     <string name="gank_list_item_author_name_unknown">未知</string>
+
+    <string name="setting_sharedprefereces_name">local_setttings</string>
+
+    <!-- 主题 -->
+    <string name="settting_prefrences_theme_title">主题</string>
+
+    <string name="settting_prefrences_theme_weather_title">天气主题</string>
+    <string name="settting_prefrences_theme_weather_status">theme_weather_status</string>
+    <string name="settting_prefrences_theme_weather_summary_on">主题随天气动态切换（需要开启定位功能）</string>
+
+    <string name="setting_prefrences_theme_night_title">夜间主题</string>
+    <string name="setting_prefrences_theme_night_status">theme_night_status</string>
+
+    <string name="setting_prefrences_theme_night_mode_title">夜间模式</string>
+    <string name="setting_prefrences_theme_night_mode_status">theme_night_mode</string>
+    <string name="setting_prefrences_theme_night_mode_on">根据时间点自动切换到夜间主题</string>
+
+    <!-- 显示 -->
+    <string name="settting_prefrences_display_card_title">显示</string>
+
+    <string name="settting_prefrences_display_no_pic_title">无图模式</string>
+    <string name="settting_prefrences_display_no_pic_key">display_no_pic</string>
+
+    <string name="settting_prefrences_display_wifi_pic_title">仅WIFI下显示图片</string>
+    <string name="settting_prefrences_display_wifi_pic_key">display_wifi_pic</string>
+
+    <string name="settting_prefrences_display_card_list_title">卡片列表</string>
+    <string name="settting_prefrences_display_card_list_off">正在使用图块列表</string>
+    <string name="settting_prefrences_display_card_list_on">正在使用卡片列表</string>
+    <string name="settting_prefrences_display_car_list_key">display_list_mode</string>
+
+    <!-- 关于 -->
+    <string name="settting_prefrences_about_title">关于</string>
+
+    <string name="settting_prefrences_about_share_key">about_share</string>
+    <string name="settting_prefrences_about_share_title">推荐给朋友</string>
+    <string name="settting_prefrences_about_share_summary">好东西一定要分享哦</string>
+
+    <string name="settting_prefrences_about_version_code">1.0.0</string>
+    <string name="settting_prefrences_about_version_title">版本号</string>
+
+    <string name="settting_prefrences_about_author_title">作者博客</string>
+    <string name="settting_prefrences_about_author_summary">http://www.xiaofeng.site</string>
+
+    <!--preferences-->
+    <string name="setting_prefrences_common_off">禁用</string>
+    <string name="setting_prefrences_common_on">开启</string>
+
 
 </resources>

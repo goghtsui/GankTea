@@ -1,11 +1,15 @@
 package com.gogh.afternoontea.utils;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.TypedArray;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.util.TypedValue;
 
 import com.gogh.afternoontea.R;
+import com.gogh.afternoontea.log.Logger;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -76,4 +80,56 @@ public class TintColor {
                 R.color.colorDeepPurplePrimaryCenter, R.color.colorPurplePrimary};
     }
 
+    /**
+     * 获取主题颜色
+     *
+     * @return
+     */
+    public static int getAccentColor(Context context) {
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
+        return typedValue.data;
+    }
+
+    /**
+     * 获取主题颜色
+     *
+     * @return
+     */
+    public static int getPrimaryColor(Context context) {
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        return typedValue.data;
+    }
+
+    /**
+     * 获取主题颜色
+     *
+     * @return
+     */
+    public static int getPrimaryDarkColor(Context context) {
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
+        return typedValue.data;
+    }
+
+    private void getColor(Context context) {
+        TypedArray array = context.getTheme().obtainStyledAttributes(new int[]{
+                android.R.attr.colorBackground,
+                android.R.attr.textColorPrimary,
+        });
+        int backgroundColor = array.getColor(0, 0xFF00FF);
+        int textColor = array.getColor(1, 0xFF00FF);
+        array.recycle();
+    }
+
+    public static int getThemeColor(Context context, int style){
+        int[] attr = new int[]{R.attr.colorPrimary};
+        TypedArray array = context.obtainStyledAttributes(null, attr, 0, style);
+        Logger.d("TAG", "getThemeColor " + 0xffffff);
+        int colorPrimary = array.getColor(0, 0xffffff);
+        Logger.d("TAG", "getThemeColor " + colorPrimary);
+        array.recycle();
+        return colorPrimary;
+    }
 }

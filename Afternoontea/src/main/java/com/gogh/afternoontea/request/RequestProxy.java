@@ -3,7 +3,7 @@ package com.gogh.afternoontea.request;
 import android.content.Context;
 
 import com.gogh.afternoontea.entity.gank.GankEntity;
-import com.gogh.afternoontea.iinterface.OnResponListener;
+import com.gogh.afternoontea.listener.OnResponListener;
 import com.gogh.afternoontea.request.imp.RequestApiImp;
 
 /**

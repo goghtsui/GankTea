@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/settting_prefrences_theme_title">
+        <SwitchPreference
+            android:icon="@drawable/ic_preference_weather"
+            android:key="@string/settting_prefrences_theme_weather_status"
+            android:summaryOff="@string/setting_prefrences_common_off"
+            android:summaryOn="@string/settting_prefrences_theme_weather_summary_on"
+            android:title="@string/settting_prefrences_theme_weather_title"/>
+        <SwitchPreference
+            android:icon="@drawable/ic_preference_night"
+            android:key="@string/setting_prefrences_theme_night_status"
+            android:summaryOff="@string/setting_prefrences_common_off"
+            android:summaryOn="@string/setting_prefrences_common_on"
+            android:title="@string/setting_prefrences_theme_night_title"/>
+        <SwitchPreference
+            android:icon="@drawable/ic_preference_night_mode"
+            android:key="@string/setting_prefrences_theme_night_mode_status"
+            android:summaryOff="@string/setting_prefrences_common_off"
+            android:summaryOn="@string/setting_prefrences_theme_night_mode_on"
+            android:title="@string/setting_prefrences_theme_night_mode_title"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settting_prefrences_display_card_title">
+        <SwitchPreference
+            android:icon="@drawable/ic_preference_pic"
+            android:key="@string/settting_prefrences_display_no_pic_key"
+            android:summaryOff="@string/setting_prefrences_common_off"
+            android:summaryOn="@string/setting_prefrences_common_on"
+            android:title="@string/settting_prefrences_display_no_pic_title"/>
+        <SwitchPreference
+            android:icon="@drawable/ic_preference_wifi"
+            android:key="@string/settting_prefrences_display_wifi_pic_key"
+            android:summaryOff="@string/setting_prefrences_common_off"
+            android:summaryOn="@string/setting_prefrences_common_on"
+            android:title="@string/settting_prefrences_display_wifi_pic_title"/>
+        <SwitchPreference
+            android:icon="@drawable/ic_prefrences_list"
+            android:key="@string/settting_prefrences_display_car_list_key"
+            android:summaryOff="@string/settting_prefrences_display_card_list_off"
+            android:summaryOn="@string/settting_prefrences_display_card_list_on"
+            android:title="@string/settting_prefrences_display_card_list_title"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settting_prefrences_about_title">
+        <com.afollestad.materialdialogs.prefs.MaterialDialogPreference
+            android:icon="@drawable/ic_preference_share"
+            android:key="@string/settting_prefrences_about_share_key"
+            android:summary="@string/settting_prefrences_about_share_summary"
+            android:title="@string/settting_prefrences_about_share_title"/>
+        <intent
+            android:action="android.intent.action.SEND"
+            android:data="@string/settting_prefrences_about_author_summary"
+            android:mimeType="text/plain"/>
+        <Preference
+            android:icon="@drawable/ic_preference_version"
+            android:summary="@string/settting_prefrences_about_version_code"
+            android:title="@string/settting_prefrences_about_version_title"/>
+        <Preference
+            android:icon="@drawable/ic_preference_author"
+            android:summary="@string/settting_prefrences_about_author_summary"
+            android:title="@string/settting_prefrences_about_author_title">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/settting_prefrences_about_author_summary"/>
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

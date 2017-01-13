@@ -19,25 +19,25 @@ public class Resource {
         Logger.d(TAG, "getTypeResId : " + type);
         switch (type) {
             case Urls.GANK_URL.ANDROID:
-                return R.drawable.ic_android;
+                return R.drawable.ic_type_android;
             case Urls.GANK_URL.IOS:
-                return R.drawable.ic_iphone;
+                return R.drawable.ic_type_iphone;
             case Urls.GANK_URL.WEB:
-                return R.drawable.ic_web;
+                return R.drawable.ic_type_web;
             case Urls.GANK_URL.WELFARE:
-                return R.drawable.ic_image;
+                return R.drawable.ic_type_image;
             case Urls.GANK_URL.REST_VIDEO:
-                return R.drawable.ic_movies;
+                return R.drawable.ic_type_movies;
             case Urls.GANK_URL.MATERIAL:
-                return R.drawable.ic_power;
+                return R.drawable.ic_type_power;
             case Urls.GANK_URL.APP:
-                return R.drawable.ic_smartphone;
+                return R.drawable.ic_type_smartphone;
             case Urls.GANK_URL.RECOMMEND:
-                return R.drawable.ic_recommend;
+                return R.drawable.ic_type_recommend;
         }
 
         Logger.d(TAG, "getTypeResId error : " + type);
-        return R.drawable.ic_default;
+        return R.drawable.ic_type_default;
     }
 
 }

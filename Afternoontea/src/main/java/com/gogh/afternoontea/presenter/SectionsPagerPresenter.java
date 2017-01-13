@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import com.gogh.afternoontea.adapter.SectionsPagerAdapter;
 import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.fragment.GankListFragment;
-import com.gogh.afternoontea.iinterface.OnScrollListener;
+import com.gogh.afternoontea.listener.OnScrollListener;
 import com.gogh.afternoontea.main.BaseFragment;
 
 import java.util.ArrayList;

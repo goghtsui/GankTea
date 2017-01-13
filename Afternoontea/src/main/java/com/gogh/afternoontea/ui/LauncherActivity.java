@@ -52,7 +52,6 @@ public class LauncherActivity extends BaseAppCompatActivity implements
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.launcher_layout);
-        Logger.d(TAG, " onCreate.");
         requestPermissionsImp = new RequestPermissionsImp(LauncherActivity.this);
         requestPermissionsImp.setOnStartActivityListener(this);
     }
@@ -60,7 +59,6 @@ public class LauncherActivity extends BaseAppCompatActivity implements
     @Override
     protected void onStart() {
         super.onStart();
-        Logger.d(TAG, " onStart.");
         // 隐藏导航栏
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN);
@@ -69,7 +67,6 @@ public class LauncherActivity extends BaseAppCompatActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        Logger.d(TAG, " onResume.");
         requestPermissionsImp.requestPermission();
     }
 

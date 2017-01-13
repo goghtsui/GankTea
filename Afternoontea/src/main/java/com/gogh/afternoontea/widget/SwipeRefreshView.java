@@ -14,11 +14,12 @@ import android.widget.LinearLayout;
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.adapter.gank.BaseGankAdapter;
 import com.gogh.afternoontea.adapter.gank.GankListAdapter;
+import com.gogh.afternoontea.app.Initializer;
 import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.entity.gank.GankEntity;
-import com.gogh.afternoontea.iinterface.OnLodingChangedListener;
-import com.gogh.afternoontea.iinterface.OnRefreshListener;
-import com.gogh.afternoontea.iinterface.OnScrollListener;
+import com.gogh.afternoontea.location.listener.OnLodingChangedListener;
+import com.gogh.afternoontea.listener.OnRefreshListener;
+import com.gogh.afternoontea.listener.OnScrollListener;
 import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.presenter.imp.GankTechPresneter;
@@ -39,7 +40,8 @@ import static com.gogh.afternoontea.main.BaseFragment.ARG_SECTION_TYPE;
  * <p> ChangeLog: </p>
  * <li> 高晓峰 on 1/4/2017 do fisrt create. </li>
  */
-public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener, OnRefreshListener, OnLodingChangedListener {
+public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
+        OnRefreshListener, OnLodingChangedListener, Initializer {
 
     private static final String TAG = "SwipeRefreshView";
 
@@ -68,15 +70,18 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener, O
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
+            Logger.d(TAG, "mOnScrollListener onScrolled");
             mLastVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
             if (recyclerView.computeVerticalScrollOffset() == 0
                     && verticalScrollOffset == SCROLL_NONE) {// 滚动到顶部
+                Logger.d(TAG, "mOnScrollListener SCROLL_TOP");
                 verticalScrollOffset = SCROLL_TOP;
                 if (onScrollListener != null) {
                     onScrollListener.onScrollToTop(mFragment.getCurrentPage());
                 }
             } else {// 滚动中（已离开顶部）
                 if (verticalScrollOffset == SCROLL_TOP) {
+                    Logger.d(TAG, "mOnScrollListener SCROLL_NONE");
                     verticalScrollOffset = SCROLL_NONE;
                     if (onScrollListener != null) {
                         onScrollListener.onScrolling(mFragment.getCurrentPage());
@@ -88,7 +93,11 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener, O
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
+            Logger.d(TAG, "mOnScrollListener onScrollStateChanged");
             //正在滚动
+            if(newState == RecyclerView.SCROLL_STATE_DRAGGING){
+                onScrollListener.onScrollStart(mFragment.getCurrentPage());
+            }
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && mLastVisibleItemPosition + 1 == recyclerView.getAdapter().getItemCount()) {
                 onLoadMore();
@@ -112,7 +121,7 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener, O
             View intoView = view.findViewById(resId);
             ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(mFragment.getActivity(),
-                            intoView, mFragment.getString(R.string.translation_element_name));
+                            intoView, mFragment.getResources().getString(R.string.translation_element_name));
             ActivityCompat.startActivity(mFragment.getActivity(), intent, options.toBundle());
         }
     };
@@ -126,7 +135,12 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener, O
         initView();
     }
 
-    private void initView() {
+    @Override
+    public void init() {
+    }
+
+    @Override
+    public void initView() {
         mSwipeRefreshLayout.setColorSchemeResources(TintColor.getColorSchemeResources());
         mSwipeRefreshLayout.setOnRefreshListener(this);
 

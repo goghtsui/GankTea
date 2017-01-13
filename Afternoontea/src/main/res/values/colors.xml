@@ -10,27 +10,70 @@
     <color name="black">#040404</color>
 
     <!-- 晴天主题 -->
-    <color name="colorSunny">#677bec</color>
-    <!-- 多云主题 -->
-    <color name="colorCloudy">#008eda</color>
+    <color name="colorSunnyPrimary">#677bec</color>
+    <color name="colorSunnyPrimaryDark">#596ddf</color>
+    <color name="colorSunnyAccent">#FF4081</color>
+    <color name="colorSunnyPrimaryCenter">#475bcc</color>
+
+    <!-- 多云主题 blue  -->
+    <color name="colorCloudyPrimary">#008eda</color>
+    <color name="colorCloudyPrimaryDark">#1976D2</color>
+    <color name="colorCloudyAccent">#FF4081</color>
+    <color name="colorCloudyPrimaryCenter">#154f89</color>
+
     <!-- 阴天主题 -->
-    <color name="colorOvercast">#3E4953</color>
+    <color name="colorOvercastPrimary">#fb2f3131</color>
+    <color name="colorOvercastPrimaryDark">#fd282929</color>
+    <color name="colorOvercastAccent">#FF4081</color>
+    <color name="colorOvercastPrimaryCenter">#fd242626</color>
+
     <!-- 雨主题 -->
-    <color name="colorRain">#8b7d70</color>
+    <color name="colorRainPrimary">#fee2dcd6</color>
+    <color name="colorRainPrimaryDark">#feded4cb</color>
+    <color name="colorRainAccent">#FF4081</color>
+    <color name="colorRainPrimaryCenter">#fec9beb5</color>
+
     <!-- 冰雹主题 -->
-    <color name="colorHailstones">#eaeaea</color>
+    <color name="colorHailstonesPrimary">#eaeaea</color>
+    <color name="colorHailstonesPrimaryDark">#f3dfdddd</color>
+    <color name="colorHailstonesAccent">#FF4081</color>
+    <color name="colorHailstonesPrimaryCenter">#eaeaea</color>
+
     <!-- 雪主题 -->
-    <color name="colorSnow">#f7f5f6</color>
+    <color name="colorSnowPrimary">#FFFFFF</color>
+    <color name="colorSnowPrimaryDark">#edecec</color>
+    <color name="colorSnowAccent">#FF4081</color>
+    <color name="colorSnowPrimaryCenter">#f1eded</color>
+
     <!-- 雾主题 -->
-    <color name="colorFog">#cfc8ca</color>
+    <color name="colorFogPrimary">#cfc8ca</color>
+    <color name="colorFogPrimaryDark">#a7a3a4</color>
+    <color name="colorFogAccent">#FF4081</color>
+    <color name="colorFogPrimaryCenter">#716f70</color>
+
     <!-- 雾霾主题 -->
-    <color name="colorFogAndHaze">#bfbcbd</color>
+    <color name="colorFogAndHazePrimary">#bfbcbd</color>
+    <color name="colorFogAndHazePrimaryDark">#999798</color>
+    <color name="colorFogAndHazeAccent">#FF4081</color>
+    <color name="colorFogAndHazePrimaryCenter">#818080</color>
+
     <!-- 沙尘主题 -->
-    <color name="colorSandstorm">#fcf5cc</color>
+    <color name="colorSandstormPrimary">#d6b35c</color>
+    <color name="colorSandstormPrimaryDark">#d1ac51</color>
+    <color name="colorSandstormAccent">#FF4081</color>
+    <color name="colorSandstormPrimaryCenter">#caa038</color>
+
     <!-- 夜间主题 -->
-    <color name="colorDark">#2d2c2c</color>
-    <!-- 夜间主题 -->
-    <color name="colorDefault">#3F51B5</color>
+    <color name="colorDarkPrimary">#2c2c2c</color>
+    <color name="colorDarkPrimaryDark">#282828</color>
+    <color name="colorDarkAccent">#FF4081</color>
+    <color name="colorDarkPrimaryCenter">#232323</color>
+
+    <!-- 默认主题 -->
+    <color name="colorDefaultPrimary">#3F51B5</color>
+    <color name="colorDefaultPrimaryDark">#303F9F</color>
+    <color name="colorDefaultAccent">#FF4081</color>
+    <color name="colorDefaultPrimaryCenter">#2e3d9e</color>
 
     <!--blue-->
     <color name="colorBluePrimary">#2196F3</color>

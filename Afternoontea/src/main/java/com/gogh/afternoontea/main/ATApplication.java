@@ -1,15 +1,13 @@
 package com.gogh.afternoontea.main;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.iinterface.OnResponListener;
+import com.gogh.afternoontea.app.Initializer;
+import com.gogh.afternoontea.location.Weather;
 import com.gogh.afternoontea.log.Logger;
-import com.gogh.afternoontea.request.RequestProxy;
-import com.gogh.afternoontea.theme.ThemeManager;
+import com.gogh.afternoontea.preference.imp.Configuration;
 import com.gogh.afternoontea.utils.Utility;
-import com.gogh.afternoontea.constant.Weather;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -18,67 +16,43 @@ import com.gogh.afternoontea.constant.Weather;
  * <p> ChangeLog: </p>
  * <li> 高晓峰 on 12/21/2016 do fisrt create. </li>
  */
-public class ATApplication extends Application implements com.gogh.afternoontea.iinterface.AT {
+public class ATApplication extends Application implements Initializer {
 
     private static final String TAG = "ATApplication";
 
-    public static String WEATHER = null;
-    public static int THEME = R.style.BlueTheme;
+    public static int THEME = R.style.DefaultTheme;
+    private Configuration configuration;
 
     @Override
     public void onCreate() {
         super.onCreate();
         Logger.d(TAG, "ATApplication  onCreate.");
+        THEME = new Configuration(getApplicationContext(), Configuration.FLAG_CUSTOM).getTheme();
         init();
     }
 
     @Override
     public void init() {
-        onLocation();
-    }
-
-    @Override
-    public void onLocation() {
-        if (Utility.isNight()) {
-            Logger.d(TAG, " onLocation is night. ");
-            WEATHER = Weather.NIGHT;
+        Logger.d(TAG, "ATApplication  init.");
+        configuration = new Configuration(getApplicationContext(), Configuration.FLAG_SYSTEM);
+        if (configuration.isNightMode()) {
+            Logger.d(TAG, "is night mode. ");
+            if (Utility.isNight()) {
+                Logger.d(TAG, " is night mode and set up night theme. ");
+                THEME = R.style.DarkTheme;
+            } else {
+                new Weather(this).onLocation();
+            }
         } else {
-            Logger.d(TAG, " onLocation is normal. ");
-            RequestProxy.newInstance().getLocation(getApplicationContext(), new OnResponListener<String>() {
-                @Override
-                public void onComplete() {
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                }
-
-                @Override
-                public void onResponse(String response) {
-                    requestWeather(response);
-                }
-            });
+            if (configuration.isWeatherTheme()) {// 开启天气主题
+                Logger.d(TAG, "had opened weather theme.");
+                new Weather(this).onLocation();
+            }
         }
     }
 
     @Override
-    public void requestWeather(String cityIp) {
-        Log.d(TAG, " requestWeather city : " + cityIp);
-        RequestProxy.newInstance().getWeatherByCity(cityIp, new OnResponListener<String>() {
-            @Override
-            public void onComplete() {
-            }
-
-            @Override
-            public void onError(Throwable e) {
-            }
-
-            @Override
-            public void onResponse(String response) {
-                WEATHER = response;
-                ThemeManager.newInstance().setTheme(WEATHER);
-            }
-        });
+    public void initView() {
     }
 
 }

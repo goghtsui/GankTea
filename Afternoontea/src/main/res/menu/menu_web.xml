@@ -5,6 +5,12 @@
       tools:context=".ui.activity.WebActivity">
 
     <item
+        android:id="@+id/action_share_url"
+        android:title="@string/action_share_url"
+        android:orderInCategory="97"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/action_copy_url"
         android:title="@string/action_copy_url"
         android:orderInCategory="98"

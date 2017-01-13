@@ -2,9 +2,9 @@ package com.gogh.afternoontea.presenter.imp;
 
 import com.gogh.afternoontea.adapter.gank.GankListAdapter;
 import com.gogh.afternoontea.entity.gank.GankEntity;
-import com.gogh.afternoontea.iinterface.OnLodingChangedListener;
-import com.gogh.afternoontea.iinterface.OnRefreshListener;
-import com.gogh.afternoontea.iinterface.OnResponListener;
+import com.gogh.afternoontea.location.listener.OnLodingChangedListener;
+import com.gogh.afternoontea.listener.OnRefreshListener;
+import com.gogh.afternoontea.listener.OnResponListener;
 import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.presenter.BasePresenter;

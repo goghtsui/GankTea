@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.iinterface.OnScrollListener;
+import com.gogh.afternoontea.listener.OnScrollListener;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.widget.SwipeRefreshView;
 
@@ -113,4 +113,8 @@ public class GankListFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onChanged() {
+        mRecyclerView.getAdapter().notifyDataSetChanged();
+    }
 }

@@ -27,23 +27,112 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <!-- START -->
+    <!--SunnyTheme-->
+    <style name="SunnyTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/colorSunnyPrimary</item>
+        <item name="colorPrimaryDark">@color/colorSunnyPrimaryDark</item>
+        <item name="colorAccent">@color/colorSunnyAccent</item>
+        <item name="android:navigationBarColor">@color/colorSunnyPrimaryDark</item>
+    </style>
+
+    <!--CloudyTheme-->
+    <style name="CloudyTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/colorCloudyPrimary</item>
+        <item name="colorPrimaryDark">@color/colorCloudyPrimaryDark</item>
+        <item name="colorAccent">@color/colorCloudyAccent</item>
+        <item name="android:navigationBarColor">@color/colorCloudyPrimaryDark</item>
+    </style>
+
+    <!--OvercastTheme-->
+    <style name="OvercastTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/colorOvercastPrimary</item>
+        <item name="colorPrimaryDark">@color/colorOvercastPrimaryDark</item>
+        <item name="colorAccent">@color/colorOvercastAccent</item>
+        <item name="android:navigationBarColor">@color/colorOvercastPrimaryDark</item>
+    </style>
+
+    <!--RainTheme-->
+    <style name="RainTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/colorRainPrimary</item>
+        <item name="colorPrimaryDark">@color/colorRainPrimaryDark</item>
+        <item name="colorAccent">@color/colorRainAccent</item>
+        <item name="android:navigationBarColor">@color/colorRainPrimaryDark</item>
+    </style>
+
+    <!--HailstonesTheme-->
+    <style name="HailstonesTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/colorHailstonesPrimary</item>
+        <item name="colorPrimaryDark">@color/colorHailstonesPrimaryDark</item>
+        <item name="colorAccent">@color/colorHailstonesAccent</item>
+        <item name="android:navigationBarColor">@color/colorHailstonesPrimaryDark</item>
+    </style>
+
+    <!--SnowTheme-->
+    <style name="SnowTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/colorSnowPrimary</item>
+        <item name="colorPrimaryDark">@color/colorSnowPrimaryDark</item>
+        <item name="colorAccent">@color/colorSnowAccent</item>
+        <item name="android:navigationBarColor">@color/colorSnowPrimaryDark</item>
+    </style>
+
+    <!--blueTheme-->
+    <style name="FogTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/colorFogPrimary</item>
+        <item name="colorPrimaryDark">@color/colorFogPrimaryDark</item>
+        <item name="colorAccent">@color/colorFogAccent</item>
+        <item name="android:navigationBarColor">@color/colorFogPrimaryDark</item>
+    </style>
+
+    <!--FogAndHazeTheme-->
+    <style name="FogAndHazeTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/colorFogAndHazePrimary</item>
+        <item name="colorPrimaryDark">@color/colorFogAndHazePrimaryDark</item>
+        <item name="colorAccent">@color/colorFogAndHazeAccent</item>
+        <item name="android:navigationBarColor">@color/colorFogAndHazePrimaryDark</item>
+    </style>
+
+    <!--SandstormTheme-->
+    <style name="SandstormTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/colorSandstormPrimary</item>
+        <item name="colorPrimaryDark">@color/colorSandstormPrimaryDark</item>
+        <item name="colorAccent">@color/colorSandstormAccent</item>
+        <item name="android:navigationBarColor">@color/colorSandstormPrimaryDark</item>
+    </style>
+
+    <!--DarkTheme-->
+    <style name="DarkTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/colorDarkPrimary</item>
+        <item name="colorPrimaryDark">@color/colorDarkPrimaryDark</item>
+        <item name="colorAccent">@color/colorDarkAccent</item>
+        <item name="android:navigationBarColor">@color/colorDarkPrimaryDark</item>
+    </style>
+
+    <!--DefaultTheme-->
+    <style name="DefaultTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/colorDefaultPrimary</item>
+        <item name="colorPrimaryDark">@color/colorDefaultPrimaryDark</item>
+        <item name="colorAccent">@color/colorDefaultAccent</item>
+        <item name="android:navigationBarColor">@color/colorDefaultPrimaryDark</item>
+    </style>
+
+    <!-- END -->
     <!--blueTheme-->
     <style name="BlueTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorBluePrimary</item>
         <item name="colorPrimaryDark">@color/colorBluePrimaryDark</item>
-        <item name="colorAccent">@color/colorBluePrimaryDark</item>
+        <item name="colorAccent">@color/colorBlueAccent</item>
         <item name="android:navigationBarColor">@color/colorBluePrimaryDark</item>
         <!-- <item name="menuBackground">@drawable/blue_background</item>-->
         <item name="md_title_color">@color/colorBluePrimary</item>
         <item name="md_link_color">@color/colorBluePrimary</item>
         <item name="md_positive_color">@color/colorBluePrimary</item>
-
     </style>
     <!--redTheme-->
     <style name="RedTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorRedPrimary</item>
         <item name="colorPrimaryDark">@color/colorRedPrimaryDark</item>
-        <item name="colorAccent">@color/colorRedPrimaryDark</item>
+        <item name="colorAccent">@color/colorRedAccent</item>
         <item name="android:navigationBarColor">@color/colorRedPrimaryDark</item>
         <!--<item name="menuBackground">@drawable/red_background</item>-->
         <item name="md_title_color">@color/colorRedPrimary</item>
@@ -55,7 +144,7 @@
     <style name="BrownTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorBrownPrimary</item>
         <item name="colorPrimaryDark">@color/colorBrownPrimaryDark</item>
-        <item name="colorAccent">@color/colorBrownPrimaryDark</item>
+        <item name="colorAccent">@color/colorBrownAccent</item>
         <item name="android:navigationBarColor">@color/colorBrownPrimaryDark</item>
         <!--<item name="menuBackground">@drawable/brown_background</item>-->
         <item name="md_title_color">@color/colorBrownPrimary</item>
@@ -67,7 +156,7 @@
     <style name="GreenTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorGreenPrimary</item>
         <item name="colorPrimaryDark">@color/colorGreenPrimaryDark</item>
-        <item name="colorAccent">@color/colorGreenPrimaryDark</item>
+        <item name="colorAccent">@color/colorGreenAccent</item>
         <item name="android:navigationBarColor">@color/colorGreenPrimaryDark</item>
         <!--<item name="menuBackground">@drawable/green_background</item>-->
         <item name="md_title_color">@color/colorGreenPrimary</item>
@@ -78,7 +167,7 @@
     <style name="PurpleTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorPurplePrimary</item>
         <item name="colorPrimaryDark">@color/colorPurplePrimaryDark</item>
-        <item name="colorAccent">@color/colorPurplePrimaryDark</item>
+        <item name="colorAccent">@color/colorPurpleAccent</item>
         <item name="android:navigationBarColor">@color/colorPurplePrimaryDark</item>
         <!--<item name="menuBackground">@drawable/purple_background</item>-->
         <item name="md_title_color">@color/colorPurplePrimary</item>
@@ -89,7 +178,7 @@
     <style name="TealTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorTealPrimary</item>
         <item name="colorPrimaryDark">@color/colorTealPrimaryDark</item>
-        <item name="colorAccent">@color/colorTealPrimaryDark</item>
+        <item name="colorAccent">@color/colorTealAccent</item>
         <item name="android:navigationBarColor">@color/colorTealPrimaryDark</item>
         <!--<item name="menuBackground">@drawable/teal_background</item>-->
         <item name="md_title_color">@color/colorTealPrimary</item>
@@ -100,7 +189,7 @@
     <style name="PinkTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorPinkPrimary</item>
         <item name="colorPrimaryDark">@color/colorPinkPrimaryDark</item>
-        <item name="colorAccent">@color/colorPinkPrimaryDark</item>
+        <item name="colorAccent">@color/colorPinkAccent</item>
         <item name="android:navigationBarColor">@color/colorPinkPrimaryDark</item>
         <!--<item name="menuBackground">@drawable/pink_background</item>-->
         <item name="md_title_color">@color/colorPinkPrimary</item>
@@ -111,7 +200,7 @@
     <style name="DeepPurpleTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorDeepPurplePrimary</item>
         <item name="colorPrimaryDark">@color/colorDeepPurplePrimaryDark</item>
-        <item name="colorAccent">@color/colorDeepPurplePrimaryDark</item>
+        <item name="colorAccent">@color/colorDeepPurpleAccent</item>
         <item name="android:navigationBarColor">@color/colorDeepPurplePrimaryDark</item>
         <!--<item name="menuBackground">@drawable/deep_purple_background</item>-->
         <item name="md_title_color">@color/colorDeepPurplePrimary</item>
@@ -122,7 +211,7 @@
     <style name="OrangeTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorOrangePrimary</item>
         <item name="colorPrimaryDark">@color/colorOrangePrimaryDark</item>
-        <item name="colorAccent">@color/colorOrangePrimaryDark</item>
+        <item name="colorAccent">@color/colorOrangeAccent</item>
         <item name="android:navigationBarColor">@color/colorOrangePrimaryDark</item>
         <!-- <item name="menuBackground">@drawable/orange_background</item>-->
         <item name="md_title_color">@color/colorOrangePrimary</item>
@@ -133,7 +222,7 @@
     <style name="IndigoTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorIndigoPrimary</item>
         <item name="colorPrimaryDark">@color/colorIndigoPrimaryDark</item>
-        <item name="colorAccent">@color/colorIndigoPrimaryDark</item>
+        <item name="colorAccent">@color/colorIndigoAccent</item>
         <item name="android:navigationBarColor">@color/colorIndigoPrimaryDark</item>
         <!--<item name="menuBackground">@drawable/indigo_background</item>-->
         <item name="md_title_color">@color/colorIndigoPrimary</item>
@@ -144,7 +233,7 @@
     <style name="CyanTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorCyanPrimary</item>
         <item name="colorPrimaryDark">@color/colorCyanPrimaryDark</item>
-        <item name="colorAccent">@color/colorCyanPrimaryDark</item>
+        <item name="colorAccent">@color/colorCyanAccent</item>
         <item name="android:navigationBarColor">@color/colorCyanPrimaryDark</item>
         <!--<item name="menuBackground">@drawable/cyan_background</item>-->
         <item name="md_title_color">@color/colorCyanPrimary</item>
@@ -155,7 +244,7 @@
     <style name="LightGreenTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorLightGreenPrimary</item>
         <item name="colorPrimaryDark">@color/colorLightGreenPrimaryDark</item>
-        <item name="colorAccent">@color/colorLightGreenPrimaryDark</item>
+        <item name="colorAccent">@color/colorLightGreenAccent</item>
         <item name="android:navigationBarColor">@color/colorLightGreenPrimaryDark</item>
         <!--<item name="menuBackground">@drawable/light_green_background</item>-->
         <item name="md_title_color">@color/colorLightGreenPrimary</item>
@@ -166,7 +255,7 @@
     <style name="LimeTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorLimePrimary</item>
         <item name="colorPrimaryDark">@color/colorLimePrimaryDark</item>
-        <item name="colorAccent">@color/colorLimePrimaryDark</item>
+        <item name="colorAccent">@color/colorLimeAccent</item>
         <item name="android:navigationBarColor">@color/colorLimePrimaryDark</item>
         <!--<item name="menuBackground">@drawable/lime_background</item>-->
         <item name="md_title_color">@color/colorLimePrimary</item>
@@ -177,7 +266,7 @@
     <style name="DeepOrangeTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorDeepOrangePrimary</item>
         <item name="colorPrimaryDark">@color/colorDeepOrangePrimaryDark</item>
-        <item name="colorAccent">@color/colorDeepOrangePrimaryDark</item>
+        <item name="colorAccent">@color/colorDeepOrangeAccent</item>
         <item name="android:navigationBarColor">@color/colorDeepOrangePrimaryDark</item>
         <!--<item name="menuBackground">@drawable/deep_orange_background</item>-->
         <item name="md_title_color">@color/colorDeepOrangePrimary</item>
@@ -188,7 +277,7 @@
     <style name="BlueGreyTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorBlueGreyPrimary</item>
         <item name="colorPrimaryDark">@color/colorBlueGreyPrimaryDark</item>
-        <item name="colorAccent">@color/colorBlueGreyPrimaryDark</item>
+        <item name="colorAccent">@color/colorBlueGreyAccent</item>
         <!--<item name="menuBackground">@drawable/blue_grey_background</item>-->
         <item name="android:navigationBarColor">@color/colorBlueGreyPrimaryDark</item>
         <item name="md_title_color">@color/colorBlueGreyPrimary</item>

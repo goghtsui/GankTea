@@ -6,7 +6,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.gogh.afternoontea.iinterface.OnLocationListener;
+import com.gogh.afternoontea.location.listener.OnLocationListener;
 import com.gogh.afternoontea.log.Logger;
 
 /**

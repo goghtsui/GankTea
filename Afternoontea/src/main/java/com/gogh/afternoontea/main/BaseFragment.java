@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gogh.afternoontea.app.CardModeManager;
 import com.gogh.afternoontea.constant.Urls;
-import com.gogh.afternoontea.iinterface.OnScrollListener;
-import com.gogh.afternoontea.iinterface.OnTopListener;
+import com.gogh.afternoontea.listener.OnCardModeChangedListener;
+import com.gogh.afternoontea.listener.OnScrollListener;
+import com.gogh.afternoontea.listener.OnTopListener;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -17,7 +19,7 @@ import com.gogh.afternoontea.iinterface.OnTopListener;
  * <p> ChangeLog: </p>
  * <li> 高晓峰 on 12/26/2016 do fisrt create. </li>
  */
-public abstract class BaseFragment extends Fragment implements OnTopListener{
+public abstract class BaseFragment extends Fragment implements OnTopListener, OnCardModeChangedListener{
 
     /**
      * The fragment argument representing the section number for this ragment.
@@ -52,6 +54,7 @@ public abstract class BaseFragment extends Fragment implements OnTopListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        CardModeManager.newInstance().registerCardModeChangedListener(this);
         return getContentLayout(inflater, container);
     }
 
@@ -93,4 +96,9 @@ public abstract class BaseFragment extends Fragment implements OnTopListener{
         return orignal;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        CardModeManager.newInstance().unRegisterCardModeChangedListener(this);
+    }
 }

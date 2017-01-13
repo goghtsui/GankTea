@@ -19,9 +19,11 @@ import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.preference.imp.Configuration;
 import com.gogh.afternoontea.ui.GankDetailActivity;
 import com.gogh.afternoontea.ui.HomeActivity;
 import com.gogh.afternoontea.utils.DataUtil;
+import com.gogh.afternoontea.utils.NetWorkInfo;
 import com.gogh.afternoontea.utils.Resource;
 import com.squareup.picasso.Picasso;
 
@@ -58,12 +60,17 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private boolean isScrollToBottom = false;
     private boolean isLoadingError = false;
 
+    private NetWorkInfo netWorkInfo;
+    private Configuration mConfiguration;
+
     private List<GankEntity.ResultsBean> datas;
     private OnItemClickListener onItemClickListener;
 
     public GankListAdapter(Context context, String resourceType) {
         this.context = context;
         this.resourceType = resourceType;
+        netWorkInfo = new NetWorkInfo(context);
+        mConfiguration = new Configuration(context, Configuration.FLAG_SYSTEM);
     }
 
     /**
@@ -125,72 +132,113 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Logger.d("TAG", "onBindViewHolder. ");
         if (holder != null && holder instanceof ItemViewHolder) {
-            GankEntity.ResultsBean entity = datas.get(position);
-            if (entity != null) {
-                if (TextUtils.isEmpty(entity.getDesc())) {
-                    ((ItemViewHolder) holder).titleName.setText(" ");
-                } else {
-                    ((ItemViewHolder) holder).titleName.setText(entity.getDesc());
-                }
+            bindNormalData(holder, position);
+        } else if (holder != null && holder instanceof NoPicViewHolder) {
+            bindNopicData(holder, position);
+        } else {
+            ((FooterViewHolder) holder).itemView.setVisibility((isScrollToBottom && !isLoadingError) ? View.VISIBLE : View.GONE);
+        }
+    }
 
-                if (TextUtils.isEmpty(entity.getDesc())) {
-                    ((ItemViewHolder) holder).itemAuthor.setText(" ");
-                } else {
-                    ((ItemViewHolder) holder).itemAuthor.setText(entity.getWho());
-                }
+    /**
+     * 绑定数据到view，该数据是包含图片的
+     *
+     * @param holder
+     * @param position
+     */
+    private void bindNormalData(RecyclerView.ViewHolder holder, int position) {
+        GankEntity.ResultsBean entity = datas.get(position);
+        if (entity != null) {
+            if (TextUtils.isEmpty(entity.getDesc())) {
+                ((ItemViewHolder) holder).titleName.setText(" ");
+            } else {
+                ((ItemViewHolder) holder).titleName.setText(entity.getDesc());
+            }
 
-                if (TextUtils.isEmpty(entity.getDesc())) {
-                    ((ItemViewHolder) holder).itemCreateDate.setText(" ");
-                } else {
-                    ((ItemViewHolder) holder).itemCreateDate.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
-                }
+            if (TextUtils.isEmpty(entity.getDesc())) {
+                ((ItemViewHolder) holder).itemAuthor.setText(" ");
+            } else {
+                ((ItemViewHolder) holder).itemAuthor.setText(entity.getWho());
+            }
 
-                if (!TextUtils.isEmpty(resourceType) && resourceType.equals("all")
-                        && !TextUtils.isEmpty(entity.getType())) {
-                    ((ItemViewHolder) holder).itemType.setVisibility(View.VISIBLE);
-                    ((ItemViewHolder) holder).itemType.setImageResource(Resource.getResIdByType(entity.getType()));
-                }
+            if (TextUtils.isEmpty(entity.getDesc())) {
+                ((ItemViewHolder) holder).itemCreateDate.setText(" ");
+            } else {
+                ((ItemViewHolder) holder).itemCreateDate.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
+            }
 
-                String imageUrl = null;
+            if (!TextUtils.isEmpty(resourceType) && resourceType.equals("all")
+                    && !TextUtils.isEmpty(entity.getType())) {
+                ((ItemViewHolder) holder).itemType.setVisibility(View.VISIBLE);
+                ((ItemViewHolder) holder).itemType.setImageResource(Resource.getResIdByType(entity.getType()));
+            }
+
+            String imageUrl = null;
+
+            if (!mConfiguration.isNopicMode()) {
                 if (entity.getImages() != null && entity.getImages().size() > 0) {
                     imageUrl = entity.getImages().get(0);
+                }
+            }
+
+            Picasso.with(context).load(imageUrl)
+                    .config(Bitmap.Config.ARGB_8888)
+                    .placeholder(R.mipmap.tech_item_bg)
+                    .error(R.mipmap.tech_item_bg)
+                    .into(((ItemViewHolder) holder).itemBgImage);
+        }
+    }
+
+    /**
+     * 绑定数据到view，该数据是不包含图片的
+     *
+     * @param holder
+     * @param position
+     */
+    private void bindNopicData(RecyclerView.ViewHolder holder, int position) {
+        GankEntity.ResultsBean entity = datas.get(position);
+        if (entity != null) {
+            if (TextUtils.isEmpty(entity.getDesc())) {
+                ((NoPicViewHolder) holder).titleName.setText(" ");
+            } else {
+                ((NoPicViewHolder) holder).titleName.setText(entity.getDesc());
+            }
+
+            if (TextUtils.isEmpty(entity.getDesc())) {
+                ((NoPicViewHolder) holder).itemAuthor.setText(" ");
+            } else {
+                ((NoPicViewHolder) holder).itemAuthor.setText(entity.getWho());
+            }
+
+            if (TextUtils.isEmpty(entity.getDesc())) {
+                ((NoPicViewHolder) holder).itemCreateDate.setText(" ");
+            } else {
+                ((NoPicViewHolder) holder).itemCreateDate.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
+            }
+
+            if (!TextUtils.isEmpty(resourceType) && resourceType.equals("all")
+                    && !TextUtils.isEmpty(entity.getType())) {
+                ((NoPicViewHolder) holder).itemType.setVisibility(View.VISIBLE);
+                ((NoPicViewHolder) holder).itemType.setImageResource(Resource.getResIdByType(entity.getType()));
+            }
+
+            if (mConfiguration.isCardMode()) {
+
+                String imageUrl = null;
+                if (!mConfiguration.isNopicMode()) {
+                    if (entity.getImages() != null && entity.getImages().size() > 0) {
+                        imageUrl = entity.getImages().get(0);
+                    }
                 }
 
                 Picasso.with(context).load(imageUrl)
                         .config(Bitmap.Config.ARGB_8888)
-                        .placeholder(R.mipmap.tech_item_bg)
-                        .error(R.mipmap.tech_item_bg)
-                        .into(((ItemViewHolder) holder).itemBgImage);
+                        .placeholder(R.mipmap.gank_list_item_image_default)
+                        .error(R.mipmap.gank_list_item_image_default)
+                        .into(((NoPicViewHolder) holder).itemImage);
+
+
             }
-        } else if (holder != null && holder instanceof NoPicViewHolder) {
-            GankEntity.ResultsBean entity = datas.get(position);
-            if (entity != null) {
-                if (TextUtils.isEmpty(entity.getDesc())) {
-                    ((NoPicViewHolder) holder).titleName.setText(" ");
-                } else {
-                    ((NoPicViewHolder) holder).titleName.setText(entity.getDesc());
-                }
-
-                if (TextUtils.isEmpty(entity.getDesc())) {
-                    ((NoPicViewHolder) holder).itemAuthor.setText(" ");
-                } else {
-                    ((NoPicViewHolder) holder).itemAuthor.setText(entity.getWho());
-                }
-
-                if (TextUtils.isEmpty(entity.getDesc())) {
-                    ((NoPicViewHolder) holder).itemCreateDate.setText(" ");
-                } else {
-                    ((NoPicViewHolder) holder).itemCreateDate.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
-                }
-
-                if (!TextUtils.isEmpty(resourceType) && resourceType.equals("all")
-                        && !TextUtils.isEmpty(entity.getType())) {
-                    ((NoPicViewHolder) holder).itemType.setVisibility(View.VISIBLE);
-                    ((NoPicViewHolder) holder).itemType.setImageResource(Resource.getResIdByType(entity.getType()));
-                }
-            }
-        } else {
-            ((FooterViewHolder) holder).itemView.setVisibility((isScrollToBottom && !isLoadingError) ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -214,14 +262,21 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return VIEW_TYPE_FOOTER;
         }
 
-        // 有图片的项
-        if (datas.get(position).getImages() != null
-                && datas.get(position).getImages().size() > 0) {
-            return VIEW_TYPE_NORMAL;
-        } else {// 没有图片
-            return VIEW_TYPE_NO_PIC;
+        if (!TextUtils.isEmpty(resourceType) && resourceType.equals("all")) {// 推荐位为混合排版
+            // 有图片的项
+            if (datas.get(position).getImages() != null
+                    && datas.get(position).getImages().size() > 0) {
+                return VIEW_TYPE_NORMAL;
+            } else {// 没有图片
+                return VIEW_TYPE_NO_PIC;
+            }
+        } else {// 其他类别根据设置排版
+            if (mConfiguration.isCardMode()) {
+                return VIEW_TYPE_NO_PIC;
+            } else {
+                return VIEW_TYPE_NORMAL;
+            }
         }
-
     }
 
     @Override
@@ -268,6 +323,9 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.onItemClickListener = onItemClickListener;
     }
 
+    /**
+     * 有图片的项
+     */
     protected class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private AppCompatImageView itemType;
@@ -299,8 +357,12 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+    /**
+     * 没有图片的项
+     */
     protected class NoPicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        private ImageView itemImage;
         private AppCompatImageView itemType;
         private AppCompatTextView titleName;
         private AppCompatTextView itemAuthor;
@@ -308,6 +370,7 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public NoPicViewHolder(View itemView) {
             super(itemView);
+            itemImage = (ImageView) itemView.findViewById(R.id.gank_list_item_nopic_default_img);
             itemType = (AppCompatImageView) itemView.findViewById(R.id.gank_list_item_nopic_type);
             titleName = (AppCompatTextView) itemView.findViewById(R.id.gank_list_item_nopic_title);
             itemAuthor = (AppCompatTextView) itemView.findViewById(R.id.gank_list_item_nopic_author);
@@ -324,10 +387,11 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public void onClick(View v) {
             Intent intent = new Intent(context, GankDetailActivity.class);
             intent.putExtra(Urls.GANK_URL.BUNDLE_KEY, datas.get(getAdapterPosition()));
+
             View intoView = v.findViewById(R.id.gank_list_item_nopic_default_img);
             ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation((HomeActivity) context,
-                            intoView, context.getString(R.string.app_name));// 不需要联动
+                            intoView, context.getResources().getString(R.string.translation_element_name));// 不需要联动
             ActivityCompat.startActivity((HomeActivity) context, intent, options.toBundle());
         }
     }

@@ -9,8 +9,8 @@ import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.adapter.meizi.BaseCardAdapter;
 import com.gogh.afternoontea.adapter.meizi.MeiziAdapter;
 import com.gogh.afternoontea.entity.meizi.MeiziBean;
-import com.gogh.afternoontea.iinterface.OnResponListener;
-import com.gogh.afternoontea.iinterface.OnScrollListener;
+import com.gogh.afternoontea.listener.OnResponListener;
+import com.gogh.afternoontea.listener.OnScrollListener;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.parser.html.HtmlParser;
 import com.gogh.afternoontea.request.RequestProxy;
@@ -117,5 +117,10 @@ public class MeizituFragment extends BaseFragment {
 
     @Override
     public void gotoTop() {
+    }
+
+    @Override
+    public void onChanged() {
+
     }
 }

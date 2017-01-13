@@ -7,9 +7,11 @@ import android.support.v4.view.ViewPager;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.adapter.SectionsPagerAdapter;
-import com.gogh.afternoontea.iinterface.OnMultipleClickListener;
-import com.gogh.afternoontea.iinterface.OnScrollListener;
-import com.gogh.afternoontea.iinterface.OnTopListener;
+import com.gogh.afternoontea.app.Initializer;
+import com.gogh.afternoontea.listener.OnMultipleClickListener;
+import com.gogh.afternoontea.listener.OnScrollListener;
+import com.gogh.afternoontea.listener.OnTopListener;
+import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.presenter.SectionsPagerPresenter;
 import com.gogh.afternoontea.ui.HomeActivity;
@@ -21,13 +23,13 @@ import com.gogh.afternoontea.ui.HomeActivity;
  * <p> ChangeLog: </p>
  * <li> 高晓峰 on 1/6/2017 do fisrt create. </li>
  */
-public class HomePagerView implements OnScrollListener {
+public class HomePagerView implements OnScrollListener, Initializer {
 
     private static final String TAG = "HomePagerView";
 
     private int currentPage = 0;
 
-    private HomeActivity mContext;
+    private Context mContext;
 
     private TabLayout mTablayout;
 
@@ -82,17 +84,22 @@ public class HomePagerView implements OnScrollListener {
 
     public HomePagerView(Context mContext, TabLayout mTablayout, FloatingActionButton mFloatingActionButton) {
         this.mTablayout = mTablayout;
-        this.mContext = (HomeActivity) mContext;
+        this.mContext = mContext;
         this.mFloatingActionButton = mFloatingActionButton;
         initView();
     }
 
-    private void initView() {
-        mViewPager = (ViewPager) mContext.findViewById(R.id.container);
+    @Override
+    public void init() {
+    }
+
+    @Override
+    public void initView() {
+        mViewPager = (ViewPager) ((HomeActivity) mContext).findViewById(R.id.container);
 
         SectionsPagerPresenter pagerPresenter = SectionsPagerPresenter.newInstance();
         pagerPresenter.setOnScrollListener(this);
-        pagerAdapter = pagerPresenter.getPagerAdapter(mContext, mContext.getSupportFragmentManager());
+        pagerAdapter = pagerPresenter.getPagerAdapter(mContext, ((HomeActivity) mContext).getSupportFragmentManager());
         mViewPager.setAdapter(pagerAdapter);
         mTablayout.setupWithViewPager(mViewPager);
 
@@ -115,10 +122,20 @@ public class HomePagerView implements OnScrollListener {
     }
 
     /**
+     * 滚动开始
+     *
+     * @param currentPage 所在页面
+     */
+    @Override
+    public void onScrollStart(int currentPage) {
+    }
+
+    /**
      * recyclerview已滚动到顶部
      */
     @Override
     public void onScrollToTop(int fragmentIndex) {
+        Logger.d(TAG, "onScrollToTop");
         if (currentPage == fragmentIndex) {
             mFloatingActionButton.setImageResource(R.drawable.ic_menu_button);
             mFloatingActionButton.setOnClickListener(v -> {
@@ -136,10 +153,11 @@ public class HomePagerView implements OnScrollListener {
      */
     @Override
     public void onScrolling(int fragmentIndex) {
+        Logger.d(TAG, "onScrolling");
         if (currentPage == fragmentIndex) {
             mFloatingActionButton.setImageResource(R.drawable.ic_top);
-            mFloatingActionButton.setOnClickListener(v ->
-                    ((OnTopListener) pagerAdapter.getItem(mViewPager.getCurrentItem())).gotoTop());
+            mFloatingActionButton.setOnClickListener(v -> ((OnTopListener) pagerAdapter.getItem(mViewPager.getCurrentItem())).gotoTop()
+            );
         }
     }
 

@@ -12,6 +12,7 @@ import android.view.WindowManager;
 
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.gogh.afternoontea.R;
+import com.gogh.afternoontea.preference.imp.Configuration;
 import com.gogh.afternoontea.theme.ThemeManager;
 
 /**
@@ -58,62 +59,23 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         updateTheme(selectedColor);
     }
 
-    @Override
-    public void onUpdateTheme(int themeStyleId) {
-        updateThemeByChoice(themeStyleId);
-        // 动态设置标题栏的颜色
-        getWindow().setStatusBarColor(ContextCompat.getColor(BaseAppCompatActivity.this, themeStyleId));
-        // 动态设置导航栏的颜色
-        getWindow().setNavigationBarColor(ContextCompat.getColor(BaseAppCompatActivity.this, themeStyleId));
+    /**
+     *  设置主题，并通知显示的activity更改主题色
+     * @param selectedColor
+     */
+    private void updateTheme(@ColorInt int selectedColor) {
+        ThemeManager.newInstance().updateThemeByColor(BaseAppCompatActivity.this, selectedColor);
+        new Configuration(getApplicationContext(), Configuration.FLAG_CUSTOM).setTheme(ATApplication.THEME);
     }
 
-    private void updateTheme(@ColorInt int selectedColor) {
-        if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorBluePrimary)) {
-            ATApplication.THEME = R.style.BlueTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorBluePrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorRedPrimary)) {
-            ATApplication.THEME = R.style.RedTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorRedPrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorBrownPrimary)) {
-            ATApplication.THEME = R.style.BrownTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorBrownPrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorGreenPrimary)) {
-            ATApplication.THEME = R.style.GreenTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorGreenPrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorPurplePrimary)) {
-            ATApplication.THEME = R.style.PurpleTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorPurplePrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorTealPrimary)) {
-            ATApplication.THEME = R.style.TealTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorTealPrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorPinkPrimary)) {
-            ATApplication.THEME = R.style.PinkTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorPinkPrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorDeepPurplePrimary)) {
-            ATApplication.THEME = R.style.DeepPurpleTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorDeepPurplePrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorOrangePrimary)) {
-            ATApplication.THEME = R.style.OrangeTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorOrangePrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorIndigoPrimary)) {
-            ATApplication.THEME = R.style.IndigoTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorIndigoPrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorLightGreenPrimary)) {
-            ATApplication.THEME = R.style.LightGreenTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorLightGreenPrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorDeepOrangePrimary)) {
-            ATApplication.THEME = R.style.DeepOrangeTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorDeepOrangePrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorLimePrimary)) {
-            ATApplication.THEME = R.style.LimeTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorLimePrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorBlueGreyPrimary)) {
-            ATApplication.THEME = R.style.BlueGreyTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorBlueGreyPrimary);
-        } else if (selectedColor == ContextCompat.getColor(BaseAppCompatActivity.this, R.color.colorCyanPrimary)) {
-            ATApplication.THEME = R.style.CyanTheme;
-            ThemeManager.newInstance().setTheme(R.color.colorCyanPrimary);
-        }
+    @Override
+    public void onUpdateTheme(int themeColor) {
+        ThemeManager.newInstance().updateThemeByWeather(BaseAppCompatActivity.this, themeColor);
+        updateThemeByChoice(themeColor);
+        // 动态设置标题栏的颜色
+        getWindow().setStatusBarColor(ContextCompat.getColor(BaseAppCompatActivity.this, themeColor));
+        // 动态设置导航栏的颜色
+        getWindow().setNavigationBarColor(ContextCompat.getColor(BaseAppCompatActivity.this, themeColor));
     }
 
     @Override
@@ -131,5 +93,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
                 .allowUserColorInputAlpha(false)
                 .show();
     }
+
+
 
 }

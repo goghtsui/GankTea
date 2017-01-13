@@ -34,7 +34,7 @@ class ThemeImp implements Theme {
      */
     @Override
     public int getSunnyTheme() {
-        return R.color.colorSunny;
+        return R.color.colorSunnyPrimary;
     }
 
     /**
@@ -44,7 +44,7 @@ class ThemeImp implements Theme {
      */
     @Override
     public int getCloudyTheme() {
-        return R.color.colorCloudy;
+        return R.color.colorCloudyPrimary;
     }
 
     /**
@@ -54,7 +54,7 @@ class ThemeImp implements Theme {
      */
     @Override
     public int getOvercastTheme() {
-        return R.color.colorOvercast;
+        return R.color.colorOvercastPrimary;
     }
 
     /**
@@ -64,7 +64,7 @@ class ThemeImp implements Theme {
      */
     @Override
     public int getRainTheme() {
-        return R.color.colorRain;
+        return R.color.colorRainPrimary;
     }
 
     /**
@@ -74,7 +74,7 @@ class ThemeImp implements Theme {
      */
     @Override
     public int getHailstonesTheme() {
-        return R.color.colorHailstones;
+        return R.color.colorHailstonesPrimary;
     }
 
     /**
@@ -84,7 +84,7 @@ class ThemeImp implements Theme {
      */
     @Override
     public int getSnowTheme() {
-        return R.color.colorSnow;
+        return R.color.colorSnowPrimary;
     }
 
     /**
@@ -94,7 +94,7 @@ class ThemeImp implements Theme {
      */
     @Override
     public int getFogTheme() {
-        return R.color.colorFog;
+        return R.color.colorFogPrimary;
     }
 
     /**
@@ -104,7 +104,7 @@ class ThemeImp implements Theme {
      */
     @Override
     public int getFogAnHazeTheme() {
-        return R.color.colorFogAndHaze;
+        return R.color.colorFogAndHazePrimary;
     }
 
     /**
@@ -114,7 +114,7 @@ class ThemeImp implements Theme {
      */
     @Override
     public int getSandstormTheme() {
-        return R.color.colorSandstorm;
+        return R.color.colorSandstormPrimary;
     }
 
     /**
@@ -124,7 +124,7 @@ class ThemeImp implements Theme {
      */
     @Override
     public int getDarkTheme() {
-        return R.color.colorDark;
+        return R.color.colorDarkPrimary;
     }
 
     /**
@@ -134,7 +134,7 @@ class ThemeImp implements Theme {
      */
     @Override
     public int getDefaultTheme() {
-        return R.color.colorDefault;
+        return R.color.colorDefaultPrimary;
     }
 
     private static final class SingleHolder {

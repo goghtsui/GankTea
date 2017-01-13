@@ -12,6 +12,7 @@
 
     <string name="translation_element_name">translation_element_name</string>
 
+    <string name="action_share_url">复制链接</string>
     <string name="action_copy_url">复制链接</string>
     <string name="action_open_url">从浏览器打开链接</string>
 
