@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.request;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
 /**
@@ -40,6 +42,7 @@ public class Property implements Serializable {
         this.value = value;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Property{" +

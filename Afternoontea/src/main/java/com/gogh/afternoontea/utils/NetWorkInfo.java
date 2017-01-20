@@ -3,6 +3,7 @@ package com.gogh.afternoontea.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -16,7 +17,7 @@ public class NetWorkInfo {
     private Context context;
     private static ConnectivityManager connectivityManager;
 
-    public NetWorkInfo(Context context) {
+    public NetWorkInfo(@NonNull Context context) {
         this.context = context;
         connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     }

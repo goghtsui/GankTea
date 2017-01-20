@@ -2,11 +2,15 @@ package com.gogh.afternoontea.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.app.CardModeManager;
+import com.gogh.afternoontea.preference.PreferenceManager;
 import com.gogh.afternoontea.location.Weather;
 import com.gogh.afternoontea.main.ATApplication;
 import com.gogh.afternoontea.preference.imp.Configuration;
@@ -22,10 +26,14 @@ import com.gogh.afternoontea.theme.ThemeManager;
 public class SettingFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener,
         ThemeManager.OnUpdateThemeListener {
 
+    private static final int[][] ICON_RES = new int[][]{
+            {R.drawable.ic_preference_weather, R.drawable.ic_preference_night, R.drawable.ic_preference_night_mode},
+            {R.drawable.ic_preference_pic, R.drawable.ic_preference_wifi, R.drawable.ic_prefrences_list, R.drawable.ic_preference_cache},
+            {R.drawable.ic_preference_share, R.drawable.ic_preference_version, R.drawable.ic_preference_author}};
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //从xml文件加载选项
         addPreferencesFromResource(R.xml.prefrences);
         ThemeManager.newInstance().registerUpdateThemeListener(this);
     }
@@ -61,27 +69,30 @@ public class SettingFragment extends PreferenceFragment implements SharedPrefere
      * @param key               The key of the preference that was changed, added, or
      */
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
         if (key.equals(getResources().getString(R.string.settting_prefrences_theme_weather_status))) {// 天气主题
             if (sharedPreferences.getBoolean(key, false)) {
                 new Weather(getActivity().getApplicationContext()).onLocation();
             }
         } else if (key.equals(getResources().getString(R.string.settting_prefrences_display_car_list_key))) {// 卡片列表
-            CardModeManager.newInstance().notifyCardModeChanged();
+            PreferenceManager.newInstance().notifyCardModeChanged();
         } else if (key.equals(getResources().getString(R.string.setting_prefrences_theme_night_status))) {// 夜间主题
             if (sharedPreferences.getBoolean(key, false)) {
                 ThemeManager.newInstance().setThemeColor(R.color.colorDarkPrimary);
+                resetColor();
             } else {
                 ATApplication.THEME = new Configuration(getActivity().getApplicationContext(), Configuration.FLAG_CUSTOM).getTheme();
+                getActivity().setTheme(ATApplication.THEME);
                 ThemeManager.newInstance().setThemeStyle(ATApplication.THEME);
+                resetColor();
             }
         } else if (key.equals(getResources().getString(R.string.settting_prefrences_display_no_pic_key))) {// 无图模式
             if (!sharedPreferences.getBoolean(key, false)) {
-                CardModeManager.newInstance().notifyCardModeChanged();
+                PreferenceManager.newInstance().notifyCardModeChanged();
             }
         } else if(key.equals(getResources().getString(R.string.settting_prefrences_display_wifi_pic_key))){// wifi模式
             if (!sharedPreferences.getBoolean(key, false)) {
-                CardModeManager.newInstance().notifyCardModeChanged();
+                PreferenceManager.newInstance().notifyCardModeChanged();
             }
         }
     }
@@ -93,4 +104,18 @@ public class SettingFragment extends PreferenceFragment implements SharedPrefere
         // 动态设置导航栏的颜色
         getActivity().getWindow().setNavigationBarColor(ContextCompat.getColor(getActivity(), themeColor));
     }
+
+    private void resetColor() {
+        PreferenceScreen screen = getPreferenceScreen();
+        for (int i = 0; i < screen.getPreferenceCount(); i++) {
+            PreferenceCategory category = (PreferenceCategory) screen.getPreference(i);
+            int[] iconRes = ICON_RES[i];
+            for (int j = 0; j < category.getPreferenceCount(); j++) {
+                Preference preference = category.getPreference(j);
+                preference.setIcon(null);
+                preference.setIcon(iconRes[j]);
+            }
+        }
+    }
+
 }

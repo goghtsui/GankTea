@@ -33,8 +33,10 @@ public class FloatingMenuWidget implements Initializer{
     private Context context;
     private List<View> mTargetViews;
     private RelativeLayout floatMenuContainer;
+    @NonNull
     private List<FloatMenu> mFloatMenus = new ArrayList<>();
 
+    @NonNull
     private ActionType actionType = ActionType.CLOSING;
 
     public FloatingMenuWidget(Context context, RelativeLayout floatMenuContainer, @NonNull List<View> mTargetViews) {
@@ -53,7 +55,7 @@ public class FloatingMenuWidget implements Initializer{
         floatMenuContainer.setOnClickListener(v -> closeMenu());
         for (int i = 0; i < mTargetViews.size(); i++) {
             FloatMenu floatMenu = new FloatMenu(mTargetViews.get(i));
-            floatMenu.setPointer(MathUtil.computePoint(AndroidUtil.getScreenSize(context)[0] / 2, i, mTargetViews.size() - 1));
+            floatMenu.setPointer(MathUtil.computePoint((int) (AndroidUtil.getScreenSize(context)[0] / 2), i, mTargetViews.size() - 1));
             mFloatMenus.add(floatMenu);
         }
     }

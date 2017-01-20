@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.utils;
 
+import android.support.annotation.NonNull;
+
 import com.gogh.afternoontea.log.Logger;
 
 import java.text.SimpleDateFormat;
@@ -16,6 +18,7 @@ public class Utility {
 
     private static final String TAG = "Utility";
 
+    @NonNull
     private static String DATE_FORMAT = "H:mm:ss";
 
     public static String getTime() {

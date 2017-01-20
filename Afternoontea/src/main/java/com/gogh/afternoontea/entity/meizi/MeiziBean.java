@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.entity.meizi;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by huxq17 on 2016/4/11.
  */
@@ -96,6 +98,7 @@ public class MeiziBean extends BaseEntity {
         this.order = order;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "MeiziBean{" +

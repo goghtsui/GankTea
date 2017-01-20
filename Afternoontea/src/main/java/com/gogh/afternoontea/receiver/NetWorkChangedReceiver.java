@@ -5,8 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
 
-import com.gogh.afternoontea.app.CardModeManager;
+import com.gogh.afternoontea.preference.PreferenceManager;
 import com.gogh.afternoontea.preference.imp.Configuration;
 
 /**
@@ -21,16 +22,16 @@ public class NetWorkChangedReceiver extends BroadcastReceiver {
     private int netStatus = -100;
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(@NonNull Context context, Intent intent) {
 
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo == null) {
+        if (networkInfo != null) {
             if(networkInfo.isConnected() && networkInfo.isAvailable()){
                 if (netStatus != networkInfo.getType() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
                     if(new Configuration(context, Configuration.FLAG_SYSTEM).isWifiPicMode()){
-                        CardModeManager.newInstance().notifyCardModeChanged();
+                        PreferenceManager.newInstance().notifyCardModeChanged();
                     }
                 }
                 netStatus = networkInfo.getType();

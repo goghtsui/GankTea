@@ -1,30 +1,29 @@
 package com.gogh.afternoontea.adapter.gank;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.gogh.afternoontea.R;
+import com.gogh.afternoontea.adapter.holder.FooterViewHolder;
+import com.gogh.afternoontea.adapter.holder.ItemViewHolder;
+import com.gogh.afternoontea.adapter.holder.NoPicViewHolder;
+import com.gogh.afternoontea.adapter.holder.WelfareViewHolder;
 import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.preference.imp.Configuration;
-import com.gogh.afternoontea.ui.GankDetailActivity;
-import com.gogh.afternoontea.ui.HomeActivity;
 import com.gogh.afternoontea.utils.DataUtil;
 import com.gogh.afternoontea.utils.NetWorkInfo;
 import com.gogh.afternoontea.utils.Resource;
+import com.gogh.afternoontea.utils.ScaleTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -51,9 +50,14 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int VIEW_TYPE_NO_PIC = 0x10011;
 
     /**
+     *  福利图片
+     */
+    private static final int VIEW_TYPE_WELFARE = 0x10012;
+
+    /**
      * footer项
      */
-    private static final int VIEW_TYPE_FOOTER = 0x10012;
+    private static final int VIEW_TYPE_FOOTER = 0x10013;
 
     private Context context;
     private String resourceType;
@@ -63,10 +67,13 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private NetWorkInfo netWorkInfo;
     private Configuration mConfiguration;
 
+
+
+    @Nullable
     private List<GankEntity.ResultsBean> datas;
     private OnItemClickListener onItemClickListener;
 
-    public GankListAdapter(Context context, String resourceType) {
+    public GankListAdapter(@NonNull Context context, String resourceType) {
         this.context = context;
         this.resourceType = resourceType;
         netWorkInfo = new NetWorkInfo(context);
@@ -93,15 +100,19 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * @see #getItemViewType(int)
      * @see #GankListAdapter#onBindViewHolder(RecyclerView.ViewHolder, int)
      */
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Logger.d("TAG", "onCreateViewHolder. ");
         if (viewType == VIEW_TYPE_NORMAL) {
             View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_list_item_layout, parent, false);
-            return new ItemViewHolder(rootView);
+            return new ItemViewHolder(rootView, onItemClickListener);
         } else if (viewType == VIEW_TYPE_NO_PIC) {
             View footerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_list_item_nopic_layout, parent, false);
-            return new NoPicViewHolder(footerView);
+            return new NoPicViewHolder(footerView, context, datas);
+        } else if (viewType == VIEW_TYPE_WELFARE) {
+            View welfareView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_welfare_item_layout, parent, false);
+            return new WelfareViewHolder(welfareView);
         } else {
             View footerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_list_item_footer, parent, false);
             return new FooterViewHolder(footerView);
@@ -128,13 +139,16 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      *                 item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
+    @NonNull
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@Nullable RecyclerView.ViewHolder holder, int position) {
         Logger.d("TAG", "onBindViewHolder. ");
         if (holder != null && holder instanceof ItemViewHolder) {
             bindNormalData(holder, position);
         } else if (holder != null && holder instanceof NoPicViewHolder) {
             bindNopicData(holder, position);
+        } else if (holder != null && holder instanceof WelfareViewHolder) {
+            bindWelfareData(holder, position);
         } else {
             ((FooterViewHolder) holder).itemView.setVisibility((isScrollToBottom && !isLoadingError) ? View.VISIBLE : View.GONE);
         }
@@ -146,22 +160,23 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * @param holder
      * @param position
      */
-    private void bindNormalData(RecyclerView.ViewHolder holder, int position) {
+    @NonNull
+    private void bindNormalData(@NonNull RecyclerView.ViewHolder holder, int position) {
         GankEntity.ResultsBean entity = datas.get(position);
-        if (entity != null) {
+        if (entity != null && holder != null) {
             if (TextUtils.isEmpty(entity.getDesc())) {
                 ((ItemViewHolder) holder).titleName.setText(" ");
             } else {
                 ((ItemViewHolder) holder).titleName.setText(entity.getDesc());
             }
 
-            if (TextUtils.isEmpty(entity.getDesc())) {
+            if (TextUtils.isEmpty(entity.getWho())) {
                 ((ItemViewHolder) holder).itemAuthor.setText(" ");
             } else {
                 ((ItemViewHolder) holder).itemAuthor.setText(entity.getWho());
             }
 
-            if (TextUtils.isEmpty(entity.getDesc())) {
+            if (TextUtils.isEmpty(entity.getPublishedAt())) {
                 ((ItemViewHolder) holder).itemCreateDate.setText(" ");
             } else {
                 ((ItemViewHolder) holder).itemCreateDate.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
@@ -175,9 +190,15 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             String imageUrl = null;
 
-            if (!mConfiguration.isNopicMode()) {
-                if (entity.getImages() != null && entity.getImages().size() > 0) {
-                    imageUrl = entity.getImages().get(0);
+            if (entity.getImages() != null && entity.getImages().size() > 0) {
+                if (!mConfiguration.isNopicMode()) {
+                    if (mConfiguration.isWifiPicMode()) {
+                        if (netWorkInfo.isWifi()) {
+                            imageUrl = entity.getImages().get(0);
+                        }
+                    } else {
+                        imageUrl = entity.getImages().get(0);
+                    }
                 }
             }
 
@@ -195,22 +216,23 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * @param holder
      * @param position
      */
-    private void bindNopicData(RecyclerView.ViewHolder holder, int position) {
+    @NonNull
+    private void bindNopicData(@NonNull RecyclerView.ViewHolder holder, int position) {
         GankEntity.ResultsBean entity = datas.get(position);
-        if (entity != null) {
+        if (entity != null && holder != null) {
             if (TextUtils.isEmpty(entity.getDesc())) {
                 ((NoPicViewHolder) holder).titleName.setText(" ");
             } else {
                 ((NoPicViewHolder) holder).titleName.setText(entity.getDesc());
             }
 
-            if (TextUtils.isEmpty(entity.getDesc())) {
+            if (TextUtils.isEmpty(entity.getWho())) {
                 ((NoPicViewHolder) holder).itemAuthor.setText(" ");
             } else {
                 ((NoPicViewHolder) holder).itemAuthor.setText(entity.getWho());
             }
 
-            if (TextUtils.isEmpty(entity.getDesc())) {
+            if (TextUtils.isEmpty(entity.getPublishedAt())) {
                 ((NoPicViewHolder) holder).itemCreateDate.setText(" ");
             } else {
                 ((NoPicViewHolder) holder).itemCreateDate.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
@@ -222,22 +244,61 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((NoPicViewHolder) holder).itemType.setImageResource(Resource.getResIdByType(entity.getType()));
             }
 
-            if (mConfiguration.isCardMode()) {
+            String imageUrl = null;
 
-                String imageUrl = null;
+            if (entity.getImages() != null && entity.getImages().size() > 0) {
                 if (!mConfiguration.isNopicMode()) {
-                    if (entity.getImages() != null && entity.getImages().size() > 0) {
+                    if (mConfiguration.isWifiPicMode()) {
+                        if (netWorkInfo.isWifi()) {
+                            imageUrl = entity.getImages().get(0);
+                        }
+                    } else {
                         imageUrl = entity.getImages().get(0);
                     }
+                }
+            }
+
+            Picasso.with(context).load(imageUrl)
+                    .config(Bitmap.Config.ARGB_8888)
+                    .placeholder(R.mipmap.gank_list_item_image_default)
+                    .error(R.mipmap.gank_list_item_image_default)
+                    .into(((NoPicViewHolder) holder).itemImage);
+        }
+    }
+
+    /**
+     * 绑定数据到view，该数据是不包含图片的
+     *
+     * @param holder
+     * @param position
+     */
+    @NonNull
+    private void bindWelfareData(@NonNull RecyclerView.ViewHolder holder, int position) {
+        GankEntity.ResultsBean entity = datas.get(position);
+        if (entity != null && holder != null) {
+
+
+            if (TextUtils.isEmpty(entity.getPublishedAt())) {
+                ((WelfareViewHolder) holder).mTitleName.setText(" ");
+            } else {
+                ((WelfareViewHolder) holder).mTitleName.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
+            }
+
+            String imageUrl = null;
+
+            if (!TextUtils.isEmpty(entity.getUrl())) {
+                if (mConfiguration.isWifiPicMode()) {
+                    if (netWorkInfo.isWifi()) {
+                        imageUrl = entity.getUrl();
+                    }
+                } else {
+                    imageUrl = entity.getUrl();
                 }
 
                 Picasso.with(context).load(imageUrl)
                         .config(Bitmap.Config.ARGB_8888)
-                        .placeholder(R.mipmap.gank_list_item_image_default)
-                        .error(R.mipmap.gank_list_item_image_default)
-                        .into(((NoPicViewHolder) holder).itemImage);
-
-
+                        .transform(new ScaleTransformation())
+                        .into(((WelfareViewHolder) holder).mWelfareImage);
             }
         }
     }
@@ -254,6 +315,7 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return datas.size() + isFooter;
     }
 
+    @NonNull
     @Override
     public int getItemViewType(int position) {
         Logger.d("TAG", "getItemViewType. ");
@@ -262,7 +324,7 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return VIEW_TYPE_FOOTER;
         }
 
-        if (!TextUtils.isEmpty(resourceType) && resourceType.equals("all")) {// 推荐位为混合排版
+        if (!TextUtils.isEmpty(resourceType) && resourceType.equals(Urls.GANK_URL.ALL)) {// 推荐分类：混合排版
             // 有图片的项
             if (datas.get(position).getImages() != null
                     && datas.get(position).getImages().size() > 0) {
@@ -270,6 +332,8 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             } else {// 没有图片
                 return VIEW_TYPE_NO_PIC;
             }
+        } else if (!TextUtils.isEmpty(resourceType) && resourceType.equals(Urls.GANK_URL.WELFARE)) {// 福利分类：图片瀑布流
+            return VIEW_TYPE_WELFARE;
         } else {// 其他类别根据设置排版
             if (mConfiguration.isCardMode()) {
                 return VIEW_TYPE_NO_PIC;
@@ -279,6 +343,7 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+    @NonNull
     @Override
     public GankEntity.ResultsBean getItem(int position) {
         Logger.d("TAG", "getItem. ");
@@ -312,98 +377,20 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void setScrollToBottom(boolean isBottom, boolean isLoadingError) {
+    public void setScrollToBottom(boolean isBottom) {
         Logger.d(TAG, "setScrollToBottom : " + isBottom);
         isScrollToBottom = isBottom;
+    }
+
+    @Override
+    public void setLoadingError(boolean isLoadingError) {
+        Logger.d(TAG, "setLoadingError : " + isLoadingError);
         this.isLoadingError = isLoadingError;
     }
 
     @Override
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
-    }
-
-    /**
-     * 有图片的项
-     */
-    protected class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        private AppCompatImageView itemType;
-        private ImageView itemBgImage;
-        private AppCompatTextView itemCreateDate;
-        private AppCompatTextView titleName;
-        private AppCompatTextView itemAuthor;
-
-        public ItemViewHolder(View itemView) {
-            super(itemView);
-            itemType = (AppCompatImageView) itemView.findViewById(R.id.gank_list_item_type);
-            titleName = (AppCompatTextView) itemView.findViewById(R.id.gank_item_title);
-            itemAuthor = (AppCompatTextView) itemView.findViewById(R.id.gank_item_author);
-            itemBgImage = (ImageView) itemView.findViewById(R.id.gank_item_image_bg);
-            itemCreateDate = (AppCompatTextView) itemView.findViewById(R.id.gank_item_date);
-            itemView.setOnClickListener(this);
-        }
-
-        /**
-         * Called when a view has been clicked.
-         *
-         * @param v The view that was clicked.
-         */
-        @Override
-        public void onClick(View v) {
-            if (onItemClickListener != null) {
-                onItemClickListener.onItemClick(v, this.getAdapterPosition(), R.id.gank_item_image_bg);
-            }
-        }
-    }
-
-    /**
-     * 没有图片的项
-     */
-    protected class NoPicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        private ImageView itemImage;
-        private AppCompatImageView itemType;
-        private AppCompatTextView titleName;
-        private AppCompatTextView itemAuthor;
-        private AppCompatTextView itemCreateDate;
-
-        public NoPicViewHolder(View itemView) {
-            super(itemView);
-            itemImage = (ImageView) itemView.findViewById(R.id.gank_list_item_nopic_default_img);
-            itemType = (AppCompatImageView) itemView.findViewById(R.id.gank_list_item_nopic_type);
-            titleName = (AppCompatTextView) itemView.findViewById(R.id.gank_list_item_nopic_title);
-            itemAuthor = (AppCompatTextView) itemView.findViewById(R.id.gank_list_item_nopic_author);
-            itemCreateDate = (AppCompatTextView) itemView.findViewById(R.id.gank_list_item_nopic_time);
-            itemView.setOnClickListener(this);
-        }
-
-        /**
-         * Called when a view has been clicked.
-         *
-         * @param v The view that was clicked.
-         */
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(context, GankDetailActivity.class);
-            intent.putExtra(Urls.GANK_URL.BUNDLE_KEY, datas.get(getAdapterPosition()));
-
-            View intoView = v.findViewById(R.id.gank_list_item_nopic_default_img);
-            ActivityOptionsCompat options =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation((HomeActivity) context,
-                            intoView, context.getResources().getString(R.string.translation_element_name));// 不需要联动
-            ActivityCompat.startActivity((HomeActivity) context, intent, options.toBundle());
-        }
-    }
-
-    protected class FooterViewHolder extends RecyclerView.ViewHolder {
-
-        private View itemView;
-
-        public FooterViewHolder(View itemView) {
-            super(itemView);
-            this.itemView = itemView;
-        }
     }
 
 }

@@ -115,6 +115,16 @@ public class Configuration implements Preference {
         return userPreferences.getInt(Constant.THEME_KEY, R.style.DefaultTheme);
     }
 
+    /**
+     * 读取页面缓存个数
+     *
+     * @return
+     */
+    @Override
+    public String getCachePageCount() {
+        return preferences.getString(context.getString(R.string.settting_prefrences_display_cache_key), "1");
+    }
+
     @Override
     public void setTheme(int theme) {
         Logger.d("Configuration","setTheme : " + theme);

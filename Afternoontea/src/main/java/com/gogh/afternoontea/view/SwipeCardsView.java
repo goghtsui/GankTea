@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -45,7 +47,9 @@ public class SwipeCardsView extends LinearLayout {
         }
     };
     private final int SCROLL_DURATION = 300; // scroll back duration
+    @NonNull
     private List<View> viewList = new ArrayList<>(); // 存放的是每一层的view，从顶到底
+    @NonNull
     private List<View> releasedViewList = new ArrayList<>(); // 手指松开后存放的view列表
     private int initLeft = 0, initTop = 0; // 正常状态下 topView的left和top
     private int mWidth = 0; // swipeCardsView的宽度
@@ -57,7 +61,9 @@ public class SwipeCardsView extends LinearLayout {
     private CardsSlideListener mCardsSlideListener; // 回调接口
     private int mCount; // 卡片的数量
     private int mShowingIndex = 0; // 当前正在显示的卡片位置
+    @Nullable
     private OnClickListener btnListener;
+    @Nullable
     private BaseCardAdapter mAdapter;
     private Scroller mScroller;
     private int mTouchSlop;
@@ -66,6 +72,7 @@ public class SwipeCardsView extends LinearLayout {
     private int mInitialMotionY;
     private int mInitialMotionX;
     private boolean hasTouchTopView;
+    @Nullable
     private VelocityTracker mVelocityTracker;
     private float mMaxVelocity;
     private float mMinVelocity;
@@ -83,15 +90,15 @@ public class SwipeCardsView extends LinearLayout {
     private MotionEvent mLastMoveEvent;
     private boolean mHasSendCancelEvent = false;
 
-    public SwipeCardsView(Context context) {
+    public SwipeCardsView(@NonNull Context context) {
         this(context, null);
     }
 
-    public SwipeCardsView(Context context, AttributeSet attrs) {
+    public SwipeCardsView(@NonNull Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SwipeCardsView(Context context, AttributeSet attrs, int defStyle) {
+    public SwipeCardsView(@NonNull Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SwipCardsView);
         yOffsetStep = (int) a.getDimension(R.styleable.SwipCardsView_yOffsetStep, yOffsetStep);
@@ -102,7 +109,7 @@ public class SwipeCardsView extends LinearLayout {
 
         btnListener = new OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(@NonNull View view) {
                 if (null != mCardsSlideListener && view.getScaleX() == 1f) {
                     mCardsSlideListener.onItemClick(view, mShowingIndex);
                 }
@@ -145,7 +152,7 @@ public class SwipeCardsView extends LinearLayout {
         return layoutid;
     }
 
-    private void bindCardData(int position, View cardview) {
+    private void bindCardData(int position, @NonNull View cardview) {
         if (mAdapter != null) {
             mAdapter.onBindData(position, cardview);
             cardview.setTag(position);
@@ -194,13 +201,13 @@ public class SwipeCardsView extends LinearLayout {
         }
     }
 
-    private void setOnItemClickListener(View childView) {
+    private void setOnItemClickListener(@NonNull View childView) {
         if (null != mCardsSlideListener) {
             childView.setOnClickListener(btnListener);
         }
     }
 
-    public void setAdapter(BaseCardAdapter adapter) {
+    public void setAdapter(@Nullable BaseCardAdapter adapter) {
         if (adapter == null) {
             throw new RuntimeException("adapter==null");
         }
@@ -266,7 +273,7 @@ public class SwipeCardsView extends LinearLayout {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
+    public boolean dispatchTouchEvent(@NonNull MotionEvent ev) {
         final int action = ev.getActionMasked();
         acquireVelocityTracker(ev);
         int deltaY;
@@ -380,7 +387,7 @@ public class SwipeCardsView extends LinearLayout {
      * @param ev
      * @return
      */
-    private boolean isTouchTopView(MotionEvent ev) {
+    private boolean isTouchTopView(@NonNull MotionEvent ev) {
         View topView = getTopView();
         if (topView != null && topView.getVisibility() == VISIBLE) {
             Rect bounds = new Rect();
@@ -511,7 +518,7 @@ public class SwipeCardsView extends LinearLayout {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private void layoutChild(View child, int index) {
+    private void layoutChild(@NonNull View child, int index) {
         LayoutParams lp = (LayoutParams) child.getLayoutParams();
         int width = child.getMeasuredWidth();
         int height = child.getMeasuredHeight();
@@ -660,7 +667,7 @@ public class SwipeCardsView extends LinearLayout {
      *
      * @param changedView 顶层的卡片view
      */
-    private void processLinkageView(View changedView) {
+    private void processLinkageView(@NonNull View changedView) {
         int changeViewLeft = changedView.getLeft();
         int changeViewTop = changedView.getTop();
         int distance = Math.abs(changeViewTop - initTop) + Math.abs(changeViewLeft - initLeft);
@@ -705,7 +712,7 @@ public class SwipeCardsView extends LinearLayout {
      *
      * @param xvel X方向上的滑动速度
      */
-    private void onTopViewReleased(View changedView, float xvel, float yvel) {
+    private void onTopViewReleased(@NonNull View changedView, float xvel, float yvel) {
         int finalX = initLeft;
         int finalY = initTop;
         SlideType flyType = SlideType.NONE;
@@ -739,7 +746,7 @@ public class SwipeCardsView extends LinearLayout {
      *
      * @param type {@link com.gogh.afternoontea.view.SwipeCardsView.SlideType}
      */
-    public void slideCardOut(SlideType type) {
+    public void slideCardOut(@NonNull SlideType type) {
         if (!canMoveCard()) {
             return;
         }

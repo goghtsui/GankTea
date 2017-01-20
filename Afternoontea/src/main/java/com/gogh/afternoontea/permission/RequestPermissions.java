@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.permission;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -13,6 +15,7 @@ public interface RequestPermissions {
 
     void checkPermissions(String... permissions);
 
+    @NonNull
     List<String> findDeniedPermissions(String[] permissions);
 
     boolean verifyPermissions(int[] grantResults);

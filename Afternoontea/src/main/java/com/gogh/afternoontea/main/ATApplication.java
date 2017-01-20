@@ -7,6 +7,7 @@ import com.gogh.afternoontea.app.Initializer;
 import com.gogh.afternoontea.location.Weather;
 import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.preference.imp.Configuration;
+import com.gogh.afternoontea.utils.AndroidUtil;
 import com.gogh.afternoontea.utils.Utility;
 
 /**
@@ -23,6 +24,8 @@ public class ATApplication extends Application implements Initializer {
     public static int THEME = R.style.DefaultTheme;
     private Configuration configuration;
 
+    private static float[] screenSize;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -35,24 +38,36 @@ public class ATApplication extends Application implements Initializer {
     public void init() {
         Logger.d(TAG, "ATApplication  init.");
         configuration = new Configuration(getApplicationContext(), Configuration.FLAG_SYSTEM);
-        if (configuration.isNightMode()) {
-            Logger.d(TAG, "is night mode. ");
-            if (Utility.isNight()) {
-                Logger.d(TAG, " is night mode and set up night theme. ");
-                THEME = R.style.DarkTheme;
-            } else {
-                new Weather(this).onLocation();
-            }
+        if (configuration.isNightTheme()) {
+            THEME = R.style.DarkTheme;
         } else {
-            if (configuration.isWeatherTheme()) {// 开启天气主题
-                Logger.d(TAG, "had opened weather theme.");
-                new Weather(this).onLocation();
+            if (configuration.isNightMode()) {
+                Logger.d(TAG, "is night mode. ");
+                if (Utility.isNight()) {
+                    Logger.d(TAG, " is night mode and set up night theme. ");
+                    THEME = R.style.DarkTheme;
+                } else {
+                    if (configuration.isWeatherTheme()) {// 开启天气主题
+                        Logger.d(TAG, "had opened weather theme.");
+                        new Weather(this).onLocation();
+                    }
+                }
+            } else {
+                if (configuration.isWeatherTheme()) {// 开启天气主题
+                    Logger.d(TAG, "had opened weather theme.");
+                    new Weather(this).onLocation();
+                }
             }
         }
+        screenSize = AndroidUtil.getScreenSize(getApplicationContext());
     }
 
     @Override
     public void initView() {
+    }
+
+    public static float[] getScreenSize() {
+        return screenSize;
     }
 
 }

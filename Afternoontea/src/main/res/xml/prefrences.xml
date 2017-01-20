@@ -39,17 +39,23 @@
             android:summaryOff="@string/settting_prefrences_display_card_list_off"
             android:summaryOn="@string/settting_prefrences_display_card_list_on"
             android:title="@string/settting_prefrences_display_card_list_title"/>
+        <ListPreference
+            android:entries="@array/cache_page_entries"
+            android:entryValues="@array/cache_page_entries"
+            android:icon="@drawable/ic_preference_cache"
+            android:key="@string/settting_prefrences_display_cache_key"
+            android:summary="@string/settting_prefrences_display_cache_summary"
+            android:title="@string/settting_prefrences_display_cache_title"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/settting_prefrences_about_title">
-        <com.afollestad.materialdialogs.prefs.MaterialDialogPreference
+        <Preference
             android:icon="@drawable/ic_preference_share"
             android:key="@string/settting_prefrences_about_share_key"
             android:summary="@string/settting_prefrences_about_share_summary"
-            android:title="@string/settting_prefrences_about_share_title"/>
-        <intent
-            android:action="android.intent.action.SEND"
-            android:data="@string/settting_prefrences_about_author_summary"
-            android:mimeType="text/plain"/>
+            android:title="@string/settting_prefrences_about_share_title">
+            <intent
+                android:action="com.gogh.intent.action.SHARE"/>
+        </Preference>
         <Preference
             android:icon="@drawable/ic_preference_version"
             android:summary="@string/settting_prefrences_about_version_code"
@@ -63,5 +69,4 @@
                 android:data="@string/settting_prefrences_about_author_summary"/>
         </Preference>
     </PreferenceCategory>
-
 </PreferenceScreen>

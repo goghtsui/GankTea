@@ -1,6 +1,7 @@
 package com.gogh.afternoontea.presenter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 
 import com.gogh.afternoontea.adapter.SectionsPagerAdapter;
@@ -35,30 +36,32 @@ public class SectionsPagerPresenter {
         return INSTANCE;
     }
 
+    @NonNull
     private List<BaseFragment> getFragmentList() {
         List<BaseFragment> fragments = new ArrayList<>();
         int i = 0;
-        fragments.add(getFragment(Urls.GANK_URL.ALL, i));
+        fragments.add(getFragment(Urls.GANK_URL.ALL, i, BaseFragment.LAYOUT_TYPE_LIST));
         i++;
-        fragments.add(getFragment(Urls.GANK_URL.ANDROID, i));
+        fragments.add(getFragment(Urls.GANK_URL.ANDROID, i, BaseFragment.LAYOUT_TYPE_LIST));
         i++;
-        fragments.add(getFragment(Urls.GANK_URL.IOS, i));
+        fragments.add(getFragment(Urls.GANK_URL.IOS, i, BaseFragment.LAYOUT_TYPE_LIST));
         i++;
-        fragments.add(getFragment(Urls.GANK_URL.WEB, i));
+        fragments.add(getFragment(Urls.GANK_URL.WEB, i, BaseFragment.LAYOUT_TYPE_LIST));
         i++;
-        fragments.add(getFragment(Urls.GANK_URL.MATERIAL, i));
+        fragments.add(getFragment(Urls.GANK_URL.MATERIAL, i, BaseFragment.LAYOUT_TYPE_LIST));
         i++;
-        fragments.add(getFragment(Urls.GANK_URL.RECOMMEND, i));
+        fragments.add(getFragment(Urls.GANK_URL.RECOMMEND, i, BaseFragment.LAYOUT_TYPE_LIST));
         i++;
-        fragments.add(getFragment(Urls.GANK_URL.REST_VIDEO, i));
+        fragments.add(getFragment(Urls.GANK_URL.REST_VIDEO, i, BaseFragment.LAYOUT_TYPE_LIST));
         i++;
-        fragments.add(getFragment(Urls.GANK_URL.WELFARE, i));
+        fragments.add(getFragment(Urls.GANK_URL.WELFARE, i, BaseFragment.LAYOUT_TYPE_FALLS));
         return fragments;
     }
 
-    private BaseFragment getFragment(String type, int index) {
+    @NonNull
+    private BaseFragment getFragment(String type, int index, int layoutType) {
         GankListFragment fragment = new GankListFragment().newInstance(new BaseFragment.Builder()
-                .type(type).number(10).page(1).build(), index);
+                .type(type).number(10).page(1).layoutType(layoutType).build(), index);
         fragment.setOnScrollListener(onScrollListener);
         return fragment;
     }
@@ -67,6 +70,7 @@ public class SectionsPagerPresenter {
         this.onScrollListener = onScrollListener;
     }
 
+    @NonNull
     public SectionsPagerAdapter getPagerAdapter(Context context, FragmentManager fragmentManager) {
         return new SectionsPagerAdapter(context, getFragmentList(), fragmentManager);
     }

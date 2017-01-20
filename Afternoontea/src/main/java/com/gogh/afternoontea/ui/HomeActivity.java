@@ -8,18 +8,22 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.gogh.afternoontea.R;
+import com.gogh.afternoontea.listener.OnCachePageNumChangedListener;
 import com.gogh.afternoontea.listener.OnMultipleClickListener;
 import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.main.BaseAppCompatActivity;
+import com.gogh.afternoontea.preference.PreferenceManager;
 import com.gogh.afternoontea.utils.TintColor;
 import com.gogh.afternoontea.view.FloatMenuButton;
 import com.gogh.afternoontea.widget.FloatingMenuWidget;
 import com.gogh.afternoontea.widget.HomePagerView;
 
-public class HomeActivity extends BaseAppCompatActivity implements OnMultipleClickListener, FloatMenuButton.OnFloatingMenuClickListener {
+public class HomeActivity extends BaseAppCompatActivity implements OnMultipleClickListener,
+        FloatMenuButton.OnFloatingMenuClickListener, OnCachePageNumChangedListener {
 
     private static final String TAG = "HomeActivity";
 
@@ -27,6 +31,11 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
      * tab标签
      */
     private TabLayout tabLayout;
+
+    /**
+     * The {@link ViewPager} that will host the section contents.
+     */
+    private ViewPager mViewPager;
 
     private FloatMenuButton floatMenuButton;
 
@@ -42,6 +51,7 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
         super.onCreate(savedInstanceState);
         Logger.d(TAG, "HomeActivity  onCreate.");
         setContentView(R.layout.home_activity_layout);
+        PreferenceManager.newInstance().registerCachePageNumChangedListener(this);
         initView();
     }
 
@@ -63,8 +73,10 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
         floatMenuButton.setOnFloatingMenuClickListener(this);
         mFloatingMenuWidget = floatMenuButton.create();
 
+        mViewPager = (ViewPager) findViewById(R.id.container);
+
         // 分页适配器
-        new HomePagerView(this, tabLayout, floatingActionButton).setOnMultipleClickListener(this);
+        new HomePagerView(this, tabLayout, mViewPager, floatingActionButton).setOnMultipleClickListener(this);
 
         // 设置悬浮菜单的背景颜色
         floatMenuButton.initFloatMenuBackground(TintColor.getPrimaryColor(HomeActivity.this));
@@ -114,6 +126,11 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
     @Override
     public void onSearchListener(View v) {
         mFloatingMenuWidget.closeMenu();
+        Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+        ActivityOptionsCompat options =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(HomeActivity.this,
+                        v, getResources().getString(R.string.app_name));// 不需要联动
+        ActivityCompat.startActivity(HomeActivity.this, intent, options.toBundle());
     }
 
     /**
@@ -148,5 +165,16 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PreferenceManager.newInstance().unRegisterCachePageNumChangedListener(this);
+    }
+
+    @Override
+    public void onChanged(int count) {
+        mViewPager.setOffscreenPageLimit(count);
     }
 }

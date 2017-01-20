@@ -46,8 +46,22 @@ public interface Preference {
      */
     boolean isCardMode();
 
+    /**
+     *  存储用户设置的主题
+     * @param theme 主题
+     */
     void setTheme(int theme);
 
+    /**
+     *  读取用户设置的主题
+     * @return
+     */
     int getTheme();
+
+    /**
+     *  读取页面缓存个数
+     * @return
+     */
+    String getCachePageCount();
 
 }

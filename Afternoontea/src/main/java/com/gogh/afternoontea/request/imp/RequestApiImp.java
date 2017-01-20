@@ -1,6 +1,8 @@
 package com.gogh.afternoontea.request.imp;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.gogh.afternoontea.constant.Constant;
 import com.gogh.afternoontea.constant.Urls;
@@ -9,9 +11,9 @@ import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.entity.weather.NowBean;
 import com.gogh.afternoontea.entity.weather.WeatherEntity;
 import com.gogh.afternoontea.http.RequestTask;
-import com.gogh.afternoontea.location.listener.OnLocationListener;
 import com.gogh.afternoontea.listener.OnResponListener;
 import com.gogh.afternoontea.location.LocationClient;
+import com.gogh.afternoontea.location.listener.OnLocationListener;
 import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.request.Property;
 import com.gogh.afternoontea.request.Request;
@@ -58,7 +60,7 @@ public class RequestApiImp implements Request {
      * @param responListener
      */
     @Override
-    public void getLocation(Context context, OnResponListener<String> responListener) {
+    public void getLocation(@NonNull Context context, @Nullable OnResponListener<String> responListener) {
         LocationClient.newInstance().setOnLocationListener(new OnLocationListener() {
             @Override
             public void onLocationed(String cityIp) {
@@ -86,7 +88,7 @@ public class RequestApiImp implements Request {
      * @return 天气
      */
     @Override
-    public void getWeatherByCity(String city, OnResponListener<String> responListener) {
+    public void getWeatherByCity(String city, @Nullable OnResponListener<String> responListener) {
         List<Property> propertyList = new ArrayList<>();
         propertyList.add(new Property(Constant.ACCEPT, Constant.ACCEPT_GSON_VALUE));
         propertyList.add(new Property(Constant.USER_AGENT, Constant.USER_AGENT_VALUE));
@@ -102,7 +104,7 @@ public class RequestApiImp implements Request {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<WeatherEntity>() {
                     @Override
-                    public void onNext(WeatherEntity weatherEntity) {
+                    public void onNext(@NonNull WeatherEntity weatherEntity) {
                         Logger.d(TAG, "getWeatherByCity onNext weatherEntity =" + weatherEntity.toString());
                         String weather = null;
                         if (null != weatherEntity) {
@@ -129,7 +131,7 @@ public class RequestApiImp implements Request {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NonNull Throwable e) {
                         Logger.d(TAG, "getWeatherByCity onError : " + e.getMessage());
                         if(responListener != null){
                             responListener.onError(e);
@@ -145,7 +147,7 @@ public class RequestApiImp implements Request {
      * @return
      */
     @Override
-    public void getMeiziPic(OnResponListener<String> responListener) {
+    public void getMeiziPic(@Nullable OnResponListener<String> responListener) {
         List<Property> propertyList = new ArrayList<>();
         propertyList.add(new Property(Constant.ACCEPT, Constant.ACCEPT_HTML_VALUE));
         propertyList.add(new Property(Constant.USER_AGENT, Constant.USER_AGENT_VALUE));
@@ -168,7 +170,7 @@ public class RequestApiImp implements Request {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NonNull Throwable e) {
                         Logger.d(TAG, "getMeiziPic onError : " + e.getMessage());
                         if (null != responListener) {
                             responListener.onError(e);
@@ -194,7 +196,7 @@ public class RequestApiImp implements Request {
      * @param responListener
      */
     @Override
-    public void getDataByCategory(String category, int num, int page, OnResponListener<GankEntity> responListener) {
+    public void getDataByCategory(String category, int num, int page, @Nullable OnResponListener<GankEntity> responListener) {
         List<Property> propertyList = new ArrayList<>();
         propertyList.add(new Property(Constant.ACCEPT, Constant.ACCEPT_GSON_VALUE));
         propertyList.add(new Property(Constant.USER_AGENT, Constant.USER_AGENT_VALUE));
@@ -216,7 +218,7 @@ public class RequestApiImp implements Request {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NonNull Throwable e) {
                         Logger.d(TAG, "getDataByCategory onError : " + e.getMessage());
                         if (null != responListener) {
                             responListener.onError(e);
@@ -224,7 +226,7 @@ public class RequestApiImp implements Request {
                     }
 
                     @Override
-                    public void onNext(GankEntity response) {
+                    public void onNext(@NonNull GankEntity response) {
                         Logger.d(TAG, "getDataByCategory onNext : " + response.toString());
                         if (null != responListener) {
                             responListener.onResponse(response);
@@ -239,7 +241,7 @@ public class RequestApiImp implements Request {
      * @param responListener
      */
     @Override
-    public void getHtmlByUrl(String url, OnResponListener<String> responListener) {
+    public void getHtmlByUrl(@NonNull String url, @Nullable OnResponListener<String> responListener) {
         String[] params = StringUtil.formatUrl(url);
         Logger.d(TAG,  "getHtmlByUrl: " + params[0] + ", " + params[1]);
         List<Property> propertyList = new ArrayList<>();
@@ -264,7 +266,7 @@ public class RequestApiImp implements Request {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NonNull Throwable e) {
                         Logger.d(TAG, "getHtmlByUrl onError : " + e.getMessage());
                         if (null != responListener) {
                             responListener.onError(e);

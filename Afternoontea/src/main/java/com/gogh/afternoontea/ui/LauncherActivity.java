@@ -3,6 +3,7 @@ package com.gogh.afternoontea.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.view.KeyEvent;
@@ -34,6 +35,7 @@ public class LauncherActivity extends BaseAppCompatActivity implements
 
     private RequestPermissionsImp requestPermissionsImp;
 
+    @Nullable
     private Handler handler = new Handler();
 
     @Override
@@ -84,7 +86,7 @@ public class LauncherActivity extends BaseAppCompatActivity implements
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions, int[] paramArrayOfInt) {
+                                           String[] permissions, @NonNull int[] paramArrayOfInt) {
         Logger.d(TAG, " onRequestPermissionsResult.requestCode : " + requestCode);
         requestPermissionsImp.onRequestPermissionsResult(requestCode, permissions, paramArrayOfInt);
     }

@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.presenter.imp;
 
+import android.support.annotation.NonNull;
+
 import com.gogh.afternoontea.adapter.gank.GankListAdapter;
 import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.location.listener.OnLodingChangedListener;
@@ -81,7 +83,7 @@ public class GankTechPresneter implements BasePresenter, OnRefreshListener {
             }
 
             @Override
-            public void onResponse(GankEntity response) {
+            public void onResponse(@NonNull GankEntity response) {
                 Logger.d(TAG, "loadData : " + mBuilder.fragment.getArguments().getString(ARG_SECTION_TYPE) + response.getResults());
                 if (response != null) {
                     mBuilder.adapter.setData(response.getResults());
@@ -120,7 +122,7 @@ public class GankTechPresneter implements BasePresenter, OnRefreshListener {
             }
 
             @Override
-            public void onResponse(GankEntity response) {
+            public void onResponse(@NonNull GankEntity response) {
                 Logger.d(TAG, "onSwipeRefresh : " + mBuilder.fragment.getArguments().getString(ARG_SECTION_TYPE) + response.getResults());
                 if (response != null) {
                     mBuilder.adapter.addRefreshData(response.getResults());
@@ -161,7 +163,7 @@ public class GankTechPresneter implements BasePresenter, OnRefreshListener {
                     }
 
                     @Override
-                    public void onResponse(GankEntity response) {
+                    public void onResponse(@NonNull GankEntity response) {
                         Logger.d(TAG, "onLoadMore : " + mBuilder.fragment.getArguments().getString(ARG_SECTION_TYPE) + response.getResults());
                         if (response != null) {
                             mBuilder.adapter.addLoadMoreData(response.getResults());
@@ -176,16 +178,19 @@ public class GankTechPresneter implements BasePresenter, OnRefreshListener {
         private GankListAdapter adapter;
         private BaseFragment fragment;
 
+        @NonNull
         public Builder adapter(GankListAdapter adapter){
             this.adapter = adapter;
             return this;
         }
 
+        @NonNull
         public Builder fragment(BaseFragment fragment){
             this.fragment = fragment;
             return this;
         }
 
+        @NonNull
         public GankTechPresneter build() {
             return new GankTechPresneter(this);
         }

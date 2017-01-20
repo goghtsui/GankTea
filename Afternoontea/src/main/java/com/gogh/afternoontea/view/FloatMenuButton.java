@@ -1,6 +1,7 @@
 package com.gogh.afternoontea.view;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -30,7 +31,9 @@ public class FloatMenuButton implements Initializer {
     private CoordinatorLayout rootView;
     private OnFloatingMenuClickListener onFloatingMenuClickListener;
 
+    @NonNull
     private List<View.OnClickListener> onClickListeners = new ArrayList<>();
+    @NonNull
     private List<View> floatMenus = new ArrayList<>();
 
     public FloatMenuButton(Context context, CoordinatorLayout rootView) {
@@ -46,11 +49,11 @@ public class FloatMenuButton implements Initializer {
         /**
          * 搜索
          */
-        View.OnClickListener searchClickListener = v -> {
+       /* View.OnClickListener searchClickListener = v -> {
             if (onFloatingMenuClickListener != null) {
                 onFloatingMenuClickListener.onSearchListener(v);
             }
-        };
+        };*/
 
         /**
          * 投稿
@@ -80,7 +83,7 @@ public class FloatMenuButton implements Initializer {
         };
 
         onClickListeners.add(themeClickListener);
-        onClickListeners.add(searchClickListener);
+//        onClickListeners.add(searchClickListener);
         onClickListeners.add(contributeClickListener);
         onClickListeners.add(settingClickListener);
     }
@@ -89,6 +92,7 @@ public class FloatMenuButton implements Initializer {
     public void initView() {
     }
 
+    @NonNull
     private List<View> createView() {
 
         for (int i = 0; i < onClickListeners.size(); i++) {
@@ -120,6 +124,7 @@ public class FloatMenuButton implements Initializer {
         }
     }
 
+    @NonNull
     public FloatingMenuWidget create() {
         return new FloatingMenuWidget(context, floatMenuContainer, createView());
     }

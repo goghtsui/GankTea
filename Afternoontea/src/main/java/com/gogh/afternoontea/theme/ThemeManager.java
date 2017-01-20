@@ -1,6 +1,8 @@
 package com.gogh.afternoontea.theme;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import com.gogh.afternoontea.R;
@@ -20,7 +22,9 @@ import java.util.List;
  */
 public class ThemeManager {
 
+    @Nullable
     private static ThemeManager INSTANCE = null;
+    @NonNull
     private List<OnUpdateThemeListener> updateThemeListeners = new ArrayList<>();
 
     /**
@@ -34,6 +38,7 @@ public class ThemeManager {
      *
      * @return
      */
+    @Nullable
     public static ThemeManager newInstance() {
         if (INSTANCE == null) {
             INSTANCE = SingleHolder.MANAGER;
@@ -47,7 +52,7 @@ public class ThemeManager {
      * @param weather 天气值，具体查看 {@link Weather} 类
      * @return int 格式颜色值
      */
-    private int getThemeByWeather(String weather) {
+    private int getThemeByWeather(@Nullable String weather) {
         Theme theme = ThemeImp.newInstance();
         if (null == weather) {
             return theme.getDefaultTheme();
@@ -126,7 +131,7 @@ public class ThemeManager {
      * @param context
      * @param selectedColor 选择的颜色
      */
-    public void updateThemeByColor(Context context, int selectedColor) {
+    public void updateThemeByColor(@NonNull Context context, int selectedColor) {
         if (selectedColor == ContextCompat.getColor(context, R.color.colorBluePrimary)) {
             ATApplication.THEME = R.style.BlueTheme;
             context.setTheme(R.style.BlueTheme);
@@ -190,7 +195,7 @@ public class ThemeManager {
         }
     }
 
-    private int getColorByTheme(int theme){
+    public  int getColorByTheme(int theme){
         switch (theme) {// weather
             case R.style.SunnyTheme:
                 return R.color.colorSunnyPrimary;
@@ -256,7 +261,7 @@ public class ThemeManager {
      * @param context
      * @param weatherColor 天气对应的主题色
      */
-    public void updateThemeByWeather(Context context, int weatherColor) {
+    public void updateThemeByWeather(@NonNull Context context, int weatherColor) {
         Theme theme = ThemeImp.newInstance();
 
         if (weatherColor == theme.getSunnyTheme()) {

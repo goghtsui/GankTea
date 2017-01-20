@@ -2,12 +2,14 @@ package com.gogh.afternoontea.widget;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -17,9 +19,9 @@ import com.gogh.afternoontea.adapter.gank.GankListAdapter;
 import com.gogh.afternoontea.app.Initializer;
 import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.entity.gank.GankEntity;
-import com.gogh.afternoontea.location.listener.OnLodingChangedListener;
 import com.gogh.afternoontea.listener.OnRefreshListener;
 import com.gogh.afternoontea.listener.OnScrollListener;
+import com.gogh.afternoontea.location.listener.OnLodingChangedListener;
 import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.presenter.imp.GankTechPresneter;
@@ -54,8 +56,10 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private LinearLayout mReloadLayout;
+    @NonNull
     private List<GankEntity.ResultsBean> datas = new ArrayList<>();
 
+    @Nullable
     private GankListAdapter gankListAdapter;
     private GankTechPresneter mPrensenter;
 
@@ -63,15 +67,16 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
     /**
      * 列表下拉刷新监听事件
      */
+    @NonNull
     public RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
 
         private int mLastVisibleItemPosition;//最后一个角标位置
 
         @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
             Logger.d(TAG, "mOnScrollListener onScrolled");
-            mLastVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+            mLastVisibleItemPosition = getLastVisibleItemPosition(recyclerView);
             if (recyclerView.computeVerticalScrollOffset() == 0
                     && verticalScrollOffset == SCROLL_NONE) {// 滚动到顶部
                 Logger.d(TAG, "mOnScrollListener SCROLL_TOP");
@@ -91,7 +96,7 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
         }
 
         @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
             Logger.d(TAG, "mOnScrollListener onScrollStateChanged");
             //正在滚动
@@ -108,10 +113,11 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
     /**
      * 列表项的点击事件，跳转到详情页
      */
+    @NonNull
     private BaseGankAdapter.OnItemClickListener mOnItemClickListener = new BaseGankAdapter.OnItemClickListener() {
 
         @Override
-        public void onItemClick(View view, int position, int resId) {
+        public void onItemClick(@NonNull View view, int position, int resId) {
             Logger.d(TAG, "mOnItemClickListener position : " + position);
             GankEntity.ResultsBean data = gankListAdapter.getItem(position);
             Intent intent = new Intent(mFragment.getActivity(), GankDetailActivity.class);
@@ -146,7 +152,6 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
         mRecyclerView.addOnScrollListener(mOnScrollListener);
 
         gankListAdapter = new GankListAdapter(mFragment.getActivity(),
@@ -182,7 +187,8 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
 
     @Override
     public void onLoadMore() {
-        gankListAdapter.setScrollToBottom(true, false);
+        gankListAdapter.setLoadingError(false);
+        gankListAdapter.setScrollToBottom(true);
         mPrensenter.onLoadMore();
     }
 
@@ -196,14 +202,14 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
         if (isShowReload) {
             resetVisible(View.VISIBLE);
         }
-        gankListAdapter.setScrollToBottom(false, true);
+        gankListAdapter.setLoadingError(true);
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void onLoadingComplete() {
         resetVisible(View.GONE);
-        gankListAdapter.setScrollToBottom(false, false);
+        gankListAdapter.setScrollToBottom(false);
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
@@ -214,6 +220,30 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
 
     private void resetVisible(int visible) {
         mReloadLayout.setVisibility(visible);
+    }
+
+    private int getLastVisibleItemPosition(RecyclerView recyclerView) {
+        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        if (layoutManager instanceof LinearLayoutManager) {
+            return ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+        } else {
+            //因为StaggeredGridLayoutManager的特殊性可能导致最后显示的item存在多个，所以这里取到的是一个数组
+            //得到这个数组后再取到数组中position值最大的那个就是最后显示的position值了
+            int[] lastPositions = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
+            ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(lastPositions);
+            return findMax(lastPositions);
+        }
+    }
+
+    //找到数组中的最大值
+    private int findMax(int[] lastPositions) {
+        int max = lastPositions[0];
+        for (int value : lastPositions) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
     }
 
 }

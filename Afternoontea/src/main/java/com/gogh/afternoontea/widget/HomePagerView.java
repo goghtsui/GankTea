@@ -1,6 +1,7 @@
 package com.gogh.afternoontea.widget;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -13,6 +14,7 @@ import com.gogh.afternoontea.listener.OnScrollListener;
 import com.gogh.afternoontea.listener.OnTopListener;
 import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
+import com.gogh.afternoontea.preference.imp.Configuration;
 import com.gogh.afternoontea.presenter.SectionsPagerPresenter;
 import com.gogh.afternoontea.ui.HomeActivity;
 
@@ -31,6 +33,8 @@ public class HomePagerView implements OnScrollListener, Initializer {
 
     private Context mContext;
 
+    private ViewPager mViewPager;
+
     private TabLayout mTablayout;
 
     /**
@@ -45,11 +49,7 @@ public class HomePagerView implements OnScrollListener, Initializer {
 
     private OnMultipleClickListener onMultipleClickListener;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    private ViewPager mViewPager;
-
+    @NonNull
     private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
@@ -82,9 +82,10 @@ public class HomePagerView implements OnScrollListener, Initializer {
         }
     };
 
-    public HomePagerView(Context mContext, TabLayout mTablayout, FloatingActionButton mFloatingActionButton) {
-        this.mTablayout = mTablayout;
+    public HomePagerView(Context mContext, TabLayout mTablayout, ViewPager mViewPager, FloatingActionButton mFloatingActionButton) {
         this.mContext = mContext;
+        this.mTablayout = mTablayout;
+        this.mViewPager = mViewPager;
         this.mFloatingActionButton = mFloatingActionButton;
         initView();
     }
@@ -95,12 +96,14 @@ public class HomePagerView implements OnScrollListener, Initializer {
 
     @Override
     public void initView() {
-        mViewPager = (ViewPager) ((HomeActivity) mContext).findViewById(R.id.container);
+        mViewPager.setOffscreenPageLimit(Integer.valueOf(new Configuration(mContext, Configuration.FLAG_SYSTEM).getCachePageCount()));
 
         SectionsPagerPresenter pagerPresenter = SectionsPagerPresenter.newInstance();
         pagerPresenter.setOnScrollListener(this);
+
         pagerAdapter = pagerPresenter.getPagerAdapter(mContext, ((HomeActivity) mContext).getSupportFragmentManager());
         mViewPager.setAdapter(pagerAdapter);
+
         mTablayout.setupWithViewPager(mViewPager);
 
         mFloatingActionButton.setOnClickListener(v -> {

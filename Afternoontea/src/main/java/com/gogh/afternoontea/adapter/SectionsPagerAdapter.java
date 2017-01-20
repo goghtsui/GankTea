@@ -1,6 +1,7 @@
 package com.gogh.afternoontea.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -46,6 +47,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return fragmentList.size();
     }
 
+    @NonNull
     @Override
     public CharSequence getPageTitle(int position) {
         Logger.d("getPageTitle", "getPageTitle : " +fragmentList.get(position).getTitle() );

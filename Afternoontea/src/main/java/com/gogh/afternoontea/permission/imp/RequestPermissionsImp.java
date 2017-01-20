@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -35,6 +36,7 @@ public class RequestPermissionsImp implements RequestPermissions {
     /**
      * 需要进行检测的权限数组
      */
+    @NonNull
     protected String[] needPermissions = {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -60,7 +62,7 @@ public class RequestPermissionsImp implements RequestPermissions {
     }
 
     @Override
-    public void checkPermissions(String... permissions) {
+    public void checkPermissions(@NonNull String... permissions) {
         Logger.d(TAG, " checkPermissions.");
         List<String> needRequestPermissonList = findDeniedPermissions(permissions);
         if (null != needRequestPermissonList
@@ -78,8 +80,9 @@ public class RequestPermissionsImp implements RequestPermissions {
         }
     }
 
+    @NonNull
     @Override
-    public List<String> findDeniedPermissions(String[] permissions) {
+    public List<String> findDeniedPermissions(@NonNull String[] permissions) {
         Logger.d(TAG, " findDeniedPermissions.");
         List<String> needRequestPermissonList = new ArrayList<>();
         for (String perm : permissions) {
@@ -95,7 +98,7 @@ public class RequestPermissionsImp implements RequestPermissions {
     }
 
     @Override
-    public boolean verifyPermissions(int[] grantResults) {
+    public boolean verifyPermissions(@NonNull int[] grantResults) {
         Logger.d(TAG, " verifyPermissions.");
         for (int result : grantResults) {
             if (result != PackageManager.PERMISSION_GRANTED) {
@@ -108,7 +111,7 @@ public class RequestPermissionsImp implements RequestPermissions {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] paramArrayOfInt) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, @NonNull int[] paramArrayOfInt) {
         Logger.d(TAG, " onRequestPermissionsResult.requestCode : " + requestCode);
         if (requestCode == PERMISSON_REQUESTCODE) {
             if (!verifyPermissions(paramArrayOfInt)) {

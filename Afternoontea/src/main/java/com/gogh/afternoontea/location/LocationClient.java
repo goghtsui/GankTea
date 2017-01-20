@@ -1,6 +1,8 @@
 package com.gogh.afternoontea.location;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -20,10 +22,13 @@ public class LocationClient {
 
     private static final String TAG = "LocationClient";
     //声明AMapLocationClient类对象
+    @Nullable
     private static AMapLocationClient mLocationClient = null;
+    @Nullable
     private static LocationClient INSTANCE = null;
     private OnLocationListener locationListener;
 
+    @NonNull
     public AMapLocationListener mLocationListener = aMapLocation -> {
 
         if (null != aMapLocation) {
@@ -50,6 +55,7 @@ public class LocationClient {
     private LocationClient() {
     }
 
+    @Nullable
     public static LocationClient newInstance() {
         if (null == INSTANCE) {
             INSTANCE = SingleHolder.CLIENT;
@@ -63,7 +69,8 @@ public class LocationClient {
      * @param location
      * @return
      */
-    private synchronized static String getLocationStr(AMapLocation location) {
+    @Nullable
+    private synchronized static String getLocationStr(@Nullable AMapLocation location) {
         if (null == location) {
             return null;
         }
@@ -107,7 +114,8 @@ public class LocationClient {
         return sb.toString();
     }
 
-    public synchronized AMapLocationClient build(Context context) {
+    @Nullable
+    public synchronized AMapLocationClient build(@NonNull Context context) {
         if (mLocationClient == null) {
             //初始化定位
             mLocationClient = new AMapLocationClient(context.getApplicationContext());
@@ -123,6 +131,7 @@ public class LocationClient {
      *
      * @since 2.8.0
      */
+    @NonNull
     private AMapLocationClientOption getDefaultOption() {
         AMapLocationClientOption mOption = new AMapLocationClientOption();
         mOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式

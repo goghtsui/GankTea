@@ -1,6 +1,7 @@
 package com.gogh.afternoontea.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class MeizituFragment extends BaseFragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
+    @NonNull
     public static MeizituFragment newInstance(int sectionNumber) {
         MeizituFragment fragment = new MeizituFragment();
         Bundle args = new Bundle();
@@ -45,6 +47,7 @@ public class MeizituFragment extends BaseFragment {
     /**
      * 获取页面的标题
      */
+    @NonNull
     @Override
     public String getTitle() {
         return "妹子图";
@@ -71,7 +74,7 @@ public class MeizituFragment extends BaseFragment {
      * @param inflater
      */
     @Override
-    protected View getContentLayout(LayoutInflater inflater, ViewGroup container) {
+    protected View getContentLayout(@NonNull LayoutInflater inflater, ViewGroup container) {
         View rootView = inflater.inflate(R.layout.meizipic_layout, container, false);
         cardsView = (SwipeCardsView) rootView.findViewById(R.id.swipCardsView);
         requestData();
@@ -106,11 +109,12 @@ public class MeizituFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return getContentLayout(inflater, container);
     }
 
+    @NonNull
     private MeiziAdapter getAdapter(String response) {
         return new MeiziAdapter(HtmlParser.parserHtml(response), getActivity().getApplicationContext());
     }

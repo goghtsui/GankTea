@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.request;
 
+import android.support.annotation.NonNull;
+
 import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.entity.weather.WeatherEntity;
@@ -23,16 +25,20 @@ public interface RequestApi {
      * @param city 城市名称
      * @return 天气
      */
+    @NonNull
     @GET(Urls.Weather.PATH)
     Observable<WeatherEntity> getWeatherByCity(@Query("cityip") String city);
 
+    @NonNull
     @GET("page/2")
     Observable<String> getMeiziPic();
 
+    @NonNull
     @GET("data/{category}/{num}/{page}")
     Observable<GankEntity> getDataByCategory(@Path("category") String category
             , @Path("num") int num, @Path("page") int page);
 
+    @NonNull
     @GET("{params}")
     Observable<String> getHtmlByUrl(@Path("params") String path);
 

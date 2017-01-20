@@ -68,3 +68,8 @@ settings.gradle
 !/gradlew.bat
 /gradlew.bat
 /gradlew
+/library/
+/sample/
+Afternoontea/src/main/java/com/gogh/afternoontea/service/
+Afternoontea/src/main/res/anim/
+/FloatingMenu/

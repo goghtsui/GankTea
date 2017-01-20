@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.entity.gank;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -148,6 +150,7 @@ public class GankEntity implements Serializable {
             this.images = images;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "ResultsBean{" +
@@ -165,6 +168,7 @@ public class GankEntity implements Serializable {
         }
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "GankEntity{" +

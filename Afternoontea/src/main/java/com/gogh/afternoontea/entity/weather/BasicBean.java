@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.entity.weather;
 
+import android.support.annotation.NonNull;
+
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
  * <p> Description:  基础信息</p>
@@ -128,6 +130,7 @@ public class BasicBean {
             this.utc = utc;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "UpdateBean{" +

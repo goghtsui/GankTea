@@ -1,6 +1,8 @@
 package com.gogh.afternoontea.convert;
 
 
+import android.support.annotation.NonNull;
+
 import com.gogh.afternoontea.log.Logger;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
@@ -30,7 +32,7 @@ final class CustomGsonResponseBodyConverter<T> implements Converter<ResponseBody
     }
 
     @Override
-    public T convert(ResponseBody value) throws IOException {
+    public T convert(@NonNull ResponseBody value) throws IOException {
         String response = value.string();
         Logger.d("CustomGsonResponseBodyConverter", "convert ResponseBody before = " + response);
         if(response.startsWith("{") && response.endsWith("}")){

@@ -1,6 +1,7 @@
 package com.gogh.afternoontea.request;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.listener.OnResponListener;
@@ -33,7 +34,7 @@ public class RequestProxy implements Request {
      * @param responListener
      */
     @Override
-    public void getLocation(Context context, OnResponListener<String> responListener) {
+    public void getLocation(@NonNull Context context, OnResponListener<String> responListener) {
         RequestApiImp.newInstance().getLocation(context, responListener);
     }
 
@@ -70,11 +71,12 @@ public class RequestProxy implements Request {
      * @param responListener
      */
     @Override
-    public void getHtmlByUrl(String url, OnResponListener<String> responListener) {
+    public void getHtmlByUrl(@NonNull String url, OnResponListener<String> responListener) {
         RequestApiImp.newInstance().getHtmlByUrl(url, responListener);
     }
 
     private static final class SingleHoder {
         private static final RequestProxy PROXY = new RequestProxy();
     }
+
 }

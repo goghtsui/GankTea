@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.entity.weather;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -88,6 +90,7 @@ public class WeatherEntity {
         this.hourly_forecast = hourly_forecast;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "WeatherEntity{" +

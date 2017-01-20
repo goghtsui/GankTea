@@ -3,6 +3,7 @@ package com.gogh.afternoontea.widget;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -124,7 +125,7 @@ public class PicWebview implements WebWidget {
      *
      * @param webView 使用的webview
      */
-    public void setUpWebView(WebView webView) {
+    public void setUpWebView(@NonNull WebView webView) {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setLoadWithOverviewMode(true);
@@ -144,7 +145,7 @@ public class PicWebview implements WebWidget {
          * @param url
          * @return
          */
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        public boolean shouldOverrideUrlLoading(@NonNull WebView view, String url) {
             if (TextUtils.isEmpty(url)) {
                 return true;
             }

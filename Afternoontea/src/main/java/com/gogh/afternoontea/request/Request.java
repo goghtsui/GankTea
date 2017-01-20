@@ -50,4 +50,5 @@ public interface Request {
      *  获取网页的html源码
      */
     void getHtmlByUrl(String url, OnResponListener<String> responListener);
+
 }

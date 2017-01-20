@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.parser.html;
 
+import android.support.annotation.NonNull;
+
 import com.gogh.afternoontea.entity.meizi.MeiziBean;
 import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.utils.StringUtil;
@@ -23,6 +25,7 @@ public class HtmlParser {
 
     private static final String TAG = "HtmlParser";
 
+    @NonNull
     public static List<MeiziBean> parserHtml(String html) {
         List<MeiziBean> meiziList = new ArrayList<>();
 

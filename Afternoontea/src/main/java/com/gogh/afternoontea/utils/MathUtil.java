@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.utils;
 
+import android.support.annotation.NonNull;
+
 import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.entity.FloatMenu;
 
@@ -12,6 +14,7 @@ import com.gogh.afternoontea.entity.FloatMenu;
  */
 public class MathUtil {
 
+    @NonNull
     public static FloatMenu.Pointer computePoint(int distance, int position, int num) {
         float myroate = (float) (Math.PI / 2 / num);
         float x = (float) (distance * Math.cos(myroate * position));

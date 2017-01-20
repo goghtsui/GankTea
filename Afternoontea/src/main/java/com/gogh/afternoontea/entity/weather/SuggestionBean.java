@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.entity.weather;
 
+import android.support.annotation.NonNull;
+
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
  * <p> Description:  生活指数，仅限国内城市，国际城市无此字段</p>
@@ -148,6 +150,7 @@ public class SuggestionBean {
             this.txt = txt;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "AirBean{" +
@@ -182,6 +185,7 @@ public class SuggestionBean {
             this.txt = txt;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "ComfBean{" +
@@ -216,6 +220,7 @@ public class SuggestionBean {
             this.txt = txt;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "CwBean{" +
@@ -250,6 +255,7 @@ public class SuggestionBean {
             this.txt = txt;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "DrsgBean{" +
@@ -284,6 +290,7 @@ public class SuggestionBean {
             this.txt = txt;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "FluBean{" +
@@ -318,6 +325,7 @@ public class SuggestionBean {
             this.txt = txt;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "SportBean{" +
@@ -352,6 +360,7 @@ public class SuggestionBean {
             this.txt = txt;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "TravBean{" +
@@ -386,6 +395,7 @@ public class SuggestionBean {
             this.txt = txt;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "UvBean{" +
@@ -395,6 +405,7 @@ public class SuggestionBean {
         }
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "SuggestionBean{" +

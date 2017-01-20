@@ -2,6 +2,7 @@ package com.gogh.afternoontea.adapter.meizi;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -39,7 +40,7 @@ public class MeiziAdapter extends BaseCardAdapter {
     }
 
     @Override
-    public void onBindData(int position, View cardview) {
+    public void onBindData(int position, @NonNull View cardview) {
         if (datas == null || datas.size() == 0) {
             return;
         }

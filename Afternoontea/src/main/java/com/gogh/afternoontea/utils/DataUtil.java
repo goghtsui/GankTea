@@ -2,6 +2,8 @@ package com.gogh.afternoontea.utils;
 
 import android.content.Context;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.log.Logger;
@@ -20,8 +22,9 @@ public class DataUtil {
 
     private static final String TAG = "DataUtil";
 
+    @Nullable
     public static List<GankEntity.ResultsBean> removeDuplicateData(
-            List<GankEntity.ResultsBean> orignalDatas, List<GankEntity.ResultsBean> newDatas) {
+            @Nullable List<GankEntity.ResultsBean> orignalDatas, @Nullable List<GankEntity.ResultsBean> newDatas) {
         if (orignalDatas == null) {
             return newDatas;
         }
@@ -43,8 +46,9 @@ public class DataUtil {
         return orignalDatas;
     }
 
+    @NonNull
     public static List<GankEntity.ResultsBean> getAvalibleData(
-            List<GankEntity.ResultsBean> orignalDatas, List<GankEntity.ResultsBean> newDatas) {
+            @NonNull List<GankEntity.ResultsBean> orignalDatas, @Nullable List<GankEntity.ResultsBean> newDatas) {
         if (newDatas != null) {
             String lastOldId = orignalDatas.get(orignalDatas.size() - 1).get_id();
             int index = -1;
@@ -72,14 +76,14 @@ public class DataUtil {
     /**
      * 清除本应用内部缓存(/data/data/com.xxx.xxx/cache) * * @param context
      */
-    public static void cleanInternalCache(Context context) {
+    public static void cleanInternalCache(@NonNull Context context) {
         deleteFilesByDirectory(context.getCacheDir());
     }
 
     /**
      * 清除本应用所有数据库(/data/data/com.xxx.xxx/databases) * * @param context
      */
-    public static void cleanDatabases(Context context) {
+    public static void cleanDatabases(@NonNull Context context) {
         deleteFilesByDirectory(new File("/data/data/"
                 + context.getPackageName() + "/databases"));
     }
@@ -88,7 +92,7 @@ public class DataUtil {
      * * 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs) * * @param
      * context
      */
-    public static void cleanSharedPreference(Context context) {
+    public static void cleanSharedPreference(@NonNull Context context) {
         deleteFilesByDirectory(new File("/data/data/"
                 + context.getPackageName() + "/shared_prefs"));
     }
@@ -96,14 +100,14 @@ public class DataUtil {
     /**
      * 按名字清除本应用数据库 * * @param context * @param dbName
      */
-    public static void cleanDatabaseByName(Context context, String dbName) {
+    public static void cleanDatabaseByName(@NonNull Context context, String dbName) {
         context.deleteDatabase(dbName);
     }
 
     /**
      * 清除/data/data/com.xxx.xxx/files下的内容 * * @param context
      */
-    public static void cleanFiles(Context context) {
+    public static void cleanFiles(@NonNull Context context) {
         deleteFilesByDirectory(context.getFilesDir());
     }
 
@@ -111,7 +115,7 @@ public class DataUtil {
      * * 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache) * * @param
      * context
      */
-    public static void cleanExternalCache(Context context) {
+    public static void cleanExternalCache(@NonNull Context context) {
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {
             deleteFilesByDirectory(context.getExternalCacheDir());
@@ -121,14 +125,14 @@ public class DataUtil {
     /**
      * 清除自定义路径下的文件，使用需小心，请不要误删。而且只支持目录下的文件删除 * * @param filePath
      */
-    public static void cleanCustomCache(String filePath) {
+    public static void cleanCustomCache(@NonNull String filePath) {
         deleteFilesByDirectory(new File(filePath));
     }
 
     /**
      * 清除本应用所有的数据 * * @param context * @param filepath
      */
-    public static void cleanApplicationData(Context context, String... filepath) {
+    public static void cleanApplicationData(@NonNull Context context, @NonNull String... filepath) {
         cleanInternalCache(context);
         cleanExternalCache(context);
         cleanDatabases(context);
@@ -142,7 +146,7 @@ public class DataUtil {
     /**
      * 删除方法 这里只会删除某个文件夹下的文件，如果传入的directory是个文件，将不做处理 * * @param directory
      */
-    private static void deleteFilesByDirectory(File directory) {
+    private static void deleteFilesByDirectory(@Nullable File directory) {
         if (directory != null && directory.exists() && directory.isDirectory()) {
             for (File item : directory.listFiles()) {
                 item.delete();

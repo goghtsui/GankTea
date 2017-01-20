@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.entity.weather;
 
+import android.support.annotation.NonNull;
+
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
  * <p> Description:  7天天气预报</p>
@@ -200,6 +202,7 @@ public class DailyForecastBean {
             this.ss = ss;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "AstroBean{" +
@@ -272,6 +275,7 @@ public class DailyForecastBean {
             this.txt_n = txt_n;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "CondBeanX{" +
@@ -318,6 +322,7 @@ public class DailyForecastBean {
             this.min = min;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "TmpBean{" +
@@ -390,6 +395,7 @@ public class DailyForecastBean {
             this.spd = spd;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "WindBeanX{" +
@@ -401,6 +407,7 @@ public class DailyForecastBean {
         }
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "DailyForecastBean{" +

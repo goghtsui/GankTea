@@ -1,9 +1,9 @@
 package com.gogh.afternoontea.utils;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
-
-import com.gogh.afternoontea.main.BaseAppCompatActivity;
+import android.view.WindowManager;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -14,10 +14,12 @@ import com.gogh.afternoontea.main.BaseAppCompatActivity;
  */
 public class AndroidUtil {
 
-    public static int[] getScreenSize(Context context) {
+    @NonNull
+    public static float[] getScreenSize(@NonNull Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics mDisplayMetrics = new DisplayMetrics();
-        ((BaseAppCompatActivity)context).getWindowManager().getDefaultDisplay().getMetrics(mDisplayMetrics);
-        return new int[]{mDisplayMetrics.widthPixels, mDisplayMetrics.heightPixels};
+        windowManager.getDefaultDisplay().getMetrics(mDisplayMetrics);
+        return new float[]{mDisplayMetrics.widthPixels * 1.0f, mDisplayMetrics.density};
     }
 
 }

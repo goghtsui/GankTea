@@ -63,6 +63,11 @@
     <string name="settting_prefrences_display_card_list_on">正在使用卡片列表</string>
     <string name="settting_prefrences_display_car_list_key">display_list_mode</string>
 
+    <string name="settting_prefrences_display_cache_title">页面预加载</string>
+    <string name="settting_prefrences_display_cache_summary">设置预加载页面数量，重启生效</string>
+    <string name="settting_prefrences_display_cache_dialog_title">请选预加载存页面的数量</string>
+    <string name="settting_prefrences_display_cache_key">display_cache_page</string>
+
     <!-- 关于 -->
     <string name="settting_prefrences_about_title">关于</string>
 
@@ -80,5 +85,11 @@
     <string name="setting_prefrences_common_off">禁用</string>
     <string name="setting_prefrences_common_on">开启</string>
 
+    <string-array name="cache_page_entries">
+        <item >1</item>
+        <item >2</item>
+        <item >3</item>
+        <item >4</item>
+    </string-array>
 
 </resources>

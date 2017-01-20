@@ -1,5 +1,6 @@
 package com.gogh.afternoontea.entity;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 
 /**
@@ -37,6 +38,7 @@ public class FloatMenu {
         this.mTargetView = mTargetView;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "FloatMenu{" +
@@ -71,6 +73,7 @@ public class FloatMenu {
             this.y = y;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "Pointer{" +

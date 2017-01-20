@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.utils;
 
+import android.support.annotation.NonNull;
+
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.log.Logger;
@@ -15,7 +17,7 @@ public class Resource {
 
     private static final String TAG = "Resource";
 
-    public static int getResIdByType(String type) {
+    public static int getResIdByType(@NonNull String type) {
         Logger.d(TAG, "getTypeResId : " + type);
         switch (type) {
             case Urls.GANK_URL.ANDROID:

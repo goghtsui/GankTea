@@ -1,6 +1,7 @@
 package com.gogh.afternoontea.ui;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.gogh.afternoontea.fragment.SettingFragment;
@@ -16,7 +17,7 @@ import com.gogh.afternoontea.main.BaseAppCompatActivity;
 public class SettingActivity extends BaseAppCompatActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 不设置setcontentview
         if (savedInstanceState == null) {

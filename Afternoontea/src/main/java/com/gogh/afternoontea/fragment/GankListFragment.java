@@ -1,15 +1,20 @@
 package com.gogh.afternoontea.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.gogh.afternoontea.R;
+import com.gogh.afternoontea.adapter.SpacesItemDecoration;
 import com.gogh.afternoontea.listener.OnScrollListener;
+import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.widget.SwipeRefreshView;
 
@@ -37,13 +42,16 @@ public class GankListFragment extends BaseFragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static GankListFragment newInstance(Builder builder, int sectionNumber) {
+    @NonNull
+    public static GankListFragment newInstance(@NonNull Builder builder, int sectionNumber) {
         GankListFragment fragment = new GankListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        args.putString(ARG_SECTION_TYPE, builder.type);
-        args.putInt(ARG_SECTION_NUM, builder.num);
-        args.putInt(ARG_SECTION_PAGE, builder.page);
+        args.putString(ARG_SECTION_TYPE, builder.getType());
+        args.putInt(ARG_SECTION_NUM, builder.getNum());
+        args.putInt(ARG_SECTION_PAGE, builder.getPage());
+        args.putInt(ARG_SECTION_LAYOUT_TYPE, builder.getLayoutType());
+        Logger.d("GankListFragment", " layout_type : " + builder.getLayoutType());
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,6 +59,7 @@ public class GankListFragment extends BaseFragment {
     /**
      * 获取页面的标题
      */
+    @NonNull
     @Override
     public String getTitle() {
         return formatTitle(getArguments().getString(ARG_SECTION_TYPE));
@@ -81,19 +90,31 @@ public class GankListFragment extends BaseFragment {
      * @param container
      */
     @Override
-    protected View getContentLayout(LayoutInflater inflater, ViewGroup container) {
+    protected View getContentLayout(@NonNull LayoutInflater inflater, ViewGroup container) {
         View rootView = inflater.inflate(R.layout.gank_list_layout, container, false);
 
         mReloadLayout = (LinearLayout) rootView.findViewById(R.id.gank_list__reload_layout);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.gank_swipe_refresh_widget);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.gank_recycler_view);
+        mRecyclerView.setLayoutManager(getLayouManager());
 
         mSwipeRefreshView = new SwipeRefreshView(this, mReloadLayout,  mRecyclerView, mSwipeRefreshLayout);
         mSwipeRefreshView.setOnScrollListener(onScrollListener);
 
         requestData();
         return rootView;
+    }
+
+    private RecyclerView.LayoutManager getLayouManager() {
+        if(getArguments().getInt(ARG_SECTION_LAYOUT_TYPE) == LAYOUT_TYPE_LIST){
+            return new  LinearLayoutManager(getActivity());
+        } else {
+            //设置item之间的间隔
+            SpacesItemDecoration decoration=new SpacesItemDecoration(16);
+            mRecyclerView.addItemDecoration(decoration);
+            return new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        }
     }
 
     /**

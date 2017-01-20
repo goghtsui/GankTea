@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.theme;
 
+import android.support.annotation.Nullable;
+
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.log.Logger;
 
@@ -14,12 +16,14 @@ class ThemeImp implements Theme {
 
     private static final String TAG = "ThemeImp";
 
+    @Nullable
     private static ThemeImp MANAGER = null;
 
     private ThemeImp() {
         Logger.d(TAG, "ThemeImp constructor method..");
     }
 
+    @Nullable
     static ThemeImp newInstance() {
         if (MANAGER == null) {
             MANAGER = SingleHolder.MANAGER;

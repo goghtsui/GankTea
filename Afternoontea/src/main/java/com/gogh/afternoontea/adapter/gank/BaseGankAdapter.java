@@ -1,5 +1,6 @@
 package com.gogh.afternoontea.adapter.gank;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public interface BaseGankAdapter<T> {
         void onItemClick(View view, int position, int resId);
     }
 
+    @NonNull
     T getItem(int position);
 
     void setData(List<T> datas);
@@ -27,7 +29,8 @@ public interface BaseGankAdapter<T> {
 
     boolean isScrolledToBottom();
 
-    void setScrollToBottom(boolean isBottom, boolean isLoadingError);
+    void setScrollToBottom(boolean isBottom);
+    void setLoadingError(boolean isLoadingError);
 
     void setOnItemClickListener(OnItemClickListener onItemClickListener);
 

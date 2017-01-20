@@ -3,6 +3,7 @@ package com.gogh.afternoontea.utils;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 /**
@@ -14,7 +15,7 @@ import android.widget.Toast;
  */
 public class StringUtil {
 
-    public static void copyToClipBoard(Context context, String text, String success) {
+    public static void copyToClipBoard(@NonNull Context context, String text, String success) {
         ClipData clipData = ClipData.newPlainText("meizhi_copy", text);
         ClipboardManager manager =
                 (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
@@ -22,11 +23,12 @@ public class StringUtil {
         Toast.makeText(context.getApplicationContext(), success, Toast.LENGTH_SHORT).show();
     }
 
-    public static int url2groupid(String url) {
+    public static int url2groupid(@NonNull String url) {
         return Integer.parseInt(url.split("/")[3]);
     }
 
-    public static String[] formatUrl(String url){
+    @NonNull
+    public static String[] formatUrl(@NonNull String url){
         String[] result = new String[2];
         if(url.endsWith("/")){
             url = url.substring(0, url.lastIndexOf("/"));

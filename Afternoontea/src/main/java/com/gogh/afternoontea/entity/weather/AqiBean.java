@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.entity.weather;
 
+import android.support.annotation.NonNull;
+
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
  * <p> Description: 空气质量，仅限国内部分城市，国际城市无此字段</p>
@@ -138,6 +140,7 @@ public class AqiBean {
             this.so2 = so2;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "CityBean{" +
@@ -153,6 +156,7 @@ public class AqiBean {
         }
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "AqiBean{" +

@@ -1,5 +1,8 @@
 package com.gogh.afternoontea.http;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.gogh.afternoontea.request.Property;
 
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ class HttpClient {
 
     private static HttpClient INSTANCE;
 
+    @Nullable
     private List<Property> properties;
 
     private HttpClient() {
@@ -31,7 +35,8 @@ class HttpClient {
         return INSTANCE;
     }
 
-    protected okhttp3.OkHttpClient build(Builder builder) {
+    @NonNull
+    protected okhttp3.OkHttpClient build(@Nullable Builder builder) {
 
         if (null != builder) {
             this.properties = builder.properties;
@@ -69,6 +74,7 @@ class HttpClient {
      */
     static class Builder {
 
+        @Nullable
         private List<Property> properties;
 
         Builder() {
@@ -77,7 +83,8 @@ class HttpClient {
             }
         }
 
-        Builder addHeaders(List<Property> propertyList) {
+        @NonNull
+        Builder addHeaders(@Nullable List<Property> propertyList) {
             if (propertyList == null) {
                 throw new NullPointerException("addHeaders(List<Property>) : The value of param is null, plear ensure you pass an avaible value. ");
             }
@@ -90,7 +97,8 @@ class HttpClient {
             return this;
         }
 
-        Builder addHeader(Property property) {
+        @NonNull
+        Builder addHeader(@Nullable Property property) {
             if (property == null) {
                 throw new NullPointerException("addProperty(Property) : The value of param is null, plear ensure you pass an avaible value. ");
             }
@@ -101,6 +109,7 @@ class HttpClient {
             return this;
         }
 
+        @NonNull
         okhttp3.OkHttpClient build() {
             return HttpClient.newInstance().build(this);
         }

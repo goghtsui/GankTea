@@ -3,6 +3,7 @@ package com.gogh.afternoontea.utils;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -21,6 +22,15 @@ import com.gogh.afternoontea.log.Logger;
 public class TintColor {
 
     public static void setBackgroundTintList(@NonNull FloatingActionButton floatingActionButton, @ColorInt int color) {
+        floatingActionButton.setBackgroundTintList(getTintList(color));
+    }
+
+    public static void setTintList(@NonNull Drawable drawable, @ColorInt int color) {
+        drawable.setTintList(getTintList(color));
+    }
+
+    @NonNull
+    private static  ColorStateList getTintList(@ColorInt int color) {
         int[] colors = new int[]{color, color, color, color, color, color};
         int[][] states = new int[6][];
         states[0] = new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled};
@@ -29,7 +39,7 @@ public class TintColor {
         states[3] = new int[]{android.R.attr.state_focused};
         states[4] = new int[]{android.R.attr.state_window_focused};
         states[5] = new int[]{};
-        floatingActionButton.setBackgroundTintList(new ColorStateList(states, colors));
+        return new ColorStateList(states, colors);
     }
 
     /**
@@ -74,6 +84,7 @@ public class TintColor {
         return orignal;
     }
 
+    @NonNull
     public static int[] getColorSchemeResources() {
         return new int[]{R.color.colorRedPrimary, R.color.colorBrownPrimary,
                 R.color.colorOrangePrimary, R.color.colorLightGreenPrimary, R.color.colorIndigoPrimary,
@@ -85,7 +96,7 @@ public class TintColor {
      *
      * @return
      */
-    public static int getAccentColor(Context context) {
+    public static int getAccentColor(@NonNull Context context) {
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         return typedValue.data;
@@ -96,7 +107,7 @@ public class TintColor {
      *
      * @return
      */
-    public static int getPrimaryColor(Context context) {
+    public static int getPrimaryColor(@NonNull Context context) {
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
         return typedValue.data;
@@ -107,13 +118,13 @@ public class TintColor {
      *
      * @return
      */
-    public static int getPrimaryDarkColor(Context context) {
+    public static int getPrimaryDarkColor(@NonNull Context context) {
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
         return typedValue.data;
     }
 
-    private void getColor(Context context) {
+    private void getColor(@NonNull Context context) {
         TypedArray array = context.getTheme().obtainStyledAttributes(new int[]{
                 android.R.attr.colorBackground,
                 android.R.attr.textColorPrimary,
@@ -123,7 +134,7 @@ public class TintColor {
         array.recycle();
     }
 
-    public static int getThemeColor(Context context, int style){
+    public static int getThemeColor(@NonNull Context context, int style){
         int[] attr = new int[]{R.attr.colorPrimary};
         TypedArray array = context.obtainStyledAttributes(null, attr, 0, style);
         Logger.d("TAG", "getThemeColor " + 0xffffff);

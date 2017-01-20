@@ -30,7 +30,7 @@
         <!-- app:tabIndicatorColor // 下方滚动的下划线颜色
                  app:tabSelectedTextColor // tab被选中后，文字的颜色
                  app:tabTextColor // tab默认的文字颜色
-                 app:tabBackground // 4.改变整个TabLayout的颜色-->
+                 app:tabBackground // 4.改变整个TabLayout的颜色 -->
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             style="@style/LowerCase.TabLayout"

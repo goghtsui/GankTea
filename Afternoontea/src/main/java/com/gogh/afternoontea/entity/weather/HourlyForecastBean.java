@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.entity.weather;
 
+import android.support.annotation.NonNull;
+
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
  * <p> Description:  每三小时天气预报</p>
@@ -155,6 +157,7 @@ public class HourlyForecastBean {
             this.spd = spd;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "WindBeanXX{" +
@@ -166,6 +169,7 @@ public class HourlyForecastBean {
         }
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "HourlyForecastBean{" +

@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.http;
 
+import android.support.annotation.NonNull;
+
 import com.gogh.afternoontea.request.Property;
 
 import java.util.List;
@@ -18,11 +20,13 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
  */
 public class RequestTask {
 
+    @NonNull
     private static RequestTask INSTANCE = new RequestTask();
 
     private RequestTask() {
     }
 
+    @NonNull
     public static RequestTask getInstance() {
         if (null == INSTANCE) {
             INSTANCE = SingleHolder.TASK;
@@ -34,7 +38,8 @@ public class RequestTask {
         private static final RequestTask TASK = new RequestTask();
     }
 
-    public Retrofit retrofit (List<Property> propertyList, String baseUrl, Converter.Factory convertFactory) {
+    @NonNull
+    public Retrofit retrofit(List<Property> propertyList, @NonNull String baseUrl, @NonNull Converter.Factory convertFactory) {
         OkHttpClient client = new HttpClient.Builder()
                 .addHeaders(propertyList).build();
 
@@ -47,6 +52,5 @@ public class RequestTask {
 
         return retrofit;
     }
-
 
 }

@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.entity.weather;
 
+import android.support.annotation.NonNull;
+
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
  * <p> Description:  实况天气</p>
@@ -155,6 +157,7 @@ public class NowBean {
             this.txt = txt;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "CondBean{" +
@@ -227,6 +230,7 @@ public class NowBean {
             this.spd = spd;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "WindBean{" +
@@ -238,6 +242,7 @@ public class NowBean {
         }
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "NowBean{" +

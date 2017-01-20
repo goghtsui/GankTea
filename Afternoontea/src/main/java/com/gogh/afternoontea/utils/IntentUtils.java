@@ -1,11 +1,20 @@
 package com.gogh.afternoontea.utils;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.gogh.afternoontea.R;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -22,15 +31,16 @@ public class IntentUtils {
      * @param context 上下文
      * @param text    要分享的文本
      */
-    public static void share(Context context, String text) {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, text);
-        sendIntent.setType("text/plain");
-        context.startActivity(Intent.createChooser(sendIntent, "分享到"));
+    public static void share(@NonNull Context context, String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "分享到");
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(Intent.createChooser(intent, "分享到"));
     }
 
-    public static void openWithBrowser(String url, Context context) {
+    public static void openWithBrowser(String url, @NonNull Context context) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         Uri uri = Uri.parse(url);
@@ -42,4 +52,43 @@ public class IntentUtils {
         }
     }
 
+    public void sendMultiple(@NonNull Context context) {
+        Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+        intent.setType("image/*");
+        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, getUriListForImages(context));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+        intent.putExtra(Intent.EXTRA_TEXT, "你好 ");
+        intent.putExtra(Intent.EXTRA_TITLE, "我是标题");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(Intent.createChooser(intent, "请选择"));
+    }
+
+    private ArrayList<Uri> getUriListForImages(@NonNull Context context) {
+        ArrayList<Uri> myList = new ArrayList<Uri>();
+        String imageDirectoryPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/100ANDRO/";
+        File imageDirectory = new File(imageDirectoryPath);
+        String[] fileList = imageDirectory.list();
+        if (fileList.length != 0) {
+            for (int i = 0; i < 5; i++) {
+                try {
+                    ContentValues values = new ContentValues(7);
+                    values.put(MediaStore.Images.Media.TITLE, fileList[i]);
+                    values.put(MediaStore.Images.Media.DISPLAY_NAME, fileList[i]);
+                    values.put(MediaStore.Images.Media.DATE_TAKEN, new Date().getTime());
+                    values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                    values.put(MediaStore.Images.ImageColumns.BUCKET_ID, imageDirectoryPath.hashCode());
+                    values.put(MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME, fileList[i]);
+                    values.put("_data", imageDirectoryPath + fileList[i]);
+                    ContentResolver contentResolver = context.getApplicationContext().getContentResolver();
+                    Uri uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                    myList.add(uri);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return myList;
+
+    }
 }
