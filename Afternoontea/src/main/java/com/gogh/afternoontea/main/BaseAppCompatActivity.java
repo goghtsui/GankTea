@@ -32,6 +32,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setTheme(ATApplication.THEME);
         ThemeManager.newInstance().registerUpdateThemeListener(this);
+        new Configuration(getApplicationContext(), Configuration.FLAG_CUSTOM).setTheme(ATApplication.THEME);
         setupNoTitle();
     }
 

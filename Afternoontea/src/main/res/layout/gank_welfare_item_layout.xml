@@ -25,6 +25,7 @@
         android:padding="@dimen/gank_list_item_standard_margin_left"
         android:text="@string/gank_list_item_author_name_unknown"
         android:textColor="@android:color/white"
+        android:visibility="gone"
         android:textSize="@dimen/gank_list_item_title_text"
         android:textStyle="normal"/>
 

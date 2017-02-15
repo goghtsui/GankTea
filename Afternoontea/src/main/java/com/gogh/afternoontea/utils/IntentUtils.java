@@ -40,6 +40,14 @@ public class IntentUtils {
         context.startActivity(Intent.createChooser(intent, "分享到"));
     }
 
+    public static void contibuteByEmail(Context context, String emailTitle, String emailContent){
+        Intent intent=new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:xiaofeng355@sina.com"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, emailTitle);
+        intent.putExtra(Intent.EXTRA_TEXT, emailContent);
+        context.startActivity(intent);
+    }
+
     public static void openWithBrowser(String url, @NonNull Context context) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);

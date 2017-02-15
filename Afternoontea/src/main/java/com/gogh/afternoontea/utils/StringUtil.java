@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 /**
@@ -16,11 +17,13 @@ import android.widget.Toast;
 public class StringUtil {
 
     public static void copyToClipBoard(@NonNull Context context, String text, String success) {
-        ClipData clipData = ClipData.newPlainText("meizhi_copy", text);
+        ClipData clipData = ClipData.newPlainText("share_copy", text);
         ClipboardManager manager =
                 (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         manager.setPrimaryClip(clipData);
-        Toast.makeText(context.getApplicationContext(), success, Toast.LENGTH_SHORT).show();
+        if(!TextUtils.isEmpty(success)){
+            Toast.makeText(context.getApplicationContext(), success, Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static int url2groupid(@NonNull String url) {

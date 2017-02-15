@@ -59,7 +59,8 @@
         <Preference
             android:icon="@drawable/ic_preference_version"
             android:summary="@string/settting_prefrences_about_version_code"
-            android:title="@string/settting_prefrences_about_version_title"/>
+            android:title="@string/settting_prefrences_about_version_title">
+        </Preference>
         <Preference
             android:icon="@drawable/ic_preference_author"
             android:summary="@string/settting_prefrences_about_author_summary"

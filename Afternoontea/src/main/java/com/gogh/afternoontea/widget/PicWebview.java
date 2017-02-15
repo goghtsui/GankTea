@@ -14,13 +14,13 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.bumptech.glide.Glide;
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.app.WebWidget;
 import com.gogh.afternoontea.ui.GankDetailActivity;
 import com.gogh.afternoontea.utils.IntentUtils;
 import com.gogh.afternoontea.utils.StringUtil;
-import com.squareup.picasso.Picasso;
 
 import static com.gogh.afternoontea.R.id.ivImage;
 
@@ -77,8 +77,8 @@ public class PicWebview implements WebWidget {
     @Override
     public void onBindData() {
         collapsing_toolbar.setTitle(mData.getDesc());
-        Picasso.with(activity.getApplicationContext()).load(mData.getImages().get(0))
-                .config(Bitmap.Config.ARGB_8888).into(mImageView);
+        Glide.with(activity.getApplicationContext()).load(mData.getImages().get(0))
+              /*  .config(Bitmap.Config.ARGB_8888)*/.into(mImageView);
         collapsing_toolbar.setExpandedTitleColor(getColorPrimary());// 白色背景图片下，默认白色文字看不清，故设置成主题色
         mWebview.loadUrl(mData.getUrl());
     }

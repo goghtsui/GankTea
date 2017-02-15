@@ -1,30 +1,103 @@
 <resources>
-    <string name="app_name">AfternoonTea</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="app_name">Hot Coffee</string>
+    <string name="action_settings">Settigns</string>
 
     <string name="notifyTitle">Tips</string>
-    <string name="notifyMsg">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
-    <string name="setting">Setting</string>
+    <string name="notifyMsg">The current application lack of necessary permissions. \n\nPlease click on \"Settings\"-\"Permissions\"-Grant all permissions.</string>
+    <string name="setting">Settings</string>
     <string name="theme">Theme</string>
     <string name="done">Done</string>
     <string name="cancel">Cancle</string>
 
     <string name="translation_element_name">translation_element_name</string>
 
-    <string name="action_share_url">复制链接</string>
-    <string name="action_copy_url">复制链接</string>
-    <string name="action_open_url">从浏览器打开链接</string>
+    <string name="action_share_url">Share</string>
+    <string name="action_copy_url">Copy link</string>
+    <string name="action_open_url">Open the link from the browser</string>
 
-    <string name="toast_copy_done">复制成功</string>
-    <string name="toast_open_fail">打开链接失败</string>
+    <string name="toast_copy_done">Copy success</string>
+    <string name="toast_open_fail">Open the link failure</string>
 
     <string name="home_activity_tab_tile_android">Android</string>
     <string name="home_activity_tab_tile_ios">iOS</string>
-    <string name="home_activity_tab_tile_web">前端</string>
-    <string name="home_activity_tab_tile_recognized">推荐</string>
-    <string name="home_activity_tab_tile_welfare">福利</string>
-    <string name="home_activity_tab_tile_material">拓展资源</string>
-    <string name="home_activity_tab_tile_video">休息视频</string>
+    <string name="home_activity_tab_tile_web">Web</string>
+    <string name="home_activity_tab_tile_recognized">Recommend</string>
+    <string name="home_activity_tab_tile_welfare">Welfare</string>
+    <string name="home_activity_tab_tile_material">Expand resources</string>
+    <string name="home_activity_tab_tile_recommend">Other</string>
+    <string name="home_activity_tab_tile_video">Video</string>
+
+    <string name="gank_list_item_load_more">Loading...</string>
+    <string name="gank_list_item_reload">Click to reload</string>
+
+    <string name="gank_list_item_author_name_unknown">unknown</string>
+
+    <string name="setting_sharedprefereces_name">local_setttings</string>
+
+    <!-- 主题 -->
+    <string name="settting_prefrences_theme_title">Theme</string>
+
+    <string name="settting_prefrences_theme_weather_title">Weather theme</string>
+    <string name="settting_prefrences_theme_weather_status">theme_weather_status</string>
+    <string name="settting_prefrences_theme_weather_summary_on">Dynamically switch the theme with the weather(Need to open the positioning permission)</string>
+
+    <string name="setting_prefrences_theme_night_title">Night theme</string>
+    <string name="setting_prefrences_theme_night_status">theme_night_status</string>
+
+    <string name="setting_prefrences_theme_night_mode_title">Night mode</string>
+    <string name="setting_prefrences_theme_night_mode_status">theme_night_model</string>
+    <string name="setting_prefrences_theme_night_mode_on">According to the time, automatically switch to the night theme</string>
+
+    <!-- 显示 -->
+    <string name="settting_prefrences_display_card_title">Display</string>
+
+    <string name="settting_prefrences_display_no_pic_title">No PIC model</string>
+    <string name="settting_prefrences_display_no_pic_key">display_no_pic</string>
+
+    <string name="settting_prefrences_display_wifi_pic_title">Only under the WIFI display images</string>
+    <string name="settting_prefrences_display_wifi_pic_key">display_wifi_pic</string>
+
+    <string name="settting_prefrences_display_card_list_title">Card list</string>
+    <string name="settting_prefrences_display_card_list_off">Are using diagram block list</string>
+    <string name="settting_prefrences_display_card_list_on">Are using card list</string>
+    <string name="settting_prefrences_display_car_list_key">display_list_mode</string>
+
+    <string name="settting_prefrences_display_cache_title">Page preload</string>
+    <string name="settting_prefrences_display_cache_summary">Set the preloading page number，Restart to take effect</string>
+    <string name="settting_prefrences_display_cache_dialog_title">Please select a preload page number</string>
+    <string name="settting_prefrences_display_cache_key">display_cache_page</string>
+
+    <!-- 关于 -->
+    <string name="settting_prefrences_about_title">About</string>
+
+    <string name="settting_prefrences_about_share_key">about_share</string>
+    <string name="settting_prefrences_about_share_title">Recommend to your friend</string>
+    <string name="settting_prefrences_about_share_summary">Something good must share</string>
+
+    <string name="settting_prefrences_about_version_title">Info</string>
+    <string name="settting_prefrences_about_version_code">1.4.6\n Work on providing technology fuck goods.</string>
+
+    <string name="settting_prefrences_about_author_title">About author</string>
+    <string name="settting_prefrences_about_author_summary">http://www.xiaofeng.site</string>
+
+    <!--preferences-->
+    <string name="setting_prefrences_common_off">Disable</string>
+    <string name="setting_prefrences_common_on">Enable</string>
+
+    <string-array name="cache_page_entries">
+        <item >1</item>
+        <item >2</item>
+        <item >3</item>
+        <item >4</item>
+    </string-array>
+
+    <!-- 发布文章弹窗提示文字 -->
+    <string name="home_contribute_dialog_title">Introductions</string>
+    <string name="home_contribute_dialog_negative_button">Think about it</string>
+    <string name="home_contribute_dialog_positive_button">I\'d like to make</string>
+    <string name="home_contribute_dialog_content">This feature requires sent via email in the form of content, The specific format will be explained in email body!</string>
+    <string name="home_contribute_email_content">You only need to provide relevant article link address, and describe the subject and type for the article, Orignal article or Github open source, author name written your network name, Please fill in according to the following format, Don\'t delete!!! &lt;br&gt;The article links: &lt;br&gt;The article content description: &lt;br&gt;The article author: &lt;br&gt;The article category(Android | iOS | Video | Welfare | Expand source | Web | Recommend | App): &lt;br&gt;</string>
+
+    <string name="home_contribute_emial_title">publish an article</string>
 
 </resources>

@@ -11,12 +11,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.listener.OnCachePageNumChangedListener;
 import com.gogh.afternoontea.listener.OnMultipleClickListener;
 import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.main.BaseAppCompatActivity;
 import com.gogh.afternoontea.preference.PreferenceManager;
+import com.gogh.afternoontea.utils.IntentUtils;
 import com.gogh.afternoontea.utils.TintColor;
 import com.gogh.afternoontea.view.FloatMenuButton;
 import com.gogh.afternoontea.widget.FloatingMenuWidget;
@@ -140,6 +142,17 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
      */
     @Override
     public void onContributeListener(View v) {
+        new MaterialDialog.Builder(this)
+                .title(R.string.home_contribute_dialog_title)
+                .content(R.string.home_contribute_dialog_content)
+                .positiveText(R.string.home_contribute_dialog_positive_button)
+                .negativeText(R.string.home_contribute_dialog_negative_button)
+                .onPositive((dialog, which) -> {
+                    IntentUtils.contibuteByEmail(HomeActivity.this, getResources().getString(R.string.home_contribute_emial_title),
+                            getResources().getString(R.string.home_contribute_email_content));
+                    /*StringUtil.copyToClipBoard(HomeActivity.this,
+                        getResources().getString(R.string.home_contribute_dialog_clipboard_content), null);*/})
+                .show();
         mFloatingMenuWidget.closeMenu();
     }
 

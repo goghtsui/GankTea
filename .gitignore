@@ -70,6 +70,7 @@ settings.gradle
 /gradlew
 /library/
 /sample/
-Afternoontea/src/main/java/com/gogh/afternoontea/service/
-Afternoontea/src/main/res/anim/
 /FloatingMenu/
+/local.properties
+/gradle.properties.sample
+/nfcard/build/

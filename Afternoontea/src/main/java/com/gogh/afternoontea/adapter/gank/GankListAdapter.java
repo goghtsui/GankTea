@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.bumptech.glide.Glide;
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.adapter.holder.FooterViewHolder;
 import com.gogh.afternoontea.adapter.holder.ItemViewHolder;
@@ -27,6 +28,8 @@ import com.gogh.afternoontea.utils.ScaleTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import static android.view.View.GONE;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -66,8 +69,6 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private NetWorkInfo netWorkInfo;
     private Configuration mConfiguration;
-
-
 
     @Nullable
     private List<GankEntity.ResultsBean> datas;
@@ -112,7 +113,7 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return new NoPicViewHolder(footerView, context, datas);
         } else if (viewType == VIEW_TYPE_WELFARE) {
             View welfareView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_welfare_item_layout, parent, false);
-            return new WelfareViewHolder(welfareView);
+            return new WelfareViewHolder(context, welfareView);
         } else {
             View footerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_list_item_footer, parent, false);
             return new FooterViewHolder(footerView);
@@ -150,7 +151,13 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (holder != null && holder instanceof WelfareViewHolder) {
             bindWelfareData(holder, position);
         } else {
-            ((FooterViewHolder) holder).itemView.setVisibility((isScrollToBottom && !isLoadingError) ? View.VISIBLE : View.GONE);
+            if (isScrollToBottom) {
+                if (isLoadingError) {
+                    ((FooterViewHolder) holder).itemView.setVisibility(GONE);
+                } else {
+                    ((FooterViewHolder) holder).itemView.setVisibility(View.VISIBLE);
+                }
+            }
         }
     }
 
@@ -202,10 +209,10 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
             }
 
-            Picasso.with(context).load(imageUrl)
-                    .config(Bitmap.Config.ARGB_8888)
-                    .placeholder(R.mipmap.tech_item_bg)
-                    .error(R.mipmap.tech_item_bg)
+            Glide.with(context).load(imageUrl)
+//                    .config(Bitmap.Config.ARGB_8888)
+                    .placeholder(R.mipmap.default_item_bg)
+                    .error(R.mipmap.default_item_bg)
                     .into(((ItemViewHolder) holder).itemBgImage);
         }
     }
@@ -258,8 +265,8 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
             }
 
-            Picasso.with(context).load(imageUrl)
-                    .config(Bitmap.Config.ARGB_8888)
+            Glide.with(context).load(imageUrl)
+//                    .config(Bitmap.Config.ARGB_8888)
                     .placeholder(R.mipmap.gank_list_item_image_default)
                     .error(R.mipmap.gank_list_item_image_default)
                     .into(((NoPicViewHolder) holder).itemImage);
@@ -277,16 +284,10 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         GankEntity.ResultsBean entity = datas.get(position);
         if (entity != null && holder != null) {
 
-
-            if (TextUtils.isEmpty(entity.getPublishedAt())) {
-                ((WelfareViewHolder) holder).mTitleName.setText(" ");
-            } else {
-                ((WelfareViewHolder) holder).mTitleName.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
-            }
-
             String imageUrl = null;
 
             if (!TextUtils.isEmpty(entity.getUrl())) {
+                ((WelfareViewHolder) holder).setupImageUrl(entity.getUrl());
                 if (mConfiguration.isWifiPicMode()) {
                     if (netWorkInfo.isWifi()) {
                         imageUrl = entity.getUrl();
@@ -299,6 +300,14 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         .config(Bitmap.Config.ARGB_8888)
                         .transform(new ScaleTransformation())
                         .into(((WelfareViewHolder) holder).mWelfareImage);
+
+                if (TextUtils.isEmpty(entity.getPublishedAt())) {
+                    ((WelfareViewHolder) holder).mTitleName.setText(" ");
+                    ((WelfareViewHolder) holder).mTitleName.setVisibility(GONE);
+                } else {
+                    ((WelfareViewHolder) holder).mTitleName.setVisibility(View.VISIBLE);
+                    ((WelfareViewHolder) holder).mTitleName.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
+                }
             }
         }
     }
@@ -311,8 +320,16 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemCount() {
         Logger.d("TAG", "getItemCount. ");
-        int isFooter = (isScrollToBottom && !isLoadingError) ? 1 : 0;
-        return datas.size() + isFooter;
+
+        if (isScrollToBottom) {
+            if (isLoadingError) {
+                return datas.size();
+            } else {
+                return datas.size() + 1;
+            }
+        }
+
+        return datas.size();
     }
 
     @NonNull
