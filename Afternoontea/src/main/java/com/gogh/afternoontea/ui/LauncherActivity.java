@@ -12,7 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.main.BaseAppCompatActivity;
 import com.gogh.afternoontea.permission.imp.RequestPermissionsImp;
 

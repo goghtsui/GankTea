@@ -5,9 +5,9 @@ import android.app.Application;
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.app.Initializer;
 import com.gogh.afternoontea.location.Weather;
-import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.preference.imp.Configuration;
 import com.gogh.afternoontea.utils.AndroidUtil;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.utils.Utility;
 
 /**
@@ -22,52 +22,56 @@ public class ATApplication extends Application implements Initializer {
     private static final String TAG = "ATApplication";
 
     public static int THEME = R.style.DefaultTheme;
-    private Configuration configuration;
 
-    private static float[] screenSize;
+    private static float[] SCREEN_SIZE;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Logger.d(TAG, "ATApplication  onCreate.");
-        THEME = new Configuration(getApplicationContext(), Configuration.FLAG_CUSTOM).getTheme();
-        init();
+    public static float getWidth() {
+        return SCREEN_SIZE[0];
     }
 
-    @Override
-    public void init() {
-        Logger.d(TAG, "ATApplication  init.");
-        configuration = new Configuration(getApplicationContext(), Configuration.FLAG_SYSTEM);
-        if (configuration.isNightTheme()) {
-            THEME = R.style.DarkTheme;
-        } else {
-            if (configuration.isNightMode()) {
-                Logger.d(TAG, "is night mode. ");
-                if (Utility.isNight()) {
-                    Logger.d(TAG, " is night mode and set up night theme. ");
-                    THEME = R.style.DarkTheme;
-                } else {
-                    if (configuration.isWeatherTheme()) {// 开启天气主题
-                        Logger.d(TAG, "had opened weather theme.");
-                        new Weather(this).onLocation();
-                    }
-                }
-            } else {
-                if (configuration.isWeatherTheme()) {// 开启天气主题
-                    Logger.d(TAG, "had opened weather theme.");
-                    new Weather(this).onLocation();
-                }
-            }
-        }
-        screenSize = AndroidUtil.getScreenSize(getApplicationContext());
+    public static float getDensity() {
+        return SCREEN_SIZE[1];
     }
 
     @Override
     public void initView() {
     }
 
-    public static float[] getScreenSize() {
-        return screenSize;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Logger.d(TAG, "ATApplication  onCreate.");
+//        LeakCanary.install(this);
+        Configuration.newInstance().init(this);
+        THEME = Configuration.newInstance().getTheme();
+        init();
+    }
+
+    @Override
+    public void init() {
+        Logger.d(TAG, "ATApplication  init.");
+        if (Configuration.newInstance().isNightTheme()) {
+            THEME = R.style.DarkTheme;
+        } else {
+            if (Configuration.newInstance().isNightMode()) {
+                Logger.d(TAG, "is night mode. ");
+                if (Utility.isNight()) {
+                    Logger.d(TAG, " is night mode and set up night theme. ");
+                    THEME = R.style.DarkTheme;
+                } else {
+                    if (Configuration.newInstance().isWeatherTheme()) {// 开启天气主题
+                        Logger.d(TAG, "had opened weather theme.");
+                        new Weather(this).onLocation();
+                    }
+                }
+            } else {
+                if (Configuration.newInstance().isWeatherTheme()) {// 开启天气主题
+                    Logger.d(TAG, "had opened weather theme.");
+                    new Weather(this).onLocation();
+                }
+            }
+        }
+        SCREEN_SIZE = AndroidUtil.getScreenSize(getApplicationContext());
     }
 
 }

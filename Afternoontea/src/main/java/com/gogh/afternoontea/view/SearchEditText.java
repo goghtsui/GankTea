@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.EditText;
 
 import com.gogh.afternoontea.app.Initializer;
 
@@ -15,7 +14,7 @@ import com.gogh.afternoontea.app.Initializer;
  * <p> ChangeLog: </p>
  * <li> 高晓峰 on 1/17/2017 do fisrt create. </li>
  */
-public class SearchEditText extends EditText implements Initializer {
+public class SearchEditText extends android.support.v7.widget.AppCompatEditText implements Initializer {
 
     private OnKeyboardSearchKeyClickListener mSearchKeyListener;
     private OnKeyboardDismissedListener mOnKeyboardDismissedListener;
@@ -40,13 +39,11 @@ public class SearchEditText extends EditText implements Initializer {
     }
 
     public SearchEditText(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
-
-    public SearchEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+        super(context, attrs, defStyleAttr);
         init();
     }
+
+
 
     @Override
     public void init() {

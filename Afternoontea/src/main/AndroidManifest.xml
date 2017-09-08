@@ -35,6 +35,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
+       <!-- <meta-data
+            android:name="com.gogh.afternoontea.utils.ATGlideModulele"
+            android:value="AppGlideModule" />-->
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="fce12811f22ad38b4cd981b9ef3bdc4e"/>

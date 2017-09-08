@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:domy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="1280dp"
+    android:layout_height="108dp">
+    <!--用户信息部分-->
+    <LinearLayout
+        android:id="@+id/ll_launcher_header_user_bg"
+        android:layout_width="393dp"
+        android:layout_height="56dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="377dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/launcher_headerview_userview_bg"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="40dp">
+        <!--用户登录按钮-->
+        <LinearLayout
+            android:id="@+id/ll_launcher_header_user_login"
+            android:layout_width="166dp"
+            android:layout_height="88dp"
+            android:background="@drawable/focused_view_selector"
+            android:clipChildren="false"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@drawable/launcher_headerview_user" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/header_view_login"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                domy:usertypeface="SIMHEI" />
+        </LinearLayout>
+
+        <!--开通会员按钮-->
+        <LinearLayout
+            android:id="@+id/ll_launcher_header_user_getvip"
+            android:layout_width="143dp"
+            android:layout_height="80dp"
+            android:background="@drawable/focused_view_selector"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:layout_width="97dp"
+                android:layout_height="34dp"
+                android:background="@drawable/button_open_vip"
+                android:gravity="center"
+                android:text="@string/header_view_become_vip"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                domy:usertypeface="SIMHEI" />
+
+        </LinearLayout>
+
+        <!--会员信息，续费隐藏入口-->
+        <RelativeLayout
+            android:id="@+id/rl_launcher_header_viplogo"
+            android:layout_width="190dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="11dp"
+            android:background="@drawable/focused_view_vip_selector"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:orientation="horizontal">
+            <!--背景-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_launcher_header_viptip" />
+            <!--viplogo-->
+            <View
+                android:id="@+id/v_launcher_header_viplogo"
+                android:layout_width="25dp"
+                android:layout_height="21dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/launcher_headerview_user_viplogo"
+                android:gravity="center_horizontal" />
+            <!--vip剩余时间文本-->
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/v_launcher_header_viptime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="9dp"
+                android:gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textColor="#FFCC00"
+                android:textSize="13sp"
+                domy:usertypeface="SIMHEI" />
+        </RelativeLayout>
+        <!--我的影片按钮-->
+        <LinearLayout
+            android:id="@+id/ll_launcher_header_myfilm"
+            android:layout_width="143dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="-23dp"
+            android:background="@drawable/focused_view_selector"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:layout_width="97dp"
+                android:layout_height="34dp"
+                android:background="@drawable/bg_launcher_header_viptip"
+                android:gravity="center"
+                android:text="@string/header_view_myfilm"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                domy:usertypeface="SIMHEI" />
+
+        </LinearLayout>
+    </LinearLayout>
+    <!--背景图片-->
+    <View
+        android:id="@+id/v_launcher_header_bg"
+        android:layout_width="1280dp"
+        android:layout_height="108dp"
+        android:background="@drawable/launcher_headerview_bg" />
+    <!--大麦logo-->
+    <View
+        android:id="@+id/v_launcher_header_logo"
+        android:layout_width="142dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginTop="24dp" />
+    <!--网络状态-->
+    <ImageView
+        android:id="@+id/iv_launcher_header_net"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="28dp"
+        android:layout_toRightOf="@id/v_launcher_header_logo" />
+    <!--时间文本-->
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/txt_launcher_header_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="34dp"
+        android:layout_toRightOf="@id/iv_launcher_header_net"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        domy:usertypeface="SIMHEI" />
+
+
+    <LinearLayout
+        android:layout_width="450dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="38dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="27dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/launcher_headerview_marquee_horn" />
+
+        <ImageView
+            android:id="@+id/txt_launcher_marquee_crash"
+            android:layout_width="41dp"
+            android:layout_height="27dp"
+            android:layout_marginLeft="10dp" />
+
+        <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+            android:id="@+id/tv_launcher_marquee_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:singleLine="true"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            domy:usertypeface="SIMHEI" />
+    </LinearLayout>
+</RelativeLayout>

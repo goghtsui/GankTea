@@ -7,7 +7,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -15,7 +14,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.listener.OnCachePageNumChangedListener;
 import com.gogh.afternoontea.listener.OnMultipleClickListener;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.main.BaseAppCompatActivity;
 import com.gogh.afternoontea.preference.PreferenceManager;
 import com.gogh.afternoontea.utils.IntentUtils;
@@ -23,6 +22,8 @@ import com.gogh.afternoontea.utils.TintColor;
 import com.gogh.afternoontea.view.FloatMenuButton;
 import com.gogh.afternoontea.widget.FloatingMenuWidget;
 import com.gogh.afternoontea.widget.HomePagerView;
+
+import static com.gogh.afternoontea.R.id.container;
 
 public class HomeActivity extends BaseAppCompatActivity implements OnMultipleClickListener,
         FloatMenuButton.OnFloatingMenuClickListener, OnCachePageNumChangedListener {
@@ -75,7 +76,7 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
         floatMenuButton.setOnFloatingMenuClickListener(this);
         mFloatingMenuWidget = floatMenuButton.create();
 
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(container);
 
         // 分页适配器
         new HomePagerView(this, tabLayout, mViewPager, floatingActionButton).setOnMultipleClickListener(this);
@@ -91,10 +92,11 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
         // 动态设置滚动条的颜色
         //        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(HomeActivity.this, themeStyleId));
         floatMenuButton.resetFloatMenuBackground(themeColor);
-        TintColor.setBackgroundTintList(floatingActionButton, ContextCompat.getColor(HomeActivity.this, themeColor));
+        TintColor.setBackgroundTintList(floatingActionButton, themeColor/*ContextCompat.getColor(HomeActivity.this, themeColor)*/);
         // 动态设置tab背景颜色
-        tabLayout.setBackgroundColor(ContextCompat.getColor(HomeActivity.this, themeColor));
-//        tabLayout.setSelectedTabIndicatorColor(TintColor.getAccentColor(HomeActivity.this));
+        tabLayout.setBackgroundColor(themeColor);
+        // 设置页面背景色
+//        mViewPager.setBackgroundColor(themeColor);
     }
 
     @Override
@@ -178,12 +180,6 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        PreferenceManager.newInstance().unRegisterCachePageNumChangedListener(this);
     }
 
     @Override

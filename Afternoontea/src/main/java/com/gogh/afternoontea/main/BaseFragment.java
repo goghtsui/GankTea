@@ -75,7 +75,7 @@ public abstract class BaseFragment extends Fragment implements OnTopListener, On
     protected String formatTitle(@NonNull String orignal) {
         switch (orignal) {
             case Urls.GANK_URL.ALL:
-                return "推荐";
+                return "Top";
         }
         return orignal;
     }

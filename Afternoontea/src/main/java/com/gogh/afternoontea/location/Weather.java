@@ -1,11 +1,11 @@
 package com.gogh.afternoontea.location;
 
 import android.content.Context;
-import android.util.Log;
+import android.text.TextUtils;
 
 import com.gogh.afternoontea.app.Location;
 import com.gogh.afternoontea.listener.OnResponListener;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.request.RequestProxy;
 import com.gogh.afternoontea.theme.ThemeManager;
 
@@ -21,6 +21,8 @@ public class Weather implements Location {
     public static final String TAG = "Weather";
 
     public static final String NIGHT = "夜";
+
+    //
     public static final String SUNNY = "晴";
     public static final String CLOUDY = "多云";
     public static final String OVERCAST = "阴";
@@ -29,7 +31,14 @@ public class Weather implements Location {
     public static final String SONW = "雪";
     public static final String FOG = "雾";
     public static final String FOG_HAZE = "霾";
-    public static final String SAND_STORM = "沙尘";
+    //
+    public static final String SAND = "沙";
+    public static final String STORM = "尘";
+    //
+    public static final String WIND = "风";
+
+    public static final String COLD = "冷";
+    public static final String HOT = "热";
 
     private Context context;
 
@@ -47,18 +56,23 @@ public class Weather implements Location {
 
             @Override
             public void onError(Throwable e) {
+                requestWeather("ip");
             }
 
             @Override
             public void onResponse(String response) {
-                requestWeather(response);
+                if (TextUtils.isEmpty(response)) {
+                    requestWeather("ip");
+                } else {
+                    requestWeather(response);
+                }
             }
         });
     }
 
     @Override
     public void requestWeather(String cityIp) {
-        Log.d(TAG, " requestWeather city : " + cityIp);
+        Logger.d(TAG, "request weather key : " + cityIp);
         RequestProxy.newInstance().getWeatherByCity(cityIp, new OnResponListener<String>() {
             @Override
             public void onComplete() {

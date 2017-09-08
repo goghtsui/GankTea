@@ -1,10 +1,7 @@
 package com.gogh.afternoontea.widget;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,19 +10,15 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.adapter.gank.BaseGankAdapter;
 import com.gogh.afternoontea.adapter.gank.GankListAdapter;
 import com.gogh.afternoontea.app.Initializer;
-import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.listener.OnRefreshListener;
 import com.gogh.afternoontea.listener.OnScrollListener;
 import com.gogh.afternoontea.location.listener.OnLodingChangedListener;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.presenter.imp.GankTechPresneter;
-import com.gogh.afternoontea.ui.GankDetailActivity;
 import com.gogh.afternoontea.utils.TintColor;
 
 import java.util.ArrayList;
@@ -110,28 +103,6 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
         }
     };
 
-    /**
-     * 列表项的点击事件，跳转到详情页
-     */
-    @NonNull
-    private BaseGankAdapter.OnItemClickListener mOnItemClickListener = new BaseGankAdapter.OnItemClickListener() {
-
-        @Override
-        public void onItemClick(@NonNull View view, int position, int resId) {
-            Logger.d(TAG, "mOnItemClickListener position : " + position);
-            GankEntity.ResultsBean data = gankListAdapter.getItem(position);
-            Intent intent = new Intent(mFragment.getActivity(), GankDetailActivity.class);
-            intent.putExtra(Urls.GANK_URL.BUNDLE_KEY, data);
-
-            //            View intoView = view.findViewById(R.id.gank_item_image_bg);
-            View intoView = view.findViewById(resId);
-            ActivityOptionsCompat options =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(mFragment.getActivity(),
-                            intoView, mFragment.getResources().getString(R.string.translation_element_name));
-            ActivityCompat.startActivity(mFragment.getActivity(), intent, options.toBundle());
-        }
-    };
-
     public SwipeRefreshView(@NonNull BaseFragment mFragment, @NonNull LinearLayout mReloadLayout,
                             @NonNull RecyclerView mRecyclerView, @NonNull SwipeRefreshLayout mSwipeRefreshLayout) {
         this.mFragment = mFragment;
@@ -157,7 +128,6 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
         gankListAdapter = new GankListAdapter(mFragment.getActivity(),
                 mFragment.getArguments().getString(ARG_SECTION_TYPE));
         gankListAdapter.setData(datas);
-        gankListAdapter.setOnItemClickListener(mOnItemClickListener);
 
         mRecyclerView.setAdapter(gankListAdapter);
 
@@ -170,7 +140,6 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
     public void setOnScrollListener(OnScrollListener onScrollListener) {
         this.onScrollListener = onScrollListener;
     }
-
 
     /**
      * Called when a swipe gesture triggers a refresh.

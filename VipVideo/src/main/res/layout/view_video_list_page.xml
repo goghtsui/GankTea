@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_row_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/item_row_1_column_1"
+            layout="@layout/view_four_column_list_item_film" />
+
+        <include
+            android:id="@+id/item_row_1_column_2"
+            layout="@layout/view_four_column_list_item_film" />
+
+        <include
+            android:id="@+id/item_row_1_column_3"
+            layout="@layout/view_four_column_list_item_film" />
+
+        <include
+            android:id="@+id/item_row_1_column_4"
+            layout="@layout/view_four_column_list_item_film" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_row_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/item_row_2_column_1"
+            layout="@layout/view_four_column_list_item_film" />
+
+        <include
+            android:id="@+id/item_row_2_column_2"
+            layout="@layout/view_four_column_list_item_film" />
+
+        <include
+            android:id="@+id/item_row_2_column_3"
+            layout="@layout/view_four_column_list_item_film" />
+
+        <include
+            android:id="@+id/item_row_2_column_4"
+            layout="@layout/view_four_column_list_item_film" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_row_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/item_row_3_column_1"
+            layout="@layout/view_four_column_list_item_film" />
+
+        <include
+            android:id="@+id/item_row_3_column_2"
+            layout="@layout/view_four_column_list_item_film" />
+
+        <include
+            android:id="@+id/item_row_3_column_3"
+            layout="@layout/view_four_column_list_item_film" />
+
+        <include
+            android:id="@+id/item_row_3_column_4"
+            layout="@layout/view_four_column_list_item_film" />
+    </LinearLayout>
+
+</FrameLayout>

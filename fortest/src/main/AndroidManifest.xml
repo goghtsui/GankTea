@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.gogh.fortest">
+
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+
+    <!-- 开启摄像头 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature android:name="android.hardware.camera"/>
+    <!-- 設置录音 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!-- 网络状态 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- sd 卡获得写的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:name=".dagger.ui.DaggerApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="EMOKIT_AID"
+            android:value="100791"/>
+        <meta-data
+            android:name="EMOKIT_KEY"
+            android:value="cbc5f80e25ce67062ea3527e87df94b4"/>
+        <meta-data
+            android:name="EMOKIT_RecordTaskAnimation"
+            android:value="1"/>
+
+        <activity
+            android:name=".dynamic.test.DynamicActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+       <!-- <activity
+            android:name=".card.ui.CardActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>-->
+
+        <!--
+        <activity
+            android:name=".dagger.ui.HomeActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        -->
+
+        <activity
+            android:name="com.emokit.sdk.heartrate.FacedetectActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.emokit.sdk.senseface.CameraActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <receiver android:name=".test.SecretService">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SECRET_CODE"/>
+
+                <data
+                    android:host="2016"
+                    android:scheme="android_secret_code"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".kotlin.MainActivity">
+        </activity>
+    </application>
+
+</manifest>

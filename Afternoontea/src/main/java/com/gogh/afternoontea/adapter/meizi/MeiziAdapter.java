@@ -1,14 +1,13 @@
 package com.gogh.afternoontea.adapter.meizi;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.entity.meizi.MeiziBean;
-import com.squareup.picasso.Picasso;
+import com.gogh.afternoontea.utils.ImageLoader;
 
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class MeiziAdapter extends BaseCardAdapter {
         }
         ImageView imageView = (ImageView) cardview.findViewById(R.id.meizi_card_item_imageview);
         MeiziBean meizi = datas.get(position);
-        Picasso.with(context).load(meizi.getImageurl()).config(Bitmap.Config.ARGB_8888).into(imageView);
+        ImageLoader.load(context, meizi.getImageurl(), imageView);
     }
 
     /**

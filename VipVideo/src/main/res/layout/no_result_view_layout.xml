@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:domy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/no_result_color"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/no_result_view_layout_no_result_color_98layout_height"
+            android:layout_marginLeft="@dimen/no_result_view_layout_no_result_color_48layout_marginLeft"
+            android:layout_marginTop="@dimen/no_result_view_layout_no_result_color_58layout_marginTop"
+            android:background="@drawable/collect_color" />
+
+        <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+            android:id="@+id/title_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/no_result_color"
+            android:layout_marginLeft="@dimen/no_result_view_layout_title_text1_47layout_marginLeft"
+            android:layout_toRightOf="@id/no_result_color"
+            android:focusable="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/no_result_view_layout_title_text1_55textSize"
+            domy:usertypeface="SIMHEI" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/no_result_logo" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/no_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/logo"
+                android:layout_centerHorizontal="true"
+                android:text="@string/no_result_view"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/no_result_view_layout_no_text_93textSize"
+                domy:usertypeface="SIMHEI" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/empty_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/no_text"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/no_result_view_layout_empty_title_61textSize" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

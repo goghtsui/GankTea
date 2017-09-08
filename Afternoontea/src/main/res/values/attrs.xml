@@ -27,5 +27,6 @@
     <attr name="colorBackgroundAccent" format="color|reference" />
     <attr name="colorHint" format="color|reference" />
     <attr name="menuBackground" format="reference" />
+    <attr name="colorPrimaryBackground" format="reference" />
 
 </resources>

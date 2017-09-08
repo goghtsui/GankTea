@@ -60,7 +60,7 @@ public class GankDetailActivity extends BaseAppCompatActivity implements Initial
         mData = (GankEntity.ResultsBean) getIntent().getSerializableExtra(Urls.GANK_URL.BUNDLE_KEY);
 
         if (mData != null && mData.getImages() != null && mData.getImages().size() > 0) {
-            if (new Configuration(getApplicationContext(), Configuration.FLAG_SYSTEM).isNopicMode()) {
+            if (Configuration.newInstance().isNopicMode()) {
                 init();
             } else {
                 initView();

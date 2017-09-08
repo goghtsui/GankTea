@@ -5,10 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.constant.Urls;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
  * <p> ChangeLog: </p>
  * <li> 高晓峰 on 12/26/2016 do fisrt create. </li>
  */
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
     private Context context;
 
@@ -41,7 +42,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        if (fragmentList == null || fragmentList.size() == 0) {
+        if (fragmentList == null) {
             return 0;
         }
         return fragmentList.size();
@@ -71,4 +72,5 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         }
         return fragmentList.get(position).getTitle();
     }
+
 }

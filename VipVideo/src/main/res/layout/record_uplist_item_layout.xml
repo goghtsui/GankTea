@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:domy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/focused_view_selector"
+    android:clipChildren="false"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/history_list1_bg"
+        android:layout_width="161dp"
+        android:layout_height="@dimen/record_uplist_item_layout_history_list1_bg_80layout_height" />
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/history_list1_bg"
+        android:layout_alignTop="@id/history_list1_bg"
+        android:layout_marginRight="@dimen/record_uplist_item_layout_delete_64layout_marginRight"
+        android:layout_marginTop="@dimen/record_uplist_item_layout_delete_44layout_marginTop"
+        android:background="@drawable/delete_icon"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/history_corner"
+        android:layout_width="140dp"
+        android:layout_height="36dp"
+        android:layout_alignLeft="@id/history_list1_bg"
+        android:layout_alignTop="@id/history_list1_bg"
+        android:layout_marginLeft="15dp"
+        android:scaleType="fitStart" />
+
+    <ImageView
+        android:id="@+id/history_nopress"
+        android:layout_width="@dimen/record_uplist_item_layout_history_nopress_71layout_width"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@id/history_list1_bg"
+        android:layout_marginLeft="-2dp"
+        android:background="@drawable/recommend_bottom_mask" />
+
+    <ImageView
+        android:id="@+id/history_press"
+        android:layout_width="@dimen/record_uplist_item_layout_history_press_67layout_width"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@id/history_list1_bg"
+        android:layout_alignLeft="@id/history_list1_bg"
+        android:alpha="0"
+        android:background="@drawable/history_bottom_mask" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.EffectiveMarqueeTextView
+        android:id="@+id/history_name"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/history_list1_bg"
+        android:layout_alignLeft="@id/history_list1_bg"
+        android:layout_alignRight="@id/history_list1_bg"
+        android:layout_marginBottom="@dimen/record_uplist_item_layout_history_name_11layout_marginBottom"
+        android:layout_marginLeft="@dimen/record_uplist_item_layout_history_name_68layout_marginLeft"
+        android:layout_marginRight="@dimen/record_uplist_item_layout_history_name_80layout_marginRight"
+        android:focusable="false"
+        android:singleLine="true"
+        android:textColor="#646464"
+        android:textSize="@dimen/record_uplist_item_layout_history_name_55textSize"
+        domy:usertypeface="SIMHEI" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.EffectiveMarqueeTextView
+        android:id="@+id/history_tip"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/history_list1_bg"
+        android:layout_alignLeft="@id/history_name"
+        android:layout_marginBottom="2dp"
+        android:focusable="false"
+        android:singleLine="true"
+        android:textColor="#646464"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

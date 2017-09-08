@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.constant.Urls;
-import com.gogh.afternoontea.log.Logger;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng

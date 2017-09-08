@@ -14,11 +14,11 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.bumptech.glide.Glide;
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.app.WebWidget;
+import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.ui.GankDetailActivity;
+import com.gogh.afternoontea.utils.ImageLoader;
 import com.gogh.afternoontea.utils.IntentUtils;
 import com.gogh.afternoontea.utils.StringUtil;
 
@@ -34,14 +34,14 @@ import static com.gogh.afternoontea.R.id.ivImage;
 public class PicWebview implements WebWidget {
 
     private GankEntity.ResultsBean mData;//详情数据
-    private Context activity;
+    private Context context;
     private WebView mWebview;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
     private CollapsingToolbarLayout collapsing_toolbar;
 
-    public PicWebview(Context activity, GankEntity.ResultsBean mData) {
-        this.activity = activity;
+    public PicWebview(Context context, GankEntity.ResultsBean mData) {
+        this.context = context;
         this.mData = mData;
     }
 
@@ -62,10 +62,10 @@ public class PicWebview implements WebWidget {
      */
     @Override
     public void onCreateView() {
-        mImageView = (ImageView) ((GankDetailActivity) activity).findViewById(ivImage);
-        collapsing_toolbar = (CollapsingToolbarLayout) ((GankDetailActivity) activity).findViewById(R.id.collapsing_toolbar);
-        mProgressBar = (ProgressBar) ((GankDetailActivity) activity).findViewById(R.id.progress);
-        mWebview = (WebView) ((GankDetailActivity) activity).findViewById(R.id.gank_detail_webview);
+        mImageView = (ImageView) ((GankDetailActivity) context).findViewById(ivImage);
+        collapsing_toolbar = (CollapsingToolbarLayout) ((GankDetailActivity) context).findViewById(R.id.collapsing_toolbar);
+        mProgressBar = (ProgressBar) ((GankDetailActivity) context).findViewById(R.id.progress);
+        mWebview = (WebView) ((GankDetailActivity) context).findViewById(R.id.gank_detail_webview);
         setUpWebView(mWebview);
     }
 
@@ -77,26 +77,25 @@ public class PicWebview implements WebWidget {
     @Override
     public void onBindData() {
         collapsing_toolbar.setTitle(mData.getDesc());
-        Glide.with(activity.getApplicationContext()).load(mData.getImages().get(0))
-              /*  .config(Bitmap.Config.ARGB_8888)*/.into(mImageView);
+        ImageLoader.load(context, mData.getImages().get(0), mImageView);
         collapsing_toolbar.setExpandedTitleColor(getColorPrimary());// 白色背景图片下，默认白色文字看不清，故设置成主题色
         mWebview.loadUrl(mData.getUrl());
     }
 
     @Override
     public void copyContent() {
-        String copyDone = activity.getResources().getString(R.string.toast_copy_done);
-        StringUtil.copyToClipBoard(activity, mWebview.getUrl(), copyDone);
+        String copyDone = context.getResources().getString(R.string.toast_copy_done);
+        StringUtil.copyToClipBoard(context, mWebview.getUrl(), copyDone);
     }
 
     @Override
     public void openBySystemBrowser() {
-        IntentUtils.openWithBrowser(mWebview.getUrl(), activity);
+        IntentUtils.openWithBrowser(mWebview.getUrl(), context);
     }
 
     @Override
     public void shareUrl() {
-        IntentUtils.share(activity, mWebview.getUrl());
+        IntentUtils.share(context, mWebview.getUrl());
     }
 
     @Override
@@ -116,7 +115,7 @@ public class PicWebview implements WebWidget {
      */
     public int getColorPrimary() {
         TypedValue typedValue = new TypedValue();
-        activity.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        context.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
         return typedValue.data;
     }
 

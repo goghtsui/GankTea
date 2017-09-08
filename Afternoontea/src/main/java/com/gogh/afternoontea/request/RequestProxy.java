@@ -16,16 +16,11 @@ import com.gogh.afternoontea.request.imp.RequestApiImp;
  */
 public class RequestProxy implements Request {
 
-    private static RequestProxy INSTANCE;
-
     private RequestProxy() {
     }
 
     public static RequestProxy newInstance() {
-        if (null == INSTANCE) {
-            INSTANCE = SingleHoder.PROXY;
-        }
-        return INSTANCE;
+        return SingleHoder.PROXY;
     }
 
     /**

@@ -1,0 +1,8 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="recomment_gray">#9a9a9a</color>
+    <color name="ic_scrollbar">#00e4ff</color>
+    <color name="ic_vip_scrollbar">#deb30b</color>
+
+</resources>

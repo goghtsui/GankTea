@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:domy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/color_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/subject_textinfo_layout_color_line_31layout_marginLeft"
+        android:layout_marginTop="@dimen/subject_textinfo_layout_color_line_37layout_marginTop"
+        android:background="@drawable/subject_color_line" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/subject_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/color_line"
+        android:layout_marginLeft="@dimen/subject_textinfo_layout_subject_title_69layout_marginLeft"
+        android:layout_marginTop="@dimen/subject_textinfo_layout_subject_title_15layout_marginTop"
+        android:layout_toRightOf="@id/color_line"
+        android:text="@string/subject_textinfo_special"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_subject_title_7textSize"
+        domy:usertypeface="SIMHEI" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/sum_vedio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/color_line"
+        android:layout_alignLeft="@id/subject_title"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_sum_vedio_37textSize" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/info_title"
+        android:layout_width="@dimen/subject_textinfo_layout_info_title_30layout_width"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/color_line"
+        android:layout_below="@id/color_line"
+        android:layout_marginTop="@dimen/subject_textinfo_layout_info_title_62layout_marginTop"
+        android:maxLines="2"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_info_title_6textSize"
+        domy:usertypeface="SIMHEI" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/info_content"
+        android:layout_width="@dimen/subject_textinfo_layout_info_content_23layout_width"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/info_title"
+        android:layout_below="@id/info_title"
+        android:layout_marginTop="@dimen/subject_textinfo_layout_info_content_34layout_marginTop"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_info_content_78textSize"
+        domy:usertypeface="SIMHEI" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/info_little_title"
+        android:layout_width="@dimen/subject_textinfo_layout_info_little_title_85layout_width"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/info_content"
+        android:layout_below="@id/info_content"
+        android:layout_marginTop="@dimen/subject_textinfo_layout_info_little_title_82layout_marginTop"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_info_little_title_31textSize"
+        domy:usertypeface="SIMHEI" />
+
+    <ImageView
+        android:id="@+id/vertical_line"
+        android:layout_width="@dimen/subject_textinfo_layout_vertical_line_87layout_width"
+        android:layout_height="@dimen/subject_textinfo_layout_vertical_line_23layout_height"
+        android:layout_below="@id/info_content"
+        android:layout_marginTop="@dimen/subject_textinfo_layout_vertical_line_51layout_marginTop"
+        android:layout_toRightOf="@id/info_little_title"
+        android:background="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/info_little_title"
+        android:layout_marginLeft="@dimen/subject_textinfo_layout_star_22layout_marginLeft"
+        android:layout_toRightOf="@id/vertical_line"
+        android:background="@drawable/star" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/star"
+        android:layout_marginLeft="@dimen/subject_textinfo_layout_number_18layout_marginLeft"
+        android:layout_toRightOf="@id/star"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_number_41textSize"
+        domy:usertypeface="ARIAL" />
+
+    <ImageView
+        android:id="@+id/horizontal_line"
+        android:layout_width="@dimen/subject_textinfo_layout_horizontal_line_69layout_width"
+        android:layout_height="@dimen/subject_textinfo_layout_horizontal_line_86layout_height"
+        android:layout_alignLeft="@id/info_little_title"
+        android:layout_below="@id/vertical_line"
+        android:background="@android:color/white" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/daoyan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/horizontal_line"
+        android:layout_below="@id/horizontal_line"
+        android:layout_marginTop="@dimen/subject_textinfo_layout_daoyan_70layout_marginTop"
+        android:text="@string/subject_textinfo_director"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_daoyan_87textSize" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/director"
+        android:layout_width="@dimen/subject_textinfo_layout_director_48layout_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/daoyan"
+        android:layout_toRightOf="@id/daoyan"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_director_25textSize" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/yanyuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/daoyan"
+        android:layout_below="@id/daoyan"
+        android:layout_marginTop="@dimen/subject_textinfo_layout_yanyuan_38layout_marginTop"
+        android:text="@string/subject_textinfo_actor"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_yanyuan_23textSize" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/actors"
+        android:layout_width="@dimen/subject_textinfo_layout_actors_61layout_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/yanyuan"
+        android:layout_toRightOf="@id/yanyuan"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_actors_80textSize" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/biaoqian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/yanyuan"
+        android:layout_below="@id/yanyuan"
+        android:layout_marginTop="@dimen/subject_textinfo_layout_biaoqian_88layout_marginTop"
+        android:text="@string/subject_textinfo_label"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_biaoqian_26textSize" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/labels"
+        android:layout_width="@dimen/subject_textinfo_layout_actors_61layout_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/biaoqian"
+        android:layout_toRightOf="@id/biaoqian"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_labels_70textSize" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/introduce"
+        android:layout_width="@dimen/subject_textinfo_layout_introduce_66layout_width"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/biaoqian"
+        android:layout_below="@id/biaoqian"
+        android:layout_marginTop="@dimen/subject_textinfo_layout_introduce_78layout_marginTop"
+        android:ellipsize="end"
+        android:focusable="false"
+        android:gravity="top"
+        android:lineSpacingExtra="8dp"
+        android:maxLines="7"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/subject_textinfo_layout_introduce_35textSize"
+        domy:usertypeface="SIMHEI" />
+
+</RelativeLayout>

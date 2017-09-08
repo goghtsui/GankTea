@@ -2,8 +2,6 @@ package com.gogh.afternoontea.utils;
 
 import android.support.annotation.NonNull;
 
-import com.gogh.afternoontea.log.Logger;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

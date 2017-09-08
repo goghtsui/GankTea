@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:domy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/record_item_layout_title_text2_45layout_width"
+    android:layout_height="wrap_content"
+    android:clipChildren="true"
+    android:focusable="false">
+    <!-- 592dip -->
+
+    <LinearLayout
+        android:layout_width="@dimen/record_item_layout_title_text2_98layout_width"
+        android:layout_height="wrap_content"
+        android:clipChildren="true">
+
+        <RelativeLayout
+            android:id="@+id/rl_record_item"
+            android:layout_width="@dimen/record_item_layout_rl_record_item_82layout_width"
+            android:layout_height="@dimen/record_item_layout_rl_record_item_34layout_height"
+            android:clipChildren="true">
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/history_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/record_item_layout_history_year_2layout_marginLeft"
+                android:layout_marginTop="@dimen/record_item_layout_history_year_81layout_marginTop"
+                android:focusable="false"
+                android:text="2014"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/record_item_layout_history_year_24textSize"
+                domy:usertypeface="SIMHEI" />
+
+            <ImageView
+                android:id="@+id/hor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/history_year"
+                android:layout_marginLeft="@dimen/record_item_layout_hor_4layout_marginLeft"
+                android:layout_marginTop="@dimen/record_item_layout_hor_88layout_marginTop"
+                android:background="@drawable/history_hor_line" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/history_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hor"
+                android:layout_marginLeft="@dimen/record_item_layout_history_month_95layout_marginLeft"
+                android:layout_marginTop="@dimen/record_item_layout_history_month_34layout_marginTop"
+                android:text="04/17"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/record_item_layout_history_month_23textSize"
+                domy:usertypeface="SIMHEI" />
+
+            <ImageView
+                android:id="@+id/ver"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/record_item_layout_ver_47layout_marginLeft"
+                android:layout_toRightOf="@id/history_month"
+                android:background="@drawable/history_ver_line" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/hor"
+                android:layout_alignLeft="@id/ver"
+                android:layout_marginBottom="@dimen/record_item_layout_ver_60layout_marginBottom"
+                android:layout_marginLeft="@dimen/record_item_layout_ver_74layout_marginLeft"
+                android:background="@drawable/ricle" />
+
+            <ImageView
+                android:id="@+id/line_color1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hor"
+                android:layout_marginLeft="@dimen/record_item_layout_line_color1_62layout_marginLeft"
+                android:layout_marginTop="@dimen/record_item_layout_line_color1_48layout_marginTop"
+                android:layout_toRightOf="@id/ver"
+                android:background="@drawable/history_line_bluecolor" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/movie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/line_color1"
+                android:layout_marginLeft="@dimen/record_item_layout_movie_30layout_marginLeft"
+                android:layout_toRightOf="@id/line_color1"
+                android:text="@string/record_item_film"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/record_item_layout_movie_66textSize" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.HorizontalListView
+                android:id="@+id/history_list1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/record_item_layout_history_list1_45layout_height"
+                android:layout_below="@id/line_color1"
+                android:layout_marginLeft="@dimen/record_item_layout_history_list1_17layout_marginLeft"
+                android:layout_marginTop="@dimen/record_item_layout_history_list1_85layout_marginTop"
+                android:layout_toRightOf="@id/ver"
+                android:clipChildren="true" />
+
+            <ImageView
+                android:id="@+id/line_color2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/history_list1"
+                android:layout_marginLeft="@dimen/record_item_layout_line_color2_80layout_marginLeft"
+                android:layout_marginTop="@dimen/record_item_layout_line_color2_90layout_marginTop"
+                android:layout_toRightOf="@id/ver"
+                android:background="@drawable/history_line_greencolor" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/line_color2"
+                android:layout_marginLeft="@dimen/record_item_layout_game_35layout_marginLeft"
+                android:layout_toRightOf="@id/line_color2"
+                android:text="@string/record_item_app_games"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/record_item_layout_game_44textSize" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.HorizontalListView
+                android:id="@+id/history_list2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/line_color2"
+                android:layout_marginLeft="@dimen/record_item_layout_history_list2_5layout_marginLeft"
+                android:layout_marginTop="@dimen/record_item_layout_history_list2_90layout_marginTop"
+                android:layout_toRightOf="@id/ver"
+                android:clipChildren="true"></com.hiveview.cloudscreen.vipvideo.view.HorizontalListView>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="colorWhite">@android:color/white</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
@@ -68,6 +69,7 @@
     <color name="colorDarkPrimaryDark">#282828</color>
     <color name="colorDarkAccent">#FF4081</color>
     <color name="colorDarkPrimaryCenter">#232323</color>
+    <color name="colorPrimaryText">#7c7a7a</color>
 
     <!-- 默认主题 -->
     <color name="colorDefaultPrimary">#3F51B5</color>

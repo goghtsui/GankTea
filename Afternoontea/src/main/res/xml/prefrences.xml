@@ -44,6 +44,7 @@
             android:entryValues="@array/cache_page_entries"
             android:icon="@drawable/ic_preference_cache"
             android:key="@string/settting_prefrences_display_cache_key"
+            android:defaultValue="1"
             android:summary="@string/settting_prefrences_display_cache_summary"
             android:title="@string/settting_prefrences_display_cache_title"/>
     </PreferenceCategory>

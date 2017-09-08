@@ -13,8 +13,8 @@ import android.widget.LinearLayout;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.adapter.SpacesItemDecoration;
+import com.gogh.afternoontea.adapter.gank.GankListAdapter;
 import com.gogh.afternoontea.listener.OnScrollListener;
-import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.widget.SwipeRefreshView;
 
@@ -51,7 +51,6 @@ public class GankListFragment extends BaseFragment {
         args.putInt(ARG_SECTION_NUM, builder.getNum());
         args.putInt(ARG_SECTION_PAGE, builder.getPage());
         args.putInt(ARG_SECTION_LAYOUT_TYPE, builder.getLayoutType());
-        Logger.d("GankListFragment", " layout_type : " + builder.getLayoutType());
         fragment.setArguments(args);
         return fragment;
     }
@@ -102,7 +101,13 @@ public class GankListFragment extends BaseFragment {
         mSwipeRefreshView = new SwipeRefreshView(this, mReloadLayout,  mRecyclerView, mSwipeRefreshLayout);
         mSwipeRefreshView.setOnScrollListener(onScrollListener);
 
-        requestData();
+        mRecyclerView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                requestData();
+            }
+        }, 800);
+
         return rootView;
     }
 
@@ -136,6 +141,18 @@ public class GankListFragment extends BaseFragment {
 
     @Override
     public void onChanged() {
-        mRecyclerView.getAdapter().notifyDataSetChanged();
+        ((GankListAdapter)mRecyclerView.getAdapter()).notifyByThemeChanged();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
     }
 }

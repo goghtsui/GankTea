@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/history_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_record"
+    android:clipChildren="false">
+
+    <com.hiveview.cloudscreen.vipvideo.view.HistoryView
+        android:id="@+id/main_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.NoResultView
+        android:id="@+id/empty_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+
+</RelativeLayout>

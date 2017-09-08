@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false">
+    <!--背景推荐位图-->
+    <FrameLayout
+        android:layout_width="1333dp"
+        android:layout_height="849dp"
+        android:layout_alignParentTop="true"
+        android:clipChildren="false">
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="1500dp"
+            android:layout_height="849dp" />
+
+        <ImageView
+            android:id="@+id/background_blur"
+            android:layout_width="1500dp"
+            android:layout_height="849dp"
+            android:alpha="0"/>
+    </FrameLayout>
+    <!--整个布局-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1700dp">
+
+        <RelativeLayout
+            android:id="@+id/upordown"
+            android:layout_width="match_parent"
+            android:layout_height="1700dp"
+            android:clipChildren="false">
+            <!--顶部view-->
+            <com.hiveview.cloudscreen.vipvideo.view.LauncherHeaderView
+                android:id="@+id/v_launcher_header_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"></com.hiveview.cloudscreen.vipvideo.view.LauncherHeaderView>
+
+            <!--推荐-->
+            <com.hiveview.cloudscreen.vipvideo.view.NHScreenView
+                android:id="@+id/nh_main_recommend"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="-10dp"
+                android:layout_height="520dp"
+                android:layout_below="@id/v_launcher_header_view"
+                android:nextFocusRight="@id/nh_main_recommend"
+                android:clipChildren="false"
+                android:clipToPadding="false"></com.hiveview.cloudscreen.vipvideo.view.NHScreenView>
+            <!--频道-->
+            <com.hiveview.cloudscreen.vipvideo.view.ChannelView
+                android:id="@+id/channel_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nh_main_recommend"
+                android:layout_marginTop="26dp"
+                android:clipChildren="false" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

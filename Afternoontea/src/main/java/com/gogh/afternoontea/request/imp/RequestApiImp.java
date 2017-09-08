@@ -6,15 +6,13 @@ import android.support.annotation.Nullable;
 
 import com.gogh.afternoontea.constant.Constant;
 import com.gogh.afternoontea.constant.Urls;
-import com.gogh.afternoontea.convert.CustomGsonConverterFactory;
 import com.gogh.afternoontea.entity.gank.GankEntity;
-import com.gogh.afternoontea.entity.weather.NowBean;
 import com.gogh.afternoontea.entity.weather.WeatherEntity;
 import com.gogh.afternoontea.http.RequestTask;
 import com.gogh.afternoontea.listener.OnResponListener;
 import com.gogh.afternoontea.location.LocationClient;
 import com.gogh.afternoontea.location.listener.OnLocationListener;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.request.Property;
 import com.gogh.afternoontea.request.Request;
 import com.gogh.afternoontea.request.RequestApi;
@@ -74,7 +72,7 @@ public class RequestApiImp implements Request {
             public void onError(int errorCode, String errorInfo) {
                 Logger.d(TAG, "getLocation onError errorcode : " + errorCode + ", errorInfo : " +errorInfo);
                 if (null != responListener) {
-                    responListener.onError(new Throwable(errorInfo + ", " + errorInfo));
+                    responListener.onError(new Throwable(errorCode + ", " + errorInfo));
                 }
             }
         });
@@ -95,10 +93,10 @@ public class RequestApiImp implements Request {
         propertyList.add(new Property(Constant.APIKEY, Constant.APIKE_VALUE));
 
         RequestTask task = RequestTask.getInstance();
-        Retrofit retrofit = task.retrofit(propertyList, Urls.Weather.BASE_URL, CustomGsonConverterFactory.create());
+        Retrofit retrofit = task.retrofit(propertyList, Urls.Weather.BASE_URL, GsonConverterFactory.create());
         RequestApi api = retrofit.create(RequestApi.class);
 
-        Observable<WeatherEntity> observable = api.getWeatherByCity(city);
+        Observable<WeatherEntity> observable = api.getWeatherByCity(Urls.Weather.KEY, city, Urls.Weather.LANGUAGE, Urls.Weather.UNIT);
         observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -106,20 +104,20 @@ public class RequestApiImp implements Request {
                     @Override
                     public void onNext(@NonNull WeatherEntity weatherEntity) {
                         Logger.d(TAG, "getWeatherByCity onNext weatherEntity =" + weatherEntity.toString());
-                        String weather = null;
-                        if (null != weatherEntity) {
-                            NowBean nowBean = weatherEntity.getNow();
+                        if (null != weatherEntity && weatherEntity.getResults() != null
+                                && weatherEntity.getResults().get(0) != null && weatherEntity.getResults().get(0).getNow() != null) {
+                            WeatherEntity.ResultsBean.NowBean nowBean = weatherEntity.getResults().get(0).getNow();
                             if (null != nowBean) {
-                                NowBean.CondBean cond = nowBean.getCond();
-                                if (null != cond) {
-                                    Logger.d(TAG, "getWeatherByCity onNext normal weather : " + cond.getTxt());
-                                    weather = cond.getTxt();
+                                if(responListener != null){
+                                    responListener.onResponse(nowBean.getText());
+                                }
+                            } else {
+                                if(responListener != null){
+                                    responListener.onResponse(null);
                                 }
                             }
                         }
-                        if(responListener != null){
-                            responListener.onResponse(weather);
-                        }
+
                     }
 
                     @Override

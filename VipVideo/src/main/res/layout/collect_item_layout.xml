@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:domy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:focusable="true">
+
+    <View
+        android:id="@+id/collect_focus"
+        android:layout_width="@dimen/collect_item_layout_collect_focus_74layout_width"
+        android:layout_height="@dimen/collect_item_layout_collect_focus_54layout_height"
+        android:background="@drawable/focus"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/collect_item_bg"
+        android:layout_width="173dp"
+        android:layout_height="240dp"
+        android:layout_marginLeft="@dimen/collect_item_layout_collect_item_bg_71layout_marginLeft"
+        android:layout_marginTop="@dimen/collect_item_layout_collect_item_bg_2layout_marginTop" />
+
+    <ImageView
+        android:id="@+id/collect_item_corner"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignLeft="@id/collect_item_bg"
+        android:layout_alignTop="@id/collect_item_bg"
+        android:layout_marginLeft="15dp" />
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/collect_item_bg"
+        android:layout_alignTop="@id/collect_item_bg"
+        android:layout_marginRight="@dimen/collect_item_layout_delete_6layout_marginRight"
+        android:layout_marginTop="@dimen/collect_item_layout_delete_49layout_marginTop"
+        android:background="@drawable/delete_icon"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/collect_nopress"
+        android:layout_width="@dimen/collect_item_layout_collect_nopress_67layout_width"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/collect_item_bg"
+        android:layout_alignLeft="@id/collect_item_bg"
+        android:background="@drawable/bg_oneline" />
+
+    <ImageView
+        android:id="@+id/collect_press"
+        android:layout_width="@dimen/collect_item_layout_collect_press_58layout_width"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@id/collect_item_bg"
+        android:layout_alignLeft="@id/collect_item_bg"
+        android:background="@drawable/history_bottom_mask"
+        android:visibility="invisible" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.EffectiveMarqueeTextView
+        android:id="@+id/item_text2"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/collect_item_bg"
+        android:layout_alignLeft="@id/collect_item_bg"
+        android:layout_alignRight="@id/collect_item_bg"
+        android:layout_marginBottom="@dimen/collect_item_layout_item_text2_99layout_marginBottom"
+        android:layout_marginLeft="@dimen/collect_item_layout_item_text2_62layout_marginLeft"
+        android:layout_marginRight="@dimen/collect_item_layout_item_text2_40layout_marginRight"
+        android:singleLine="true"
+        android:textColor="#646464"
+        android:textSize="@dimen/collect_item_layout_item_text2_41textSize"
+        domy:usertypeface="SIMHEI" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/item_text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/collect_item_bg"
+        android:layout_below="@id/collect_item_bg"
+        android:layout_marginTop="@dimen/collect_item_layout_item_text3_42layout_marginTop"
+        android:focusable="false"
+        android:gravity="center"
+        android:textColor="#646464"
+        android:textSize="@dimen/collect_item_layout_item_text3_90textSize"
+        domy:usertypeface="SIMHEI" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/item_text4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/item_text3"
+        android:layout_alignRight="@id/collect_item_bg"
+        android:layout_below="@id/item_text3"
+        android:layout_marginBottom="22dp"
+        android:focusable="false"
+        android:gravity="left"
+        android:textColor="#646464"
+        android:textSize="@dimen/collect_item_layout_item_text4_82textSize"
+        domy:usertypeface="SIMHEI" />
+
+</RelativeLayout>

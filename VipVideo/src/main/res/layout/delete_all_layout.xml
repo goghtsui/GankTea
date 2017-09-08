@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:domy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/rl_vipdialog_bg"
+        android:layout_width="683dp"
+        android:layout_height="225dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/view_dialog_delete_bg"
+        android:clipChildren="false">
+
+        <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+            android:id="@+id/tv_vipdialog_tips"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginLeft="233dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="8dp"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            domy:usertypeface="SIMHEI" />
+
+        <RelativeLayout
+            android:id="@+id/rl_vipdialog_positive_txt"
+            android:layout_width="182dp"
+            android:layout_height="104dp"
+            android:layout_marginLeft="226dp"
+            android:layout_marginTop="110dp"
+            android:background="@drawable/focused_view_selector"
+            android:clipChildren="false"
+            android:focusable="true"
+            android:gravity="center">
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/tv_vipdialog_positive_txt"
+                android:layout_width="145dp"
+                android:layout_height="65dp"
+                android:background="@drawable/view_dialog_vip_btn_bg"
+                android:gravity="center"
+                android:text="@string/view_dialog_vip_ok"
+                android:textColor="#88FFFFFF"
+                android:textSize="27sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_vipdialog_negative_txt"
+            android:layout_width="182dp"
+            android:layout_height="104dp"
+            android:layout_alignTop="@id/rl_vipdialog_positive_txt"
+            android:layout_marginLeft="17dp"
+            android:layout_toRightOf="@id/rl_vipdialog_positive_txt"
+            android:background="@drawable/focused_view_selector"
+            android:clipChildren="false"
+            android:focusable="true"
+            android:gravity="center">
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/tv_vipdialog_negative_txt"
+                android:layout_width="145dp"
+                android:layout_height="65dp"
+                android:background="@drawable/view_dialog_vip_btn_bg"
+                android:gravity="center"
+                android:text="@string/view_dialog_vip_cancel"
+                android:textColor="#88FFFFFF"
+                android:textSize="27sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

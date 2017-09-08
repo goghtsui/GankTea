@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_container"
+    android:layout_width="1280dp"
+    android:layout_height="720dp"
+    android:background="@drawable/bg_package_list"
+    android:clipChildren="false">
+
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="868dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="187dp"
+        android:layout_marginTop="38dp"
+        android:divider="@null"
+        android:dividerHeight="26.6dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layoutAnimation="@anim/list_anim_in_layout"
+        android:listSelector="@drawable/focused_selector"
+        android:scrollbars="none"
+        android:smoothScrollbar="false"></ListView>
+
+    <View
+        android:id="@+id/view_topBackgroud"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/package_top_background"
+        android:visibility="invisible"></View>
+
+    <View
+        android:id="@+id/bg_buy_vip"
+        android:layout_width="10dp"
+        android:layout_height="46dp"
+        android:layout_marginLeft="198.6dp"
+        android:layout_marginTop="74.6dp"
+        android:background="@drawable/bg_damay_mark"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bg_buy_vip"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="-10dp"
+        android:layout_toRightOf="@id/bg_buy_vip"
+        android:text="@string/buy_damai_vip"
+        android:textColor="#FFFFFF"
+        android:textSize="46.6sp"
+        android:textStyle="bold"
+        android:visibility="invisible"></TextView>
+
+    <TextView
+        android:id="@+id/tv_vip_privilege"
+        android:layout_width="31dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="89.3dp"
+        android:layout_marginRight="10.6dp"
+        android:layout_marginTop="287dp"
+        android:layout_toRightOf="@id/listview"
+        android:text="@string/vip_privilege"
+        android:textColor="#fdb800"
+        android:textSize="32sp" />
+
+    <View
+        android:id="@+id/btn_right_focus_vip"
+        android:layout_width="64dp"
+        android:layout_height="77dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="330dp"
+        android:layout_toRightOf="@id/tv_vip_privilege"
+        android:background="@drawable/privilege_right_arrow" />
+
+    <FrameLayout
+        android:id="@+id/right_vip_privilege"
+        android:layout_width="792dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"></FrameLayout>
+
+
+    <RelativeLayout
+        android:layout_width="1280dp"
+        android:layout_height="720dp">
+
+        <com.hiveview.cloudscreen.vipvideo.view.LoadingView
+            android:id="@+id/lv_onload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"></com.hiveview.cloudscreen.vipvideo.view.LoadingView>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/vip_background"
+        android:layout_width="1280dp"
+        android:layout_height="720dp" />
+
+
+</RelativeLayout>

@@ -1,0 +1,84 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="100dp"
+        android:height="100dp"
+        android:viewportHeight="200"
+        android:viewportWidth="200">
+    <!--android:pathData="
+                    M8,4// 画笔移动到坐标（8，4）
+                    h24,0// 水平移动24
+                    q4,0 4,4// 画圆弧（右上角）
+                    v24// 垂直向下移动24
+                    q0,4 -4,4// 画圆弧（右下角）
+                    h-24,0
+                    q-4,0 -4,-4// 画圆弧（左下角）
+                    v-24
+                    q0,-4 4,-4" />-->
+
+    <!-- M：move to 移动绘制点，作用相当于把画笔落在哪一点。
+    L：line to 直线，就是一条直线，注意，只是直线，直线是没有宽度的，所以你什么也看不到。
+    Z：close 闭合，嗯，就是把图封闭起来。
+    C：cubic bezier 三阶贝塞尔曲线
+    Q：quatratic bezier 二阶贝塞尔曲线
+    A：ellipse 圆弧</span>  -->
+
+    <!--一般来说指令字母分为大小写两种,大写的字母是基于原点的坐标系(偏移量)，即绝对位置；
+    小写字母是基于当前点坐标系(偏移量)，即相对位置。-->
+
+    <!--
+    A rx,ry x-axis-rotation large-arc-flag,sweepflag x,y
+    a rx,ry x-axis-rotation large-arc-flag,sweepflag dx,dy
+
+    rx ry 表示画弧的半径, x-axis-rotation 表示沿x轴旋转角度
+    large-arc-flag为0时表示取小弧线,为1时表示取大弧线
+    sweepflag为0时表示逆时针方向画弧,为1时表示顺时针方向画弧.
+     x,y表示终点目标的坐标, dx,dy表示起到到终点相对坐标距离.-->
+
+    <!--外边框-->
+    <path
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:strokeColor="#dd4433"
+        android:pathData="
+                    M5,5
+                    L195,5
+                    L195,195
+                    L5,195
+                    L5,5"/>
+
+    <!-- 左上角小框 -->
+    <path
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:strokeColor="#dd4433"
+        android:pathData="
+                    M20,20
+                    l80,0
+                    l0,80
+                    l-80,0
+                    l0,-80"/>
+
+    <!-- 右上角横线 -->
+    <path
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:strokeColor="#dd4433"
+        android:pathData="
+                    M20,20
+                    l80,0
+                    l0,80
+                    l-80,0
+                    l0,-80"/>
+
+    <!-- 下面横线 -->
+    <path
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:strokeColor="#dd4433"
+        android:pathData="
+                    M20,20
+                    l80,0
+                    l0,80
+                    l-80,0
+                    l0,-80"/>
+    
+</vector>

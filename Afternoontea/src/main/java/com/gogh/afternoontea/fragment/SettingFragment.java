@@ -10,9 +10,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.preference.PreferenceManager;
 import com.gogh.afternoontea.location.Weather;
-import com.gogh.afternoontea.main.ATApplication;
+import com.gogh.afternoontea.preference.PreferenceManager;
 import com.gogh.afternoontea.preference.imp.Configuration;
 import com.gogh.afternoontea.theme.ThemeManager;
 
@@ -78,12 +77,15 @@ public class SettingFragment extends PreferenceFragment implements SharedPrefere
             PreferenceManager.newInstance().notifyCardModeChanged();
         } else if (key.equals(getResources().getString(R.string.setting_prefrences_theme_night_status))) {// 夜间主题
             if (sharedPreferences.getBoolean(key, false)) {
+                getActivity().setTheme(R.style.DarkTheme);
                 ThemeManager.newInstance().setThemeColor(R.color.colorDarkPrimary);
+                Configuration.newInstance().setTheme(R.style.DarkTheme);
                 resetColor();
             } else {
-                ATApplication.THEME = new Configuration(getActivity().getApplicationContext(), Configuration.FLAG_CUSTOM).getTheme();
-                getActivity().setTheme(ATApplication.THEME);
-                ThemeManager.newInstance().setThemeStyle(ATApplication.THEME);
+                //                ATApplication.THEME = new Configuration(getActivity().getApplicationContext(), Configuration.FLAG_CUSTOM).getTheme();
+                getActivity().setTheme(R.style.DefaultTheme);
+                ThemeManager.newInstance().setThemeColor(R.color.colorDefaultPrimary);
+                Configuration.newInstance().setTheme(R.style.DefaultTheme);
                 resetColor();
             }
         } else if (key.equals(getResources().getString(R.string.settting_prefrences_display_no_pic_key))) {// 无图模式
@@ -94,6 +96,8 @@ public class SettingFragment extends PreferenceFragment implements SharedPrefere
             if (!sharedPreferences.getBoolean(key, false)) {
                 PreferenceManager.newInstance().notifyCardModeChanged();
             }
+        } else if (key.equals(getResources().getString(R.string.settting_prefrences_display_cache_key))) {
+            PreferenceManager.newInstance().notifyCachePageChanged(Integer.valueOf(sharedPreferences.getString(key, "1")));
         }
     }
 
@@ -105,6 +109,13 @@ public class SettingFragment extends PreferenceFragment implements SharedPrefere
         getActivity().getWindow().setNavigationBarColor(ContextCompat.getColor(getActivity(), themeColor));
     }
 
+    /**
+     * 设置列表icon的主题色
+     *
+     * @author 高晓峰
+     * @date 9/5/2017
+     * @ChangeLog: <li> 高晓峰 on 9/5/2017 </li>
+     */
     private void resetColor() {
         PreferenceScreen screen = getPreferenceScreen();
         for (int i = 0; i < screen.getPreferenceCount(); i++) {

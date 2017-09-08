@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:domy="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/collect_mian"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_record"
+    android:clipChildren="false">
+
+    <LinearLayout
+        android:id="@+id/collect_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/collect_layout_collect_ll_75layout_height"
+        android:clipChildren="false">
+
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/collect_layout_container_80layout_height"
+            android:clipChildren="false">
+
+            <ImageView
+                android:id="@+id/collect_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/collect_layout_title_text3_11layout_marginTop"
+                android:layout_marginLeft="@dimen/collect_layout_collect_color_1layout_marginLeft"
+                android:layout_marginTop="@dimen/collect_layout_collect_color_99layout_marginTop"
+                android:background="@drawable/collect_color" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/title_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/collect_color"
+                android:layout_marginLeft="@dimen/collect_layout_title_text1_34layout_marginLeft"
+                android:layout_marginTop="@dimen/collect_layout_title_text1_31layout_marginTop"
+                android:layout_toRightOf="@id/collect_color"
+                android:focusable="false"
+                android:text="@string/collect_title"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/collect_layout_title_text1_95textSize"
+                domy:usertypeface="SIMHEI" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/title_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/collect_color"
+                android:layout_alignLeft="@id/title_text1"
+                android:layout_marginBottom="@dimen/collect_layout_title_text2_8layout_marginBottom"
+                android:focusable="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/collect_layout_title_text2_58textSize" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/title_text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/collect_color"
+                android:layout_below="@id/collect_color"
+
+                android:focusable="false"
+                android:text="@string/collect_title_video"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/collect_layout_title_text3_45textSize"
+                domy:usertypeface="SIMHEI" />
+
+            <ImageView
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/title_text3"
+                android:layout_marginLeft="@dimen/collect_layout_line1_76layout_marginLeft"
+                android:layout_marginTop="@dimen/collect_layout_line1_61layout_marginTop"
+                android:layout_toRightOf="@id/title_text3"
+                android:background="@drawable/collect_line" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.HorizontalListView
+                android:id="@+id/vip_video_collect"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/collect_layout_all_collect_55layout_height"
+                android:layout_below="@id/title_text3"
+                android:layout_marginTop="@dimen/collect_layout_all_collect_77layout_marginTop" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                android:id="@+id/title_text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/title_text3"
+                android:layout_below="@id/vip_video_collect"
+                android:focusable="false"
+                android:text="@string/collect_title_bluelight"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/collect_layout_title_text4_69textSize"
+                domy:usertypeface="SIMHEI" />
+
+            <ImageView
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/title_text4"
+                android:layout_marginLeft="@dimen/collect_layout_line2_50layout_marginLeft"
+                android:layout_marginTop="@dimen/collect_layout_line2_38layout_marginTop"
+                android:layout_toRightOf="@id/title_text4"
+                android:background="@drawable/collect_line" />
+
+            <com.hiveview.cloudscreen.vipvideo.view.HorizontalListView
+                android:id="@+id/normal_video_collect"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/collect_layout_geek_collect_58layout_height"
+                android:layout_below="@id/title_text4"
+                android:layout_marginTop="@dimen/collect_layout_geek_collect_70layout_marginTop" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.hiveview.cloudscreen.vipvideo.view.NoResultView
+        android:id="@+id/empty_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+
+</RelativeLayout>

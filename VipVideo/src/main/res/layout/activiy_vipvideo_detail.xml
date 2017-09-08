@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_all_detial"
+    android:layout_width="2370dp"
+    android:layout_height="match_parent"
+    android:clipChildren="false">
+    <!--2170dp-->
+
+    <ImageView
+        android:id="@+id/iv_blur_bg"
+        android:layout_width="1280dp"
+        android:layout_height="720dp"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/black"
+        android:contentDescription="@string/blur_bg"
+        android:scaleType="fitXY" />
+
+    <!--内容布局-->
+    <RelativeLayout
+        android:id="@+id/all_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:translationX="-860dp">
+        <!--详情信息布局-->
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="751.3dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="114dp"
+            android:layout_marginTop="166dp"
+            android:clipChildren="false"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/film_name"
+                android:layout_width="751.3dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="#FFFFFF"
+                android:textSize="38sp"
+                android:textStyle="bold"
+                android:translationX="-741.3dp" />
+
+
+            <TextView
+                android:id="@+id/tv_film_detail"
+                android:layout_width="750dp"
+                android:layout_height="328dp"
+                android:layout_below="@id/film_name"
+                android:layout_marginTop="16dp"
+                android:fadeScrollbars="false"
+                android:lineSpacingExtra="10dp"
+                android:maxLines="12"
+                android:nextFocusDown="@null"
+                android:paddingBottom="18dp"
+                android:paddingRight="40dp"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbarThumbVertical="@color/ic_scrollbar"
+                android:scrollbarTrackVertical="@drawable/ic_scrollbar_bg_wide"
+                android:scrollbars="vertical"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:translationX="-730dp" />
+
+            <TextView
+                android:id="@+id/tv_vip_film_detail"
+                android:layout_width="750dp"
+                android:layout_height="328dp"
+                android:layout_below="@id/film_name"
+                android:layout_marginTop="16dp"
+                android:fadeScrollbars="false"
+                android:lineSpacingExtra="10dp"
+                android:maxLines="12"
+                android:nextFocusDown="@null"
+                android:paddingBottom="18dp"
+                android:paddingRight="40dp"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbarThumbVertical="@color/ic_vip_scrollbar"
+                android:scrollbarTrackVertical="@drawable/ic_scrollbar_bg_wide"
+                android:scrollbars="vertical"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:translationX="-730dp" />
+
+        </LinearLayout>
+
+
+        <!--用户信息头布局-->
+        <RelativeLayout
+            android:id="@+id/upView"
+            android:layout_width="1280dp"
+            android:layout_height="73dp"
+            android:layout_toRightOf="@id/ll"
+            android:clipChildren="false"
+            android:gravity="center">
+
+            <com.hiveview.cloudscreen.vipvideo.view.VipVideoDetailHeaderView
+                android:id="@+id/detail_header"
+                android:layout_width="1280dp"
+                android:layout_height="73dp"
+                android:layout_alignParentTop="true"></com.hiveview.cloudscreen.vipvideo.view.VipVideoDetailHeaderView>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_film_middle"
+            android:layout_width="wrap_content"
+            android:layout_height="720dp"
+            android:layout_below="@id/upView"
+            android:layout_toRightOf="@id/ll"
+            android:clipChildren="false">
+
+            <!--左箭头-->
+            <RelativeLayout
+                android:id="@+id/rl_left_tip"
+                android:layout_width="112dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-65dp">
+
+                <ImageView
+                    android:id="@+id/iv_arrow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="281dp"
+                    android:contentDescription="@string/jiantou"
+                    android:src="@drawable/left_arrow" />
+            </RelativeLayout>
+            <!-- 海报图 -->
+            <RelativeLayout
+                android:id="@+id/rl_film_detail_cover"
+                android:layout_width="275.3dp"
+                android:layout_height="381.3dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="102.6dp"
+                android:layout_toRightOf="@id/rl_left_tip"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:id="@+id/iv_film_detail_cover"
+                    android:layout_width="275.3dp"
+                    android:layout_height="381.3dp"
+                    android:contentDescription="@string/detail_cover"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:id="@+id/mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_alignLeft="@id/iv_film_detail_cover"
+                    android:layout_alignTop="@id/iv_film_detail_cover"
+                    android:layout_marginLeft="20dp" />
+
+
+            </RelativeLayout>
+
+            <!--影片优惠价格-->
+            <RelativeLayout
+                android:id="@+id/rl_film_price"
+                android:layout_width="275.33dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/rl_film_detail_cover"
+                android:layout_marginLeft="13.33dp"
+                android:layout_toRightOf="@id/rl_left_tip"
+                android:background="@drawable/recommend_bottom_mask"
+                android:clipToPadding="false"
+                android:visibility="gone">
+                <!--会员价格-->
+                <TextView
+                    android:id="@+id/tv_vip_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp" />
+                <!--原价-->
+                <TextView
+                    android:id="@+id/tv_original_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_vip_price"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="-7dp"
+                    android:textColor="#ffffff"
+                    android:textSize="15.33sp" />
+                <!--非会员价格-->
+                <TextView
+                    android:id="@+id/tv_nonMember_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_vip_price"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="-7dp"
+                    android:layout_toRightOf="@id/tv_original_price"
+                    android:paddingBottom="20dp"
+                    android:textColor="#ffffff"
+                    android:textSize="15.33sp" />
+
+            </RelativeLayout>
+
+            <!--影片详情-->
+            <RelativeLayout
+                android:id="@+id/rl_tv_dec"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@id/rl_film_detail_cover"
+                android:layout_alignTop="@id/rl_film_detail_cover"
+                android:layout_marginLeft="56dp"
+                android:layout_toRightOf="@+id/rl_film_detail_cover">
+                <!-- 电影名字 -->
+                <TextView
+                    android:id="@+id/tv_film_detail_filmname"
+                    android:layout_width="500dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-5.3dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="38sp"
+                    android:textStyle="bold" />
+
+                <!-- 全集数 -->
+                <TextView
+                    android:id="@+id/detail_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_film_detail_filmname"
+                    android:layout_marginLeft="7.3dp"
+                    android:layout_marginTop="2.6dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- 更新集数 -->
+                <TextView
+                    android:id="@+id/detail_update_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_film_detail_filmname"
+                    android:layout_marginLeft="7.3dp"
+                    android:layout_marginTop="2.6dp"
+                    android:layout_toRightOf="@id/detail_update"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <!--购买观看有效时长-->
+                <TextView
+                    android:id="@+id/detail_watch_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/detail_update_number"
+                    android:layout_marginLeft="7.3dp"
+                    android:layout_marginTop="20dp"
+                    android:singleLine="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <!-- 导演信息 -->
+                <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                    android:id="@+id/tv_film_detail_line_one"
+                    android:layout_width="445dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/detail_watch_time"
+                    android:layout_marginLeft="7.3dp"
+                    android:layout_marginTop="28dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="19sp" />
+
+                <!-- 演员信息 -->
+
+                <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                    android:id="@+id/tv_film_detail_line_two"
+                    android:layout_width="445dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_film_detail_line_one"
+                    android:layout_marginLeft="7.3dp"
+                    android:layout_marginTop="12dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="19sp" />
+
+                <!-- 类型信息 -->
+
+                <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                    android:id="@+id/tv_film_detail_line_three"
+                    android:layout_width="445dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_film_detail_line_two"
+                    android:layout_marginLeft="7.3dp"
+                    android:layout_marginTop="12dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="19sp" />
+
+                <!-- 详情 -->
+
+                <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                    android:id="@+id/tv_film_detail_description"
+                    android:layout_width="494dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_film_detail_line_three"
+                    android:layout_marginLeft="7.3dp"
+                    android:layout_marginTop="15.5dp"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="11dp"
+                    android:maxLines="4"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+            <!--按钮布局-->
+            <RelativeLayout
+                android:id="@+id/rl_button_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="114dp"
+                android:layout_toRightOf="@id/rl_tv_dec"
+                android:clipChildren="false"
+                android:gravity="center_horizontal">
+                <!--极清文本-->
+                <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                    android:id="@+id/tv_film_detail_4play"
+                    style="@style/FilmDetailButton"
+                    android:background="@drawable/btn_4k_vip"
+                    android:text="@string/film_detail_4play"
+                    android:textColor="#9a9a9a"
+                    android:visibility="gone" />
+
+                <!--极清影片焦点框-->
+                <View
+                    android:id="@+id/btn_film_detail_4play"
+                    style="@style/FilmDetailButtonBackground"
+                    android:background="@drawable/focused_selector"
+                    android:nextFocusLeft="@+id/leftContent"
+                    android:nextFocusRight="@+id/rightContent"
+                    android:visibility="gone"></View>
+
+                <!--标清文本-->
+                <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                    android:id="@+id/tv_film_detail_play"
+                    style="@style/FilmDetailButton"
+                    android:layout_below="@id/tv_film_detail_4play"
+                    android:background="@drawable/button_default"
+                    android:text="@string/film_detail_play"
+                    android:textColor="#9a9a9a"
+                    android:visibility="gone" />
+
+                <!--标清影片焦点框-->
+                <View
+                    android:id="@+id/btn_film_detail_play"
+                    style="@style/FilmDetailButtonBackground"
+                    android:layout_below="@id/tv_film_detail_4play"
+                    android:background="@drawable/focused_selector"
+                    android:nextFocusLeft="@+id/leftContent"
+                    android:nextFocusRight="@+id/rightContent"
+                    android:visibility="gone"></View>
+
+                <!--选集文本-->
+                <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                    android:id="@+id/tv_film_detail_episode"
+                    style="@style/FilmDetailButton"
+                    android:layout_below="@id/tv_film_detail_play"
+                    android:background="@drawable/button_default"
+                    android:text="@string/film_detail_select_episode"
+                    android:textColor="#9a9a9a"
+                    android:visibility="visible" />
+                <!--选集焦点框-->
+                <View
+                    android:id="@+id/btn_film_detail_episode"
+                    style="@style/FilmDetailButtonBackground"
+                    android:layout_below="@id/tv_film_detail_play"
+                    android:background="@drawable/focused_selector"
+                    android:nextFocusLeft="@+id/leftContent"
+                    android:nextFocusRight="@+id/rightContent"
+                    android:visibility="visible"></View>
+                <!--试看文本-->
+                <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                    android:id="@+id/tv_film_detail_trySee"
+                    style="@style/FilmDetailButton"
+                    android:layout_below="@id/tv_film_detail_episode"
+                    android:background="@drawable/button_default"
+                    android:text="@string/film_detail_trySee"
+                    android:textColor="#9a9a9a"
+                    android:visibility="gone" />
+
+                <!--试看焦点框-->
+                <View
+                    android:id="@+id/btn_film_detail_trySee"
+                    style="@style/FilmDetailButtonBackground"
+                    android:layout_below="@id/tv_film_detail_episode"
+                    android:background="@drawable/focused_selector"
+                    android:nextFocusLeft="@+id/leftContent"
+                    android:nextFocusRight="@+id/rightContent"
+                    android:visibility="gone"></View>
+                <!--收藏文本-->
+                <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+                    android:id="@+id/tv_film_detail_collect"
+                    style="@style/FilmDetailButton"
+                    android:layout_below="@id/tv_film_detail_trySee"
+                    android:background="@drawable/button_default"
+                    android:text="@string/film_detail_collect"
+                    android:textColor="#9a9a9a" />
+                <!--收藏焦点框-->
+                <View
+                    android:id="@+id/btn_film_detail_collect"
+                    style="@style/FilmDetailButtonBackground"
+                    android:layout_below="@id/tv_film_detail_trySee"
+                    android:background="@drawable/focused_selector"
+                    android:nextFocusDown="@+id/btn_film_detail_collect"
+                    android:nextFocusLeft="@+id/leftContent"
+                    android:nextFocusRight="@+id/rightContent"></View>
+
+                <ImageView
+                    android:id="@+id/iv_collect_ic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_film_detail_trySee"
+                    android:layout_marginLeft="@dimen/activity_film_detail_iv_collect_ic_62layout_marginLeft"
+                    android:layout_marginTop="@dimen/activity_film_detail_iv_collect_ic_90layout_marginTop"
+                    android:alpha="0"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    android:src="@drawable/ic_collection" />
+
+            </RelativeLayout>
+            <!--右箭头-->
+            <RelativeLayout
+                android:id="@+id/rl_right_tip"
+                android:layout_width="112dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-65dp"
+                android:layout_toRightOf="@id/rl_button_container"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:id="@+id/iv_eposide_arrow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="60.5dp"
+                    android:layout_marginTop="281dp"
+                    android:contentDescription="@string/jiantou"
+                    android:src="@drawable/right_arrow"
+                    android:visibility="visible" />
+            </RelativeLayout>
+            <!--选集-->
+
+
+            <RelativeLayout
+                android:id="@+id/rl_film_recomm"
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="-28dp"
+                android:layout_marginRight="-30dp"
+                android:layout_marginTop="27dp"
+                android:layout_toRightOf="@id/rl_right_tip"
+                android:clipChildren="true">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleView"
+                    android:layout_width="210dp"
+                    android:layout_height="match_parent"
+                    android:translationX="200dp"></android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+
+            <!-- 按左右键操作提示 -->
+            <com.hiveview.cloudscreen.vipvideo.view.NoticeView
+                android:id="@+id/ll_notice_container"
+                android:layout_width="wrap_content"
+                android:layout_height="33.33dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30.67dp"
+                android:layout_marginLeft="450dp"
+                android:orientation="horizontal" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_episode_layout"
+            android:layout_width="810dp"
+            android:layout_height="720dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/episode_background"
+            android:translationX="650dp">
+
+            <LinearLayout
+                android:id="@+id/linear_episode_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="720dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:translationX="450dp">
+
+                <RelativeLayout
+                    android:id="@+id/sv_episode_left_container"
+                    android:layout_width="198.3dp"
+                    android:layout_height="720dp"
+                    android:layout_gravity="center">
+
+                    <View
+                        android:id="@+id/view_episode_left_background"
+                        android:layout_width="296dp"
+                        android:layout_height="77dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/bg_episode_vip_focus"
+                        android:visibility="invisible" />
+
+                    <com.hiveview.cloudscreen.vipvideo.view.wheelview.WheelView
+                        android:id="@+id/sv_episode_left"
+                        android:layout_width="198.3dp"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false">
+
+                    </com.hiveview.cloudscreen.vipvideo.view.wheelview.WheelView>
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view_bg"
+                    android:layout_width="0.6dp"
+                    android:layout_height="585dp"
+                    android:background="@drawable/bg_episode_view"></View>
+
+                <RelativeLayout
+                    android:id="@+id/sv_episode_right_container"
+                    android:layout_width="172dp"
+                    android:layout_height="720dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="48dp">
+
+                    <View
+                        android:id="@+id/view_episode_right_background"
+                        android:layout_width="296dp"
+                        android:layout_height="77dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/bg_episode_vip_focus"
+                        android:visibility="invisible" />
+
+                    <com.hiveview.cloudscreen.vipvideo.view.wheelview.WheelView
+                        android:id="@+id/sv_episode_right"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerInParent="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false">
+
+                    </com.hiveview.cloudscreen.vipvideo.view.wheelview.WheelView>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="1280dp"
+        android:layout_height="720dp">
+
+        <com.hiveview.cloudscreen.vipvideo.view.LoadingView
+            android:id="@+id/lv_onload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"></com.hiveview.cloudscreen.vipvideo.view.LoadingView>
+    </RelativeLayout>
+</RelativeLayout>

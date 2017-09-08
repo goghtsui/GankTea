@@ -9,7 +9,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.gogh.afternoontea.location.listener.OnLocationListener;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -22,10 +22,10 @@ public class LocationClient {
 
     private static final String TAG = "LocationClient";
     //声明AMapLocationClient类对象
+
     @Nullable
     private static AMapLocationClient mLocationClient = null;
-    @Nullable
-    private static LocationClient INSTANCE = null;
+
     private OnLocationListener locationListener;
 
     @NonNull
@@ -33,23 +33,17 @@ public class LocationClient {
 
         if (null != aMapLocation) {
             if (locationListener != null) {
-                StringBuffer location = new StringBuffer();
-                location.append(aMapLocation.getLongitude())
-                        .append(".")
-                        .append(aMapLocation.getLatitude());
-                locationListener.onLocationed(location.toString());
+                locationListener.onLocationed(aMapLocation.getCity());
             }
             // 解析定位结果
             Logger.d(TAG, "onLocationChanged  : " + getLocationStr(aMapLocation));
         } else {
             if (locationListener != null) {
-                locationListener.onError(aMapLocation.getErrorCode(), aMapLocation.getErrorInfo());
+                locationListener.onError(-1, "response is null.");
             }
             // 定位失败
-            Logger.e(TAG, "location Error - errorCode: " + aMapLocation.getErrorCode()
-                    + ", errorInfo: " + aMapLocation.getErrorInfo());
+            Logger.e(TAG, "onLocationChanged error : result is null.");
         }
-
     };
 
     private LocationClient() {
@@ -57,10 +51,7 @@ public class LocationClient {
 
     @Nullable
     public static LocationClient newInstance() {
-        if (null == INSTANCE) {
-            INSTANCE = SingleHolder.CLIENT;
-        }
-        return INSTANCE;
+        return SingleHolder.CLIENT;
     }
 
     /**

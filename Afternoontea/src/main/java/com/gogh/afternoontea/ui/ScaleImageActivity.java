@@ -1,13 +1,12 @@
 package com.gogh.afternoontea.ui;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.app.Initializer;
 import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.main.BaseAppCompatActivity;
-import com.squareup.picasso.Picasso;
+import com.gogh.afternoontea.utils.ImageLoader;
 
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -46,9 +45,7 @@ public class ScaleImageActivity extends BaseAppCompatActivity implements Initial
     @Override
     public void init() {
         String imageUrl = getIntent().getStringExtra(Urls.GANK_URL.BUNDLE_KEY);
-        Picasso.with(this).load(imageUrl)
-                .config(Bitmap.Config.ARGB_8888)
-                .into(scaleView);
+        ImageLoader.loadFull(this, imageUrl, scaleView);
     }
 
     @Override

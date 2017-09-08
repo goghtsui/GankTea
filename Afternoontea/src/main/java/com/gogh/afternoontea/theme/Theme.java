@@ -69,6 +69,8 @@ interface Theme {
      */
     int getDarkTheme();// 夜间
 
+    int getHotTheme();// 热
+
     /**
      *  在没有网络的情况下，使用默认的主题色
      * @return

@@ -22,12 +22,13 @@ public interface RequestApi {
 
     /**
      * 根据城市获取对应的天气信息
-     * @param city 城市名称
+     * @param city 城市名称或IP
      * @return 天气
      */
     @NonNull
     @GET(Urls.Weather.PATH)
-    Observable<WeatherEntity> getWeatherByCity(@Query("cityip") String city);
+    Observable<WeatherEntity> getWeatherByCity(@Query("key") String key, @Query("location") String location,
+                                               @Query("language") String language, @Query("unit") String unit);
 
     @NonNull
     @GET("page/2")

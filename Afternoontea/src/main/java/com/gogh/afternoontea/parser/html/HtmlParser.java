@@ -3,15 +3,7 @@ package com.gogh.afternoontea.parser.html;
 import android.support.annotation.NonNull;
 
 import com.gogh.afternoontea.entity.meizi.MeiziBean;
-import com.gogh.afternoontea.log.Logger;
-import com.gogh.afternoontea.utils.StringUtil;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,9 +17,9 @@ public class HtmlParser {
 
     private static final String TAG = "HtmlParser";
 
-    @NonNull
-    public static List<MeiziBean> parserHtml(String html) {
-        List<MeiziBean> meiziList = new ArrayList<>();
+     @NonNull
+   public static List<MeiziBean> parserHtml(String html) {
+        /*List<MeiziBean> meiziList = new ArrayList<>();
 
         Document doc = Jsoup.parse(html);
         Elements links = doc.select("li");
@@ -53,7 +45,8 @@ public class HtmlParser {
         }
 
         Logger.d(TAG, "parserHtml datas: " + meiziList.size());
-        return meiziList;
+        return meiziList;*/
+        return null;
     }
 
 }

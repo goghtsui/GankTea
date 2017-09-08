@@ -3,7 +3,7 @@ package com.gogh.afternoontea.theme;
 import android.support.annotation.Nullable;
 
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -16,19 +16,13 @@ class ThemeImp implements Theme {
 
     private static final String TAG = "ThemeImp";
 
-    @Nullable
-    private static ThemeImp MANAGER = null;
-
     private ThemeImp() {
         Logger.d(TAG, "ThemeImp constructor method..");
     }
 
     @Nullable
     static ThemeImp newInstance() {
-        if (MANAGER == null) {
-            MANAGER = SingleHolder.MANAGER;
-        }
-        return MANAGER;
+        return SingleHolder.MANAGER;
     }
 
     /**
@@ -129,6 +123,11 @@ class ThemeImp implements Theme {
     @Override
     public int getDarkTheme() {
         return R.color.colorDarkPrimary;
+    }
+
+    @Override
+    public int getHotTheme() {
+        return R.color.colorOrangePrimary;
     }
 
     /**

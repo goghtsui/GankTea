@@ -10,6 +10,7 @@
 
     <ImageView
         android:id="@+id/gank_welfare_item_imageview"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -24,7 +25,7 @@
         android:maxLines="1"
         android:padding="@dimen/gank_list_item_standard_margin_left"
         android:text="@string/gank_list_item_author_name_unknown"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/colorPrimary"
         android:visibility="gone"
         android:textSize="@dimen/gank_list_item_title_text"
         android:textStyle="normal"/>

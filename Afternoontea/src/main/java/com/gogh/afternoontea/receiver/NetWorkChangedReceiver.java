@@ -30,7 +30,7 @@ public class NetWorkChangedReceiver extends BroadcastReceiver {
         if (networkInfo != null) {
             if(networkInfo.isConnected() && networkInfo.isAvailable()){
                 if (netStatus != networkInfo.getType() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-                    if(new Configuration(context, Configuration.FLAG_SYSTEM).isWifiPicMode()){
+                    if(Configuration.newInstance().isWifiPicMode()){
                         PreferenceManager.newInstance().notifyCardModeChanged();
                     }
                 }

@@ -30,7 +30,7 @@ proguard/
 .navigation/
 
 # Android Studio captures folder
-captures/初始化
+captures/
 
 # Intellij
 *.iml
@@ -39,38 +39,15 @@ captures/初始化
 # Keystore files
 *.jks
 .idea/
-GankApp/
-GankIO/
-GankList/
-GankTheme/
-Would skip repository MarvelLauncher/
 build.gradle
-fortest/
-gradle.properties
 gradle/
 gradlew
 gradlew.bat
-settings.gradle
 
 /.gradle/
 /.idea/
 /build/
-/fortest/
-/GankApp/
-/GankIO/
-/GankList/
-/GankTheme/
 /gradle/
-/MarvelLauncher/
-!/build.gradle
-!/gradle.properties
-!/gradlew
-!/gradlew.bat
-/gradlew.bat
-/gradlew
-/library/
-/sample/
-/FloatingMenu/
-/local.properties
-/gradle.properties.sample
-/nfcard/build/
+
+/VipVideo/
+/captures/

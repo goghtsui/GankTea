@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="420dp"
+    android:layout_height="720dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    >
+
+    <RelativeLayout
+        android:id="@+id/sv_episode_left_container"
+        android:layout_width="173dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="37dp"
+        android:translationX="33dp">
+
+        <View
+            android:id="@+id/view_episode_left_background"
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/focus"
+            />
+
+        <com.hiveview.cloudscreen.vipvideo.view.wheelview.WheelView
+            android:id="@+id/sv_episode_left"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false">
+
+        </com.hiveview.cloudscreen.vipvideo.view.wheelview.WheelView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/sv_episode_right_container"
+        android:layout_width="173dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:translationX="333dp">
+
+        <View
+            android:id="@+id/view_episode_right_background"
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/focus"
+             />
+
+        <com.hiveview.cloudscreen.vipvideo.view.wheelview.WheelView
+            android:id="@+id/sv_episode_right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false">
+
+        </com.hiveview.cloudscreen.vipvideo.view.wheelview.WheelView>
+    </RelativeLayout>
+
+</LinearLayout>
+

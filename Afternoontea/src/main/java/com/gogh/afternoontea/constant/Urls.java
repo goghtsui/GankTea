@@ -10,9 +10,15 @@ package com.gogh.afternoontea.constant;
 
 public interface Urls {
 
+    /**
+     * https://api.seniverse.com/v3/weather/now.json?key=klxvmngb60g6ickb&location=ip&language=zh-Hans&unit=c
+     */
     interface Weather {
-        String BASE_URL = "http://apis.baidu.com/";
-        String PATH = "heweather/weather/free";
+        String KEY = "klxvmngb60g6ickb";
+        String LANGUAGE = "zh-Hans";
+        String UNIT = "c";
+        String BASE_URL = "https://api.seniverse.com/";
+        String PATH = "v3/weather/now.json";
     }
 
     interface Meizi {

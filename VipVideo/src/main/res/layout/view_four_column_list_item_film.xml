@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/view_four_column_list_item_film_view_focus_75layout_width"
+    android:layout_height="@dimen/view_four_column_list_item_film_view_focus_2layout_height"
+    android:layout_marginBottom="@dimen/view_four_column_list_item_film_view_focus_10layout_marginBottom"
+    android:layout_marginLeft="@dimen/view_four_column_list_item_film_view_focus_88layout_marginLeft"
+    android:layout_marginRight="@dimen/view_four_column_list_item_film_view_focus_14layout_marginRight"
+    android:layout_marginTop="@dimen/view_four_column_list_item_film_view_focus_1layout_marginTop"
+    android:background="@drawable/focused_view_selector"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:id="@+id/image_cover"
+        android:layout_width="@dimen/view_four_column_list_item_film_image_cover_68layout_width"
+        android:layout_height="@dimen/view_four_column_list_item_film_image_cover_82layout_height"
+        android:contentDescription="@string/cover" />
+
+    <ImageView
+        android:id="@+id/v_corner"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignLeft="@id/image_cover"
+        android:layout_alignTop="@id/image_cover"
+        android:layout_margin="15dp" />
+
+    <View
+        android:id="@+id/bg_oneline"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/view_four_column_list_item_film_bg_oneline_13layout_height"
+        android:layout_alignBottom="@id/image_cover"
+        android:layout_alignLeft="@+id/image_cover"
+        android:layout_alignRight="@+id/image_cover"
+        android:background="@drawable/bg_oneline" />
+
+    <View
+        android:id="@+id/bg_multiline"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/view_four_column_list_item_film_bg_multiline_98layout_height"
+        android:layout_alignBottom="@id/image_cover"
+        android:layout_alignLeft="@+id/image_cover"
+        android:layout_alignRight="@+id/image_cover"
+        android:background="@drawable/bg_multiline"
+        android:visibility="invisible" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.MarqueeTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/image_cover"
+        android:layout_alignLeft="@+id/image_cover"
+        android:layout_marginBottom="@dimen/view_four_column_list_item_film_tv_title_85layout_marginBottom"
+        android:layout_marginLeft="@dimen/view_four_column_list_item_film_tv_title_70layout_marginLeft"
+        android:layout_marginRight="@dimen/view_four_column_list_item_film_tv_title_76layout_marginRight"
+        android:layout_toLeftOf="@+id/tv_time_length"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:maxLines="1"
+        android:textColor="#999999"
+        android:textSize="@dimen/view_four_column_list_item_film_tv_title_24textSize" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.MarqueeTextView
+        android:id="@+id/tv_descript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/image_cover"
+        android:layout_alignLeft="@id/image_cover"
+        android:layout_alignRight="@id/image_cover"
+        android:layout_marginBottom="@dimen/view_four_column_list_item_film_tv_descript_28layout_marginBottom"
+        android:layout_marginLeft="@dimen/view_four_column_list_item_film_tv_descript_95layout_marginLeft"
+        android:layout_marginRight="@dimen/view_four_column_list_item_film_tv_descript_9layout_marginRight"
+        android:alpha="0"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:textColor="#CCCCCC"
+        android:textSize="@dimen/view_four_column_list_item_film_tv_descript_9textSize" />
+
+    <TextView
+        android:id="@+id/tv_issue_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/image_cover"
+        android:layout_alignLeft="@id/image_cover"
+        android:layout_marginBottom="@dimen/view_four_column_list_item_film_tv_issue_time_70layout_marginBottom"
+        android:layout_marginLeft="@dimen/view_four_column_list_item_film_tv_issue_time_50layout_marginLeft"
+        android:alpha="0"
+        android:gravity="left"
+        android:textColor="#CCCCCC" />
+
+    <TextView
+        android:id="@+id/tv_time_length"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/image_cover"
+        android:layout_alignRight="@id/image_cover"
+        android:layout_marginBottom="@dimen/view_four_column_list_item_film_tv_time_length_99layout_marginBottom"
+        android:layout_marginRight="@dimen/view_four_column_list_item_film_tv_time_length_81layout_marginRight"
+        android:gravity="left"
+        android:textColor="#999999" />
+
+</RelativeLayout>

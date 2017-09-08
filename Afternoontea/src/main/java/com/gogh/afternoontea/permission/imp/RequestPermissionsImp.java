@@ -12,7 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.permission.RequestPermissions;
 
 import java.util.ArrayList;
@@ -29,10 +29,12 @@ public class RequestPermissionsImp implements RequestPermissions {
 
 
     private static final String TAG = "RequestPermissionsImp";
+
     /**
      * 授权码
      */
     private static final int PERMISSON_REQUESTCODE = 0;
+
     /**
      * 需要进行检测的权限数组
      */
@@ -44,8 +46,11 @@ public class RequestPermissionsImp implements RequestPermissions {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.READ_PHONE_STATE
     };
-    private OnStartActivityListener onStartActivityListener;
+
     private Activity mActivity;
+
+    private OnStartActivityListener onStartActivityListener;
+
     /**
      * 判断是否需要检测，防止不停的弹框
      */

@@ -1,9 +1,6 @@
 package com.gogh.afternoontea.adapter.holder;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,9 +8,7 @@ import android.widget.ImageView;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.app.Initializer;
-import com.gogh.afternoontea.constant.Urls;
-import com.gogh.afternoontea.ui.HomeActivity;
-import com.gogh.afternoontea.ui.ScaleImageActivity;
+import com.gogh.afternoontea.utils.TintColor;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -22,10 +17,10 @@ import com.gogh.afternoontea.ui.ScaleImageActivity;
  * <p> ChangeLog: </p>
  * <li> 高晓峰 on 1/19/2017 do fisrt create. </li>
  */
-public class WelfareViewHolder extends RecyclerView.ViewHolder implements Initializer, View.OnClickListener {
+public class WelfareViewHolder extends RecyclerView.ViewHolder implements Initializer {
 
-    private String imageUrl;
     private Context context;
+
     public AppCompatTextView mTitleName;
     public ImageView mWelfareImage;
 
@@ -33,7 +28,6 @@ public class WelfareViewHolder extends RecyclerView.ViewHolder implements Initia
         super(mItemView);
         this.context = context;
         initView();
-        itemView.setOnClickListener(this);
     }
 
     @Override
@@ -46,24 +40,9 @@ public class WelfareViewHolder extends RecyclerView.ViewHolder implements Initia
         mWelfareImage = (ImageView) itemView.findViewById(R.id.gank_welfare_item_imageview);
     }
 
-    public void setupImageUrl(String imageUrl){
-        this.imageUrl = imageUrl;
+    public void onUpdateByTheme() {
+        int textColor = TintColor.getPrimaryColor(context);
+        mTitleName.setTextColor(TintColor.getTintList(textColor));
     }
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param view The view that was clicked.
-     */
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(context, ScaleImageActivity.class);
-        intent.putExtra(Urls.GANK_URL.BUNDLE_KEY, imageUrl);
-
-        View intoView = view.findViewById(R.id.gank_welfare_item_imageview);
-        ActivityOptionsCompat options =
-                ActivityOptionsCompat.makeSceneTransitionAnimation((HomeActivity)context,
-                        intoView, context.getResources().getString(R.string.translation_element_name));
-        ActivityCompat.startActivity((HomeActivity)context, intent, options.toBundle());
-    }
 }

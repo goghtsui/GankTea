@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.constant.Constant;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.preference.Preference;
 
 /**
@@ -17,9 +17,6 @@ import com.gogh.afternoontea.preference.Preference;
  */
 public class Configuration implements Preference {
 
-    public static final int FLAG_SYSTEM = 0x11010;
-    public static final int FLAG_CUSTOM = 0x11011;
-
     private static final String PREFERENCE_NAME = "_preferences";
     private static final String USER_PREFERENCE_NAME = "_userpreferences";
 
@@ -29,25 +26,22 @@ public class Configuration implements Preference {
 
     private SharedPreferences.Editor userEditor;
 
-    public Configuration(Context context, int flag) {
-        this.context = context;
-        initConfig(flag);
+    public static Configuration newInstance() {
+        return SingleHolder.HOLDER;
     }
 
-    private void initConfig(int flag) {
-        switch (flag) {
-            case FLAG_SYSTEM:
-                if (preferences == null) {
-                    preferences = context.getSharedPreferences(context.getPackageName() + PREFERENCE_NAME, Context.MODE_PRIVATE);
-                }
-                break;
-            case FLAG_CUSTOM:
-                if (userPreferences == null) {
-                    userPreferences = context.getSharedPreferences(context.getPackageName() + USER_PREFERENCE_NAME, Context.MODE_PRIVATE);
-                    userEditor = userPreferences.edit();
-                }
-                break;
-        }
+    private static final class SingleHolder {
+        private static final Configuration HOLDER = new Configuration();
+    }
+
+    private Configuration(){
+    }
+
+    public void init(Context context) {
+        this.context = context;
+        preferences = context.getSharedPreferences(context.getPackageName() + PREFERENCE_NAME, Context.MODE_PRIVATE);
+        userPreferences = context.getSharedPreferences(context.getPackageName() + USER_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        userEditor = userPreferences.edit();
     }
 
     /**

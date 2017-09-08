@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:domy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="218dp"
+    android:layout_height="55dp"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/tv_filmlist_hortword_item"
+        android:layout_width="218dp"
+        android:layout_height="55dp"
+       android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+</LinearLayout>

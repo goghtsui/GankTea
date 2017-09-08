@@ -22,7 +22,7 @@ import android.widget.Scroller;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.adapter.meizi.BaseCardAdapter;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

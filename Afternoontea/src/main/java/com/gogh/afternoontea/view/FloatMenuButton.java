@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -120,7 +119,7 @@ public class FloatMenuButton implements Initializer {
      */
     public void resetFloatMenuBackground(int themeColor) {
         for (int i = 0; i < floatMenus.size(); i++) {
-            TintColor.setBackgroundTintList((FloatingActionButton) floatMenus.get(i), ContextCompat.getColor(context, themeColor));
+            TintColor.setBackgroundTintList((FloatingActionButton) floatMenus.get(i), themeColor/*ContextCompat.getColor(context, themeColor)*/);
         }
     }
 

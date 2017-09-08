@@ -10,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.TypedValue;
 
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.log.Logger;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -30,7 +29,7 @@ public class TintColor {
     }
 
     @NonNull
-    private static  ColorStateList getTintList(@ColorInt int color) {
+    public static  ColorStateList getTintList(@ColorInt int color) {
         int[] colors = new int[]{color, color, color, color, color, color};
         int[][] states = new int[6][];
         states[0] = new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled};
@@ -121,6 +120,17 @@ public class TintColor {
     public static int getPrimaryDarkColor(@NonNull Context context) {
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
+        return typedValue.data;
+    }
+
+    /**
+     * 获取主题颜色
+     *
+     * @return
+     */
+    public static int getPrimaryTextColor(@NonNull Context context) {
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(R.attr.colorPrimaryText, typedValue, true);
         return typedValue.data;
     }
 

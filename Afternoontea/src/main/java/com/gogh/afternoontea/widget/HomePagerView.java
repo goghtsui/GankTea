@@ -12,7 +12,7 @@ import com.gogh.afternoontea.app.Initializer;
 import com.gogh.afternoontea.listener.OnMultipleClickListener;
 import com.gogh.afternoontea.listener.OnScrollListener;
 import com.gogh.afternoontea.listener.OnTopListener;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.preference.imp.Configuration;
 import com.gogh.afternoontea.presenter.SectionsPagerPresenter;
@@ -96,13 +96,11 @@ public class HomePagerView implements OnScrollListener, Initializer {
 
     @Override
     public void initView() {
-        mViewPager.setOffscreenPageLimit(Integer.valueOf(new Configuration(mContext, Configuration.FLAG_SYSTEM).getCachePageCount()));
+        mViewPager.setOffscreenPageLimit(Integer.valueOf(Configuration.newInstance().getCachePageCount()));
 
-        SectionsPagerPresenter pagerPresenter = SectionsPagerPresenter.newInstance();
-        pagerPresenter.setOnScrollListener(this);
+        SectionsPagerPresenter.newInstance().setOnScrollListener(this);
 
-        pagerAdapter = pagerPresenter.getPagerAdapter(mContext, ((HomeActivity) mContext).getSupportFragmentManager());
-        mViewPager.setAdapter(pagerAdapter);
+        pagerAdapter = SectionsPagerPresenter.newInstance().getPagerAdapter(mContext, ((HomeActivity) mContext).getSupportFragmentManager());
 
         mTablayout.setupWithViewPager(mViewPager);
 
@@ -118,6 +116,7 @@ public class HomePagerView implements OnScrollListener, Initializer {
         });
 
         mViewPager.addOnPageChangeListener(pageChangeListener);
+        mViewPager.setAdapter(pagerAdapter);
     }
 
     public void setOnMultipleClickListener(OnMultipleClickListener onMultipleClickListener) {

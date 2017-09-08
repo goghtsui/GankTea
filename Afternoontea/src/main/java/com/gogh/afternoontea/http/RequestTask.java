@@ -20,18 +20,12 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
  */
 public class RequestTask {
 
-    @NonNull
-    private static RequestTask INSTANCE = new RequestTask();
-
     private RequestTask() {
     }
 
     @NonNull
     public static RequestTask getInstance() {
-        if (null == INSTANCE) {
-            INSTANCE = SingleHolder.TASK;
-        }
-        return INSTANCE;
+        return SingleHolder.TASK;
     }
 
     private static final class SingleHolder {

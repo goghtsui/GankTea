@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/view_filter_item_tv_film_count_17layout_width"
+    android:layout_height="@dimen/view_filter_item_tv_film_count_60layout_height"
+    android:clipChildren="false" >
+
+    <TextView
+        android:id="@+id/tv_type_text"
+        android:layout_width="@dimen/view_filter_item_tv_type_text_71layout_width"
+        android:layout_height="@dimen/view_filter_item_tv_type_text_49layout_height"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:textColor="#9A9A9A"
+        android:textSize="@dimen/view_filter_item_tv_type_text_21textSize" />
+
+    <RelativeLayout
+        android:layout_width="@dimen/view_filter_item_tv_type_text_61layout_width"
+        android:layout_height="@dimen/view_filter_item_tv_type_text_87layout_height"
+        android:layout_toRightOf="@+id/tv_type_text"
+        android:clipChildren="false" >
+
+        <com.hiveview.cloudscreen.video.view.wheelview.WheelView
+            android:id="@+id/wv_type_wheelview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true" >
+        </com.hiveview.cloudscreen.video.view.wheelview.WheelView>
+
+        <ImageView
+            android:id="@+id/view_up"
+            android:layout_width="@dimen/view_filter_item_view_up_59layout_width"
+            android:layout_height="@dimen/view_filter_item_view_up_27layout_height"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/view_filter_item_view_up_97layout_marginLeft"
+            android:layout_marginRight="@dimen/view_filter_item_view_up_54layout_marginRight"
+            android:contentDescription="@string/category_filter"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_category_filter_up"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/view_down"
+            android:layout_width="@dimen/view_filter_item_view_down_53layout_width"
+            android:layout_height="@dimen/view_filter_item_view_down_26layout_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/view_filter_item_view_down_21layout_marginLeft"
+            android:layout_marginRight="@dimen/view_filter_item_view_down_89layout_marginRight"
+            android:contentDescription="@string/category_filter"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_category_filter_down"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/view_focus"
+            android:layout_width="@dimen/view_filter_item_view_focus_78layout_width"
+            android:layout_height="@dimen/view_filter_item_view_focus_35layout_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/view_filter_item_view_focus_80layout_marginLeft"
+            android:layout_marginRight="@dimen/view_filter_item_view_focus_16layout_marginRight"
+            android:background="@drawable/focus"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</RelativeLayout>

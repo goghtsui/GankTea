@@ -20,8 +20,6 @@ import okhttp3.Response;
  */
 class HttpClient {
 
-    private static HttpClient INSTANCE;
-
     @Nullable
     private List<Property> properties;
 
@@ -29,10 +27,7 @@ class HttpClient {
     }
 
     protected static HttpClient newInstance() {
-        if (null == INSTANCE) {
-            INSTANCE = SingleHolder.CLIENT;
-        }
-        return INSTANCE;
+        return SingleHolder.CLIENT;
     }
 
     @NonNull
@@ -114,6 +109,5 @@ class HttpClient {
             return HttpClient.newInstance().build(this);
         }
     }
-
 
 }

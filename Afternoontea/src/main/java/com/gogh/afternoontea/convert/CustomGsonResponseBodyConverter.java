@@ -3,7 +3,7 @@ package com.gogh.afternoontea.convert;
 
 import android.support.annotation.NonNull;
 
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;

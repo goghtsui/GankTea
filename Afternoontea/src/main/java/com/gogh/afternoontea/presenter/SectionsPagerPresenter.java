@@ -22,39 +22,34 @@ import java.util.List;
  */
 public class SectionsPagerPresenter {
 
-    private static SectionsPagerPresenter INSTANCE;
-
     private OnScrollListener onScrollListener;
 
     private SectionsPagerPresenter() {
     }
 
     public static SectionsPagerPresenter newInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = SingleHolder.ADAPTER;
-        }
-        return INSTANCE;
+        return SingleHolder.ADAPTER;
     }
 
     @NonNull
     private List<BaseFragment> getFragmentList() {
         List<BaseFragment> fragments = new ArrayList<>();
-        int i = 0;
-        fragments.add(getFragment(Urls.GANK_URL.ALL, i, BaseFragment.LAYOUT_TYPE_LIST));
-        i++;
-        fragments.add(getFragment(Urls.GANK_URL.ANDROID, i, BaseFragment.LAYOUT_TYPE_LIST));
-        i++;
-        fragments.add(getFragment(Urls.GANK_URL.IOS, i, BaseFragment.LAYOUT_TYPE_LIST));
-        i++;
-        fragments.add(getFragment(Urls.GANK_URL.WEB, i, BaseFragment.LAYOUT_TYPE_LIST));
-        i++;
-        fragments.add(getFragment(Urls.GANK_URL.MATERIAL, i, BaseFragment.LAYOUT_TYPE_LIST));
-        i++;
-        fragments.add(getFragment(Urls.GANK_URL.RECOMMEND, i, BaseFragment.LAYOUT_TYPE_LIST));
-        i++;
-        fragments.add(getFragment(Urls.GANK_URL.REST_VIDEO, i, BaseFragment.LAYOUT_TYPE_LIST));
-        i++;
-        fragments.add(getFragment(Urls.GANK_URL.WELFARE, i, BaseFragment.LAYOUT_TYPE_FALLS));
+        int position = 0;
+        fragments.add(getFragment(Urls.GANK_URL.ALL, position, BaseFragment.LAYOUT_TYPE_LIST));
+        position++;
+        fragments.add(getFragment(Urls.GANK_URL.ANDROID, position, BaseFragment.LAYOUT_TYPE_LIST));
+        position++;
+        fragments.add(getFragment(Urls.GANK_URL.IOS, position, BaseFragment.LAYOUT_TYPE_LIST));
+        position++;
+        fragments.add(getFragment(Urls.GANK_URL.WEB, position, BaseFragment.LAYOUT_TYPE_LIST));
+        position++;
+        fragments.add(getFragment(Urls.GANK_URL.MATERIAL, position, BaseFragment.LAYOUT_TYPE_LIST));
+        position++;
+        fragments.add(getFragment(Urls.GANK_URL.RECOMMEND, position, BaseFragment.LAYOUT_TYPE_LIST));
+        position++;
+        fragments.add(getFragment(Urls.GANK_URL.REST_VIDEO, position, BaseFragment.LAYOUT_TYPE_LIST));
+        position++;
+        fragments.add(getFragment(Urls.GANK_URL.WELFARE, position, BaseFragment.LAYOUT_TYPE_FALLS));
         return fragments;
     }
 

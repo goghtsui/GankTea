@@ -7,7 +7,7 @@ import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.location.listener.OnLodingChangedListener;
 import com.gogh.afternoontea.listener.OnRefreshListener;
 import com.gogh.afternoontea.listener.OnResponListener;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.presenter.BasePresenter;
 import com.gogh.afternoontea.request.RequestProxy;

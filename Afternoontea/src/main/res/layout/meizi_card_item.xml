@@ -6,6 +6,7 @@
 
     <ImageView
         android:id="@+id/meizi_card_item_imageview"
+        android:scaleType="centerCrop"
         android:layout_width="236dp"
         android:layout_height="354dp"/>
 

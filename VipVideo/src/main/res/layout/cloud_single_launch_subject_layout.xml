@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:domy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/place_subject"
+        android:layout_width="@dimen/cloud_single_launch_subject_layout_place_subject_92layout_width"
+        android:layout_height="@dimen/cloud_single_launch_subject_layout_place_subject_9layout_height"
+        android:layout_alignBottom="@+id/place_text3"
+        android:layout_marginLeft="@dimen/cloud_single_launch_subject_layout_place_subject_17layout_marginLeft"
+        android:background="@drawable/green_color"
+        android:focusable="false" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/place_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/cloud_single_launch_subject_layout_place_text1_80layout_marginLeft"
+        android:layout_marginTop="@dimen/cloud_single_launch_subject_layout_place_text1_90layout_marginTop"
+        android:layout_toRightOf="@id/place_subject"
+        android:focusable="false"
+        android:gravity="top"
+        android:text="@string/cloud_single_subject_title"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/cloud_single_launch_subject_layout_place_text1_66textSize" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.EffectiveMarqueeTextView
+        android:id="@+id/place_text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/place_text1"
+
+        android:layout_marginLeft="@dimen/cloud_single_launch_subject_layout_place_text2_91layout_marginLeft"
+        android:layout_marginRight="@dimen/cloud_single_launch_subject_layout_place_text2_19layout_marginRight"
+        android:layout_marginTop="@dimen/cloud_single_launch_subject_layout_place_text2_53layout_marginTop"
+        android:layout_toLeftOf="@+id/place_text4"
+        android:layout_toRightOf="@id/place_subject"
+        android:focusable="false"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/cloud_single_launch_subject_layout_place_text2_62textSize"
+        domy:usertypeface="SIMHEI" />
+
+    <com.hiveview.cloudscreen.vipvideo.view.EffectiveMarqueeTextView
+        android:id="@+id/place_text3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/place_text2"
+        android:layout_marginLeft="@dimen/cloud_single_launch_subject_layout_place_text3_18layout_marginLeft"
+        android:layout_marginRight="@dimen/cloud_single_launch_subject_layout_place_text3_18layout_marginLeft"
+        android:layout_marginTop="@dimen/cloud_single_launch_subject_layout_place_text3_5layout_marginTop"
+        android:layout_toRightOf="@id/place_subject"
+        android:focusable="false"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/cloud_single_launch_subject_layout_place_text3_12textSize" />
+    <!-- 专题集数改为在顶部显示，此处View弃用      by liulifeng -->
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/place_text4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/cloud_single_launch_subject_layout_place_text4_0layout_marginRight"
+        android:layout_marginTop="@dimen/cloud_single_launch_subject_layout_place_text4_3layout_marginTop"
+        android:focusable="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/cloud_single_launch_subject_layout_place_text4_84textSize"
+        domy:usertypeface="SIMHEI" />
+    <!-- 专题集数改为在顶部显示，此处View弃用      by liulifeng -->
+
+    <com.hiveview.cloudscreen.vipvideo.view.TypeFaceTextView
+        android:id="@+id/place_text7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/place_text4"
+        android:layout_marginBottom="@dimen/cloud_single_launch_subject_layout_place_text7_45layout_marginBottom"
+        android:layout_toLeftOf="@id/place_text4"
+        android:focusable="false"
+        android:gravity="bottom"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/cloud_single_launch_subject_layout_place_text7_1textSize"
+        domy:usertypeface="SIMHEI" />
+
+</RelativeLayout>

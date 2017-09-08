@@ -1,0 +1,508 @@
+<resources>
+    <!-- ##subject_list_item_layout.xml## -->
+    <dimen name="subject_list_item_layout_margin_top">15dp</dimen>
+    <dimen name="subject_list_item_layout_margin_bottom">15dp</dimen>
+    <dimen name="subject_list_item_layout_subject_list_title2_6layout_width">380dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_title2_55layout_height">223dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_back_10layout_width">380dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_back_88layout_height">223dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_text_nopress_back_26layout_width">380dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_text_press_back_48layout_width">380dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_line_78layout_width">380dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_text1_31layout_marginBottom">10dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_text1_41layout_marginLeft">13dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_text1_21textSize">20sp</dimen>
+    <dimen name="subject_list_item_layout_subject_list_text2_50layout_marginTop">10dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_text2_36textSize">16sp</dimen>
+    <dimen name="subject_list_item_layout_subject_list_text3_16layout_marginBottom">10dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_text3_75layout_marginRight">16dip</dimen>
+    <dimen name="subject_list_item_layout_subject_list_text3_46textSize">16sp</dimen>
+    <!-- ##collect_item_layout.xml## -->
+    <dimen name="collect_item_layout_collect_focus_74layout_width">218dip</dimen>
+    <dimen name="collect_item_layout_collect_focus_54layout_height">286dip</dimen>
+    <dimen name="collect_item_layout_collect_focus_7layout_marginLeft">18dip</dimen>
+    <dimen name="collect_item_layout_collect_item_bg_71layout_marginLeft">23dip</dimen>
+    <dimen name="collect_item_layout_collect_item_bg_2layout_marginTop">23dip</dimen>
+    <dimen name="collect_item_layout_delete_6layout_marginRight">3dip</dimen>
+    <dimen name="collect_item_layout_delete_49layout_marginTop">3dip</dimen>
+    <dimen name="collect_item_layout_collect_nopress_67layout_width">173dip</dimen>
+    <dimen name="collect_item_layout_collect_press_58layout_width">173dip</dimen>
+    <dimen name="collect_item_layout_item_text2_99layout_marginBottom">10dip</dimen>
+    <dimen name="collect_item_layout_item_text2_62layout_marginLeft">13dip</dimen>
+    <dimen name="collect_item_layout_item_text2_40layout_marginRight">13dip</dimen>
+    <dimen name="collect_item_layout_item_text2_41textSize">20sp</dimen>
+    <dimen name="collect_item_layout_item_text3_18layout_marginLeft">14dip</dimen>
+    <dimen name="collect_item_layout_item_text3_42layout_marginTop">12dip</dimen>
+    <dimen name="collect_item_layout_item_text3_90textSize">16sp</dimen>
+    <dimen name="collect_item_layout_item_text4_82textSize">16sp</dimen>
+    <!-- ##collect_layout.xml## -->
+    <dimen name="collect_layout_collect_ll_75layout_height">956dip</dimen>
+    <dimen name="collect_layout_container_80layout_height">956dip</dimen>
+    <dimen name="collect_layout_collect_color_1layout_marginLeft">41dip</dimen>
+    <dimen name="collect_layout_collect_color_99layout_marginTop">40dip</dimen>
+    <dimen name="collect_layout_title_text1_34layout_marginLeft">20dip</dimen>
+    <dimen name="collect_layout_title_text1_31layout_marginTop">-10dip</dimen>
+    <dimen name="collect_layout_title_text1_95textSize">40sp</dimen>
+    <dimen name="collect_layout_title_text2_8layout_marginBottom">-1dip</dimen>
+    <dimen name="collect_layout_title_text2_58textSize">20sp</dimen>
+    <dimen name="collect_layout_title_text3_11layout_marginTop">47dip</dimen>
+    <dimen name="collect_layout_title_text3_45textSize">24sp</dimen>
+    <dimen name="collect_layout_line1_76layout_marginLeft">23dip</dimen>
+    <dimen name="collect_layout_line1_61layout_marginTop">12dip</dimen>
+    <dimen name="collect_layout_all_collect_55layout_height">349dip</dimen>
+    <dimen name="collect_layout_all_collect_77layout_marginTop">20dip</dimen>
+    <dimen name="collect_layout_title_text4_69textSize">24sp</dimen>
+    <dimen name="collect_layout_line2_50layout_marginLeft">23dip</dimen>
+    <dimen name="collect_layout_line2_38layout_marginTop">12dip</dimen>
+    <dimen name="collect_layout_geek_collect_58layout_height">349dip</dimen>
+    <dimen name="collect_layout_geek_collect_70layout_marginTop">20dip</dimen>
+    <!-- ##delete_all_layout.xml## -->
+    <dimen name="delete_all_layout_title_11layout_marginTop">70dip</dimen>
+    <dimen name="delete_all_layout_title_41textSize">32sp</dimen>
+    <dimen name="delete_all_layout_title_18layout_marginTop">50dip</dimen>
+    <dimen name="delete_all_layout_press_21layout_marginTop">5dip</dimen>
+    <dimen name="delete_all_layout_press_82textSize">24sp</dimen>
+    <dimen name="delete_all_layout_press_focus_2layout_width">252dip</dimen>
+    <dimen name="delete_all_layout_press_focus_36layout_height">105dip</dimen>
+    <dimen name="delete_all_layout_cancel_13layout_marginLeft">25dip</dimen>
+    <dimen name="delete_all_layout_cancel_85layout_marginTop">5dip</dimen>
+    <dimen name="delete_all_layout_cancel_23textSize">24sp</dimen>
+    <dimen name="delete_all_layout_cancel_focus_29layout_width">252dip</dimen>
+    <dimen name="delete_all_layout_cancel_focus_57layout_height">105dip</dimen>
+    <dimen name="delete_all_layout_cancel_focus_86layout_marginLeft">25dip</dimen>
+    <!-- ##no_result_view_layout.xml## -->
+    <dimen name="no_result_view_layout_no_result_color_98layout_height">43dip</dimen>
+    <dimen name="no_result_view_layout_no_result_color_48layout_marginLeft">41dip</dimen>
+    <dimen name="no_result_view_layout_no_result_color_58layout_marginTop">40dip</dimen>
+    <dimen name="no_result_view_layout_title_text1_47layout_marginLeft">20dip</dimen>
+    <dimen name="no_result_view_layout_title_text1_55textSize">40sp</dimen>
+    <dimen name="no_result_view_layout_no_text_93textSize">67sp</dimen>
+    <dimen name="no_result_view_layout_empty_title_61textSize">48sp</dimen>
+
+    <!-- ##record_downlist_item_layout.xml## -->
+    <dimen name="record_downlist_item_layout_list2_focus_2layout_width">232dip</dimen>
+    <dimen name="record_downlist_item_layout_list2_focus_75layout_height">151dip</dimen>
+    <dimen name="record_downlist_item_layout_list2_bg_86layout_width">187dip</dimen>
+    <dimen name="record_downlist_item_layout_list2_bg_63layout_height">106dip</dimen>
+    <dimen name="record_downlist_item_layout_list2_bg_6layout_marginLeft">23dip</dimen>
+    <dimen name="record_downlist_item_layout_list2_bg_85layout_marginTop">23dip</dimen>
+    <dimen name="record_downlist_item_layout_delete_26layout_marginRight">3dip</dimen>
+    <dimen name="record_downlist_item_layout_delete_69layout_marginTop">3dip</dimen>
+    <dimen name="record_downlist_item_layout_list2_txt_0layout_marginLeft">13dip</dimen>
+    <dimen name="record_downlist_item_layout_list2_txt_26layout_marginRight">13dip</dimen>
+    <dimen name="record_downlist_item_layout_list2_txt_91layout_marginTop">26dip</dimen>
+    <dimen name="record_downlist_item_layout_list2_txt_97textSize">20sp</dimen>
+    <!-- ##record_header_layout.xml## -->
+    <dimen name="record_header_layout_list2_txt_70layout_height">128dip</dimen>
+    <dimen name="record_header_layout_list2_txt_63paddingBottom">30dip</dimen>
+    <dimen name="record_header_layout_list2_txt_82paddingTop">30dip</dimen>
+    <dimen name="record_header_layout_his_line_81layout_marginLeft">43dip</dimen>
+    <dimen name="record_header_layout_title_text1_55layout_marginLeft">20dip</dimen>
+    <dimen name="record_header_layout_title_text1_42layout_marginTop">-10dip</dimen>
+    <dimen name="record_header_layout_title_text1_39textSize">40sp</dimen>
+    <dimen name="record_header_layout_title_text2_76textSize">20sp</dimen>
+    <!-- ##record_item_layout.xml## -->
+    <dimen name="record_item_layout_title_text2_45layout_width">1280dip</dimen>
+    <dimen name="record_item_layout_title_text2_98layout_width">1280dip</dimen>
+    <dimen name="record_item_layout_rl_record_item_82layout_width">1280dip</dimen>
+    <dimen name="record_item_layout_rl_record_item_34layout_height">592dip</dimen>
+    <dimen name="record_item_layout_history_year_2layout_marginLeft">43dip</dimen>
+    <dimen name="record_item_layout_history_year_81layout_marginTop">10dip</dimen>
+    <dimen name="record_item_layout_history_year_24textSize">24sp</dimen>
+    <dimen name="record_item_layout_hor_4layout_marginLeft">37dip</dimen>
+    <dimen name="record_item_layout_hor_88layout_marginTop">10dip</dimen>
+    <dimen name="record_item_layout_history_month_95layout_marginLeft">20dip</dimen>
+    <dimen name="record_item_layout_history_month_34layout_marginTop">10dip</dimen>
+    <dimen name="record_item_layout_history_month_23textSize">32sp</dimen>
+    <dimen name="record_item_layout_ver_47layout_marginLeft">10dip</dimen>
+    <dimen name="record_item_layout_ver_60layout_marginBottom">-5dip</dimen>
+    <dimen name="record_item_layout_ver_74layout_marginLeft">-5dip</dimen>
+    <dimen name="record_item_layout_line_color1_62layout_marginLeft">15dip</dimen>
+    <dimen name="record_item_layout_line_color1_48layout_marginTop">18dip</dimen>
+    <dimen name="record_item_layout_movie_30layout_marginLeft">7dip</dimen>
+    <dimen name="record_item_layout_movie_66textSize">20sp</dimen>
+    <dimen name="record_item_layout_history_list1_45layout_height">268dip</dimen>
+    <dimen name="record_item_layout_history_list1_17layout_marginLeft">23dip</dimen>
+    <dimen name="record_item_layout_history_list1_85layout_marginTop">8dip</dimen>
+    <dimen name="record_item_layout_line_color2_80layout_marginLeft">15dip</dimen>
+    <dimen name="record_item_layout_line_color2_90layout_marginTop">18dip</dimen>
+    <dimen name="record_item_layout_game_35layout_marginLeft">7dip</dimen>
+    <dimen name="record_item_layout_game_44textSize">20sp</dimen>
+    <dimen name="record_item_layout_history_list2_5layout_marginLeft">23dip</dimen>
+    <dimen name="record_item_layout_history_list2_90layout_marginTop">8dip</dimen>
+    <!-- ##record_layout.xml## -->
+    <!-- ##record_uplist_item_layout.xml## -->
+    <dimen name="record_uplist_item_layout_history_list1_bg_80layout_height">223dp</dimen>
+    <dimen name="record_uplist_item_layout_delete_64layout_marginRight">3dip</dimen>
+    <dimen name="record_uplist_item_layout_delete_44layout_marginTop">3dip</dimen>
+    <dimen name="record_uplist_item_layout_item_title_color_44layout_marginLeft">10dip</dimen>
+    <dimen name="record_uplist_item_layout_item_title_color_22layout_marginTop">10dip</dimen>
+    <dimen name="record_uplist_item_layout_history_nopress_71layout_width">161dip</dimen>
+    <dimen name="record_uplist_item_layout_history_press_67layout_width">161dip</dimen>
+    <dimen name="record_uplist_item_layout_history_name_11layout_marginBottom">22dip</dimen>
+    <dimen name="record_uplist_item_layout_history_name_68layout_marginLeft">13dip</dimen>
+    <dimen name="record_uplist_item_layout_history_name_80layout_marginRight">13dip</dimen>
+    <dimen name="record_uplist_item_layout_history_name_55textSize">20sp</dimen>
+
+    <!-- ##view_four_column_list_item_film.xml## -->
+    <dimen name="view_four_column_list_item_film_view_focus_75layout_width">323dp</dimen>
+    <dimen name="view_four_column_list_item_film_view_focus_2layout_height">202dp</dimen>
+    <dimen name="view_four_column_list_item_film_view_focus_10layout_marginBottom">0dp</dimen>
+    <dimen name="view_four_column_list_item_film_view_focus_88layout_marginLeft">-4dp</dimen>
+    <dimen name="view_four_column_list_item_film_view_focus_14layout_marginRight">-22dp</dimen>
+    <dimen name="view_four_column_list_item_film_view_focus_1layout_marginTop">0dp</dimen>
+    <dimen name="view_four_column_list_item_film_image_cover_68layout_width">277.3dp</dimen>
+    <dimen name="view_four_column_list_item_film_image_cover_82layout_height">157.3dp</dimen>
+    <dimen name="view_four_column_list_item_film_bg_oneline_13layout_height">87dp</dimen>
+    <dimen name="view_four_column_list_item_film_bg_multiline_98layout_height">87dp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_title_85layout_marginBottom">8dp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_title_70layout_marginLeft">15dp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_title_76layout_marginRight">15dp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_title_24textSize">20sp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_descript_28layout_marginBottom">10dp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_descript_95layout_marginLeft">15dp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_descript_9layout_marginRight">15dp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_descript_9textSize">18sp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_issue_time_70layout_marginBottom">5dp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_issue_time_50layout_marginLeft">15dp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_time_length_99layout_marginBottom">8dp</dimen>
+    <dimen name="view_four_column_list_item_film_tv_time_length_81layout_marginRight">15dp</dimen>
+
+    <!-- ##activity_four_column_list.xml## -->
+    <dimen name="activity_four_column_list_sv_episode_right_0paddingLeft">28dp</dimen>
+    <dimen name="activity_four_column_list_sv_episode_right_34paddingRight">28dp</dimen>
+    <dimen name="activity_four_column_list_view_filter_mask_95layout_marginLeft">-28dp</dimen>
+    <dimen name="activity_four_column_list_view_filter_mask_32layout_marginRight">-28dp</dimen>
+
+    <!-- ##view_film_grid_header.xml## -->
+    <dimen name="view_film_grid_header_ll_wheel_container_78paddingBottom">20dp</dimen>
+    <dimen name="view_film_grid_header_ll_wheel_container_33paddingLeft">42dp</dimen>
+    <dimen name="view_film_grid_header_ll_wheel_container_5paddingTop">41.3dp</dimen>
+    <dimen name="view_film_grid_header_iv_grid_left_31layout_marginRight">17dp</dimen>
+    <dimen name="view_film_grid_header_tv_title_66layout_marginRight">26dp</dimen>
+    <dimen name="view_film_grid_header_tv_title_57layout_marginTop">-10dp</dimen>
+    <dimen name="view_film_grid_header_tv_title_28textSize">40sp</dimen>
+    <dimen name="view_film_grid_header_fl_category_93layout_marginTop">5dp</dimen>
+    <dimen name="view_film_grid_header_tv_category_64textSize">32sp</dimen>
+    <dimen name="view_film_grid_header_fl_film_count_32layout_marginTop">1dp</dimen>
+    <dimen name="view_film_grid_header_tv_film_count_65textSize">20sp</dimen>
+
+    <!-- ##subject_textinfo_layout.xml## -->
+    <dimen name="subject_textinfo_layout_color_line_31layout_marginLeft">66dip</dimen>
+    <dimen name="subject_textinfo_layout_color_line_37layout_marginTop">78dip</dimen>
+    <dimen name="subject_textinfo_layout_subject_title_69layout_marginLeft">20dip</dimen>
+    <dimen name="subject_textinfo_layout_subject_title_15layout_marginTop">-2dip</dimen>
+    <dimen name="subject_textinfo_layout_subject_title_7textSize">40sp</dimen>
+    <dimen name="subject_textinfo_layout_sum_vedio_37textSize">20sp</dimen>
+    <dimen name="subject_textinfo_layout_info_title_30layout_width">400dip</dimen>
+    <dimen name="subject_textinfo_layout_info_title_62layout_marginTop">42dip</dimen>
+    <dimen name="subject_textinfo_layout_info_title_6textSize">40sp</dimen>
+    <dimen name="subject_textinfo_layout_info_content_23layout_width">400dip</dimen>
+    <dimen name="subject_textinfo_layout_info_content_34layout_marginTop">29dip</dimen>
+    <dimen name="subject_textinfo_layout_info_content_78textSize">16sp</dimen>
+    <dimen name="subject_textinfo_layout_info_little_title_85layout_width">301dip</dimen>
+    <dimen name="subject_textinfo_layout_info_little_title_82layout_marginTop">61dip</dimen>
+    <dimen name="subject_textinfo_layout_info_little_title_31textSize">26sp</dimen>
+    <dimen name="subject_textinfo_layout_vertical_line_87layout_width">1dip</dimen>
+    <dimen name="subject_textinfo_layout_vertical_line_23layout_height">46dip</dimen>
+    <dimen name="subject_textinfo_layout_vertical_line_51layout_marginTop">48dip</dimen>
+    <dimen name="subject_textinfo_layout_star_22layout_marginLeft">21dip</dimen>
+    <dimen name="subject_textinfo_layout_number_18layout_marginLeft">10dip</dimen>
+    <dimen name="subject_textinfo_layout_number_41textSize">20sp</dimen>
+    <dimen name="subject_textinfo_layout_horizontal_line_69layout_width">400dip</dimen>
+    <dimen name="subject_textinfo_layout_horizontal_line_86layout_height">1dip</dimen>
+    <dimen name="subject_textinfo_layout_daoyan_70layout_marginTop">4dip</dimen>
+    <dimen name="subject_textinfo_layout_daoyan_87textSize">16sp</dimen>
+    <dimen name="subject_textinfo_layout_director_48layout_width">364dip</dimen>
+    <dimen name="subject_textinfo_layout_director_25textSize">16sp</dimen>
+    <dimen name="subject_textinfo_layout_yanyuan_38layout_marginTop">4dip</dimen>
+    <dimen name="subject_textinfo_layout_yanyuan_23textSize">16sp</dimen>
+    <dimen name="subject_textinfo_layout_actors_61layout_width">364dip</dimen>
+    <dimen name="subject_textinfo_layout_actors_80textSize">16sp</dimen>
+    <dimen name="subject_textinfo_layout_biaoqian_88layout_marginTop">4dip</dimen>
+    <dimen name="subject_textinfo_layout_biaoqian_26textSize">16sp</dimen>
+    <dimen name="subject_textinfo_layout_labels_41layout_width">400dip</dimen>
+    <dimen name="subject_textinfo_layout_labels_70textSize">16sp</dimen>
+    <dimen name="subject_textinfo_layout_introduce_66layout_width">400dip</dimen>
+    <dimen name="subject_textinfo_layout_introduce_78layout_marginTop">8dip</dimen>
+    <dimen name="subject_textinfo_layout_introduce_35textSize">16sp</dimen>
+
+    <!-- ##subject_list_layout.xml## -->
+    <dimen name="subject_list_layout_subject_list_text3_73paddingLeft">20dip</dimen>
+    <dimen name="subject_list_layout_subject_list_text3_70paddingRight">10dip</dimen>
+
+    <!-- ##activity_six_column_list.xml## -->
+    <dimen name="activity_six_column_list_txtDisplay_17paddingLeft">26dp</dimen>
+    <dimen name="activity_six_column_list_txtDisplay_47paddingRight">26dp</dimen>
+    <dimen name="activity_six_column_list_view_filter_bg_31layout_marginLeft">-28dp</dimen>
+    <dimen name="activity_six_column_list_view_filter_bg_48layout_marginRight">-28dp</dimen>
+    <dimen name="activity_six_column_list_view_filter_mask_81layout_marginLeft">-28dp</dimen>
+    <dimen name="activity_six_column_list_view_filter_mask_36layout_marginRight">-28dp</dimen>
+    <dimen name="activity_six_column_list_rl_title_container_4layout_marginLeft">122.6dp</dimen>
+    <dimen name="activity_six_column_list_rl_title_container_84layout_marginTop">89.3dp</dimen>
+    <dimen name="activity_six_column_list_rl_title_container_28translationY">-165dp</dimen>
+    <dimen name="activity_six_column_list_iv_red_line_3layout_marginRight">17dp</dimen>
+    <dimen name="activity_six_column_list_tv_title_66layout_marginTop">-9dp</dimen>
+    <dimen name="activity_six_column_list_tv_title_15textSize">40sp</dimen>
+    <dimen name="activity_six_column_list_tv_film_count_9layout_marginTop">6dp</dimen>
+    <dimen name="activity_six_column_list_tv_film_count_55textSize">20sp</dimen>
+    <dimen name="activity_six_column_list_rl_filter_container_73layout_height">67.3dp</dimen>
+    <dimen name="activity_six_column_list_ll_wheel_container_42layout_marginLeft">10dp</dimen>
+    <dimen name="activity_six_column_list_ll_wheel_container_55layout_marginRight">10dp</dimen>
+    <dimen name="activity_six_column_list_nv_filter_bottom_notice_90layout_height">100dp</dimen>
+
+    <!-- ##subject_list_header_layout.xml## -->
+    <dimen name="subject_list_header_layout_focus_44paddingBottom">13dip</dimen>
+    <dimen name="subject_list_header_layout_focus_71paddingLeft">23dip</dimen>
+    <dimen name="subject_list_header_layout_focus_6paddingTop">40dip</dimen>
+    <dimen name="subject_list_header_layout_subject_list_title_55layout_marginLeft">20dip</dimen>
+    <dimen name="subject_list_header_layout_subject_list_title_1layout_marginTop">-4dip</dimen>
+    <dimen name="subject_list_header_layout_subject_list_title_6textSize">40sp</dimen>
+    <dimen name="subject_list_header_layout_subject_list_title2_52layout_marginBottom">-2dip</dimen>
+    <dimen name="subject_list_header_layout_subject_list_title2_62layout_marginLeft">22dip</dimen>
+    <dimen name="subject_list_header_layout_subject_list_title2_0textSize">20sp</dimen>
+
+    <!-- ##subject_layout.xml## -->
+    <dimen name="subject_layout_subjectinfo_23layout_width">546dip</dimen>
+    <dimen name="subject_layout_container3d_56layout_width">1066dip</dimen>
+    <dimen name="subject_layout_container3d_24layout_marginBottom">116dip</dimen>
+    <dimen name="subject_layout_container3d_35layout_marginLeft">546dip</dimen>
+
+    <!-- ##cloud_single_launch_subject_layout.xml## -->
+    <dimen name="cloud_single_launch_subject_layout_place_subject_92layout_width">7dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_subject_9layout_height">62dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_subject_76layout_marginBottom">16dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_subject_17layout_marginLeft">20dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text1_80layout_marginLeft">12dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text1_90layout_marginTop">37dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text1_66textSize">16sp</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text2_91layout_marginLeft">12dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text2_19layout_marginRight">15dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text2_53layout_marginTop">2dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text2_62textSize">24sp</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text3_18layout_marginLeft">12dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text3_5layout_marginTop">2dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text3_12textSize">16sp</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text4_0layout_marginRight">10dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text4_3layout_marginTop">55dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text4_84textSize">24sp</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text7_45layout_marginBottom">2dip</dimen>
+    <dimen name="cloud_single_launch_subject_layout_place_text7_1textSize">20sp</dimen>
+
+    <!-- ##cloud_singel_launch_top_layout.xml## -->
+    <dimen name="cloud_singel_launch_top_layout_top_text_58textSize">24sp</dimen>
+
+    <!-- ##view_filter_item.xml## -->
+    <dimen name="view_filter_item_tv_film_count_17layout_width">338dp</dimen>
+    <dimen name="view_filter_item_tv_film_count_60layout_height">248.6dp</dimen>
+    <dimen name="view_filter_item_tv_type_text_71layout_width">90.7dp</dimen>
+    <dimen name="view_filter_item_tv_type_text_49layout_height">74.3dp</dimen>
+    <dimen name="view_filter_item_tv_type_text_21textSize">25.3sp</dimen>
+    <dimen name="view_filter_item_tv_type_text_61layout_width">247.3dp</dimen>
+    <dimen name="view_filter_item_tv_type_text_87layout_height">248.6dp</dimen>
+    <dimen name="view_filter_item_view_up_59layout_width">251.3dp</dimen>
+    <dimen name="view_filter_item_view_up_27layout_height">92.6dp</dimen>
+    <dimen name="view_filter_item_view_up_97layout_marginLeft">-2dp</dimen>
+    <dimen name="view_filter_item_view_up_54layout_marginRight">-2dp</dimen>
+    <dimen name="view_filter_item_view_down_53layout_width">251.3dp</dimen>
+    <dimen name="view_filter_item_view_down_26layout_height">90.6dp</dimen>
+    <dimen name="view_filter_item_view_down_21layout_marginLeft">-2dp</dimen>
+    <dimen name="view_filter_item_view_down_89layout_marginRight">-2dp</dimen>
+    <dimen name="view_filter_item_view_focus_78layout_width">292.6dp</dimen>
+    <dimen name="view_filter_item_view_focus_35layout_height">106.3dp</dimen>
+    <dimen name="view_filter_item_view_focus_80layout_marginLeft">-22.6dp</dimen>
+    <dimen name="view_filter_item_view_focus_16layout_marginRight">-22.6dp</dimen>
+
+    <!-- ########################   电影列表页        ####################### -->
+    <!-- GridLayout尺寸 -->
+    <dimen name="six_column_item_grid_layout_width">218dp</dimen>
+    <dimen name="six_column_item_grid_layout_height">286dp</dimen>
+    <dimen name="six_column_item_grid_layout_marginLeft">-4dp</dimen>
+    <dimen name="six_column_item_grid_layout_marginRight">-9dp</dimen>
+    <dimen name="six_column_item_grid_layout_marginTop">4dp</dimen>
+    <dimen name="six_column_item_grid_layout_marginBottom">0dp</dimen>
+    <!-- 图片封面 -->
+    <dimen name="six_column_item_image_cover_width">173dp</dimen>
+    <dimen name="six_column_item_image_cover_height">240dp</dimen>
+    <dimen name="six_column_item_image_cover_round">15.3dp</dimen>
+    <!-- 一行文本时的底部蒙版 -->
+    <dimen name="six_column_item_bg_oneline_width">173dp</dimen>
+    <dimen name="six_column_item_bg_oneline_height">90dp</dimen>
+    <!-- 多行文本时的底部蒙版 -->
+    <dimen name="six_column_item_bg_multiline_width">173dp</dimen>
+    <dimen name="six_column_item_bg_multiline_height">90dp</dimen>
+    <!-- 标题部分 -->
+    <dimen name="six_column_item_tv_title_width">173dp</dimen>
+    <dimen name="six_column_item_tv_title_height">28dp</dimen>
+    <dimen name="six_column_item_tv_title_marginBottom">10dp</dimen>
+    <dimen name="six_column_item_tv_title_marginLeft">15dp</dimen>
+    <dimen name="six_column_item_tv_title_marginRight">15dp</dimen>
+    <dimen name="six_column_item_tv_title_textSize">20sp</dimen>
+    <dimen name="six_column_item_tv_title_translationY">36.666dp</dimen>
+    <!-- 底部评分 -->
+    <dimen name="six_column_item_tv_score_star_bottom_width">173dp</dimen>
+    <dimen name="six_column_item_tv_score_star_bottom_height">28dp</dimen>
+    <dimen name="six_column_item_tv_score_star_bottom_marginBottom">15dp</dimen>
+    <dimen name="six_column_item_tv_score_star_bottom_marginLeft">15dp</dimen>
+    <dimen name="six_column_item_tv_score_star_bottom_drawablePadding">5dp</dimen>
+    <dimen name="six_column_item_tv_score_star_bottom_translationY">55dp</dimen>
+
+    <!-- ChannelView -->
+    <dimen name="channerview_backParams_height">66dp</dimen>
+    <dimen name="channerview_colorParams_leftMargin">67dp</dimen>
+    <dimen name="channerview_colorParams_bottomMargin">16dp</dimen>
+    <dimen name="channerview_title_setTextSize">32px</dimen>
+    <dimen name="channerview_titleParams_leftMargin">13dp</dimen>
+    <dimen name="channerview_backParams_topMargin">12dp</dimen>
+    <dimen name="channerview_content_setTextSize">24.5px</dimen>
+    <dimen name="channerview_contentParams_width">103dp</dimen>
+    <dimen name="channerview_contentParams_double_width">127dp</dimen>
+    <dimen name="channerview_contentParams_height">59dp</dimen>
+    <dimen name="channerview_focusParams_width">151dp</dimen>
+    <dimen name="channerview_focusParams_height">107dp</dimen>
+    <dimen name="channerview_focusParams_topMargin">20dp</dimen>
+    <dimen name="channerview_focusParams_leftMargin">13dp</dimen>
+    <dimen name="channerview_lineParams_leftMargin">13dp</dimen>
+    <dimen name="channerview_lineParams_bottomMargin">9dp</dimen>
+
+
+    <!-- SubjectRecommendTextView -->
+    <dimen name="subjectRecommendTextView_textByVideo_subjectText2_30">20dp</dimen>
+    <dimen name="subjectRecommendTextView_textByMulite_subjectText2_30">20dp</dimen>
+    <dimen name="subjectRecommendTextView_textBySubject_subjectText1_15">10dp</dimen>
+    <dimen name="subjectRecommendTextView_textBySubject_subjectText2_15">10dp</dimen>
+    <dimen name="subjectRecommendTextView_focus_subjectText1_15">10dp</dimen>
+    <dimen name="subjectRecommendTextView_focus_subjectText2_15">10dp</dimen>
+    <dimen name="subjectRecommendTextView_focus_subjectText2_30">20dp</dimen>
+
+    <!-- RecommendView -->
+    <dimen name="recommendview_ivParams_height">116dp</dimen>
+    <dimen name="recommendview_subjectParams_height">116dp</dimen>
+    <dimen name="recommendview_topParams_height">50dp</dimen>
+    <dimen name="recommendview_focus_width">23.5dp</dimen>
+    <dimen name="recommendview_corner_width">65dp</dimen>
+    <dimen name="recommendview_corner_height">53dp</dimen>
+    <dimen name="recommendview_corner_margin_left">20dp</dimen>
+    <dimen name="recommendview_cover_round">16.6dp</dimen>
+
+    <!--FocusView-->
+    <dimen name="focusview_xyoffset">23dp</dimen>
+    <dimen name="focusview_whoffset">45dp</dimen>
+    <dimen name="focusview_outyoffset">0dp</dimen>
+    <dimen name="focusview_outxoffset">0dp</dimen>
+
+    <!-- CloundMenuWindow -->
+    <dimen name="cloundmenuwindow_itemView_setNameTextSize">21px</dimen>
+    <dimen name="cloundmenuwindow_LinearLayout.LayoutParams_width">229dp</dimen>
+    <dimen name="cloundmenuwindow_LinearLayout.LayoutParams_heigh">87dp</dimen>
+    <dimen name="cloundmenuwindow_params_leftMargin">36dp</dimen>
+    <dimen name="cloundmenuwindow_params_topMargin">72dp</dimen>
+    <dimen name="cloundmenuwindow_MeunPopuWindow_width">500dp</dimen>
+    <dimen name="cloundmenuwindow_MeunPopuWindow_heigh">720dp</dimen>
+    <dimen name="cloundmenuwindow_tvName_setTextSize">24px</dimen>
+    <dimen name="cloundmenuwindow_LinearLayout_params_leftMargin">13dp</dimen>
+    <dimen name="cloundmenuwindow_show_launcherFocusView_344">229dp</dimen>
+    <dimen name="cloundmenuwindow_show_view_setX_344">229dp</dimen>
+    <dimen name="cloundmenuwindow_MeunPopuWindow_launcherFocusView_404">269dp</dimen>
+    <dimen name="cloundmenuwindow_animator_344">229dp</dimen>
+
+    <!-- CollectAdapter -->
+    <dimen name="collectAdapter_getView_entity_getTvImgUri_width">173dp</dimen>
+    <dimen name="collectAdapter_getView_entity_getTvImgUri_heigh">240dp</dimen>
+    <dimen name="collectAdapter_onFocusListener_scrollTo">100dp</dimen>
+
+    <!-- RecordAdapter -->
+    <dimen name="recordAdapter_one_line_heigh">368px</dimen>
+    <dimen name="recordAdapter_two_line_heigh">593px</dimen>
+
+    <!-- RecordDownAdapter -->
+    <dimen name="recordDownAdapter_startX">139dp</dimen>
+    <dimen name="recordDownAdapter_onFocusListener_scrollTo">100dp</dimen>
+
+    <!-- RecordUpAdapter -->
+    <dimen name="recordUpAdapter_startX">139dp</dimen>
+    <dimen name="recordUpAdapter_onFocusListener_scrollTo">100dp</dimen>
+
+    <!-- 历史列表滑动尺寸 -->
+    <dimen name="history_view_scroll_from_title">128dp</dimen>
+    <dimen name="history_view_scroll_item_all">592dp</dimen>
+    <dimen name="history_view_scroll_item_one">368dp</dimen>
+
+    <!-- FourColumnListAdapter -->
+    <dimen name="fourColumnListAdapter_focus_item_title">45dp</dimen>
+    <dimen name="fourColumnListAdapter_focus_item_descript">18dp</dimen>
+    <dimen name="fourColumnListAdapter_focus_item_issueTime">3dp</dimen>
+
+    <!--LoadingView-->
+    <dimen name="loading_view_item_width">57dp</dimen>
+    <dimen name="loading_view_item_height">133dp</dimen>
+
+    <!-- GalleryView -->
+    <dimen name="galleryview_containerParams_width">1067dp</dimen>
+    <dimen name="galleryview_ivParams_width">353dp</dimen>
+    <dimen name="galleryview_ivParams_height">489dp</dimen>
+    <dimen name="galleryview_cornerParams_width">65dp</dimen>
+    <dimen name="galleryview_cornerParams_height">53dp</dimen>
+    <dimen name="galleryview_cornerParams_margin_left">13dp</dimen>
+    <dimen name="galleryview_setData_ivParams_leftMargin_240">160dp</dimen>
+
+    <!-- FilmFilterWheelView -->
+    <dimen name="filmFilterWheelView_getView_LayoutParams_width">247dp</dimen>
+    <dimen name="filmFilterWheelView_getView_LayoutParams_heigh">73dp</dimen>
+    <dimen name="filmFilterWheelView_getView_view_setTextSize">32px</dimen>
+    <dimen name="filmFilterWheelView_translationY_notice">70dp</dimen>
+    <dimen name="filmFilterWheelView_translationY_TITLE">163dp</dimen>
+
+    <!-- BaseEpisodeAdapter -->
+
+    <dimen name="baseEpisodeAdapter_getView_LayoutParams_width">173dp</dimen>
+    <dimen name="baseEpisodeAdapter_getView_TypeFaceTextView_TextSize">21px</dimen>
+    <dimen name="baseEpisodeAdapter_getView_TypeFaceTextView_Padding_left">0dp</dimen>
+    <dimen name="baseEpisodeAdapter_getView_TypeFaceTextView_Padding_top">21dp</dimen>
+    <dimen name="baseEpisodeAdapter_getView_TypeFaceTextView_Padding_reigh">0dp</dimen>
+    <dimen name="baseEpisodeAdapter_getView_TypeFaceTextView_Padding_bottom">21dp</dimen>
+
+    <!-- BaseEpisodeGroupAdapter -->
+    <dimen name="baseEpisodeGroupAdapter_getView_LayoutParams_width">173dp</dimen>
+    <dimen name="baseEpisodeGroupAdapter_getView_TypeFaceTextView_TextSize">21px</dimen>
+    <dimen name="baseEpisodeGroupAdapter_getView_TypeFaceTextView_Padding_left">0dp</dimen>
+    <dimen name="baseEpisodeGroupAdapter_getView_TypeFaceTextView_Padding_top">21dp</dimen>
+    <dimen name="baseEpisodeGroupAdapter_getView_TypeFaceTextView_Padding_reigh">0dp</dimen>
+    <dimen name="baseEpisodeGroupAdapter_getView_TypeFaceTextView_Padding_bottom">21dp</dimen>
+
+    <!--recycleView-->
+    <dimen name="space">14dp</dimen>
+
+    <!--VipVideoDetailActivity-->
+    <dimen name="all_content_translationX_returnMid">-860dp</dimen>
+    <dimen name="all_content_translationX_toRight">-100dp</dimen>
+    <dimen name="activity_film_detail_iv_collect_ic_62layout_marginLeft">75dp</dimen>
+    <dimen name="activity_film_detail_iv_collect_ic_90layout_marginTop">40dp</dimen>
+
+    <!--MainActivity-->
+    <dimen name="recommend_size_changed_review_width">367dp</dimen>
+    <dimen name="recommend_size_changed_review_height">500dp</dimen>
+    <dimen name="recommend_size_changed_review_leftMargin">10dp</dimen>
+    <dimen name="recommend_size_changed_review_topMargin">10dp</dimen>
+    <dimen name="recommend_size_changed_review_rightMargin">-24dp</dimen>
+    <dimen name="recommend_size_changed_review_bottomMargin">-24dp</dimen>
+    <dimen name="place1_inner_layout_width">358dp</dimen>
+    <dimen name="place1_text_default_width">240dp</dimen>
+    <dimen name="place1_text_max_width">380dp</dimen>
+    <dimen name="launcher_recommend_left_margin">212dp</dimen>
+    <dimen name="recommend_size_changed_distance">27dp</dimen>
+    <dimen name="recommend_size_changed_width">319dp</dimen>
+
+    <!--CollectV2Activity-->
+    <dimen name="collect_grid_item_margin">-12dp</dimen>
+    <!--电视剧详情选集，位移动画-->
+    <dimen name="animal_translationX">-200dip</dimen>
+
+    <!--电影，电视剧详情  相关推荐，详情信息 中英文适配-->
+    <dimen name="view_details_topMargin_zh">246dp</dimen>
+    <dimen name="view_details_topMargin_sea">220dp</dimen>
+
+    <!--首页相关今日推荐 中英文适配-->
+    <dimen name="lanucher_today_recommend_leftMargin_zh">10dp</dimen>
+    <dimen name="lanucher_today_recommend_leftMargin_sea">12dp</dimen>
+</resources>

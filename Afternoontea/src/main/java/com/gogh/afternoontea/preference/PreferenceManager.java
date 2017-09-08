@@ -7,6 +7,7 @@ import com.gogh.afternoontea.listener.OnCachePageNumChangedListener;
 import com.gogh.afternoontea.listener.OnCardModeChangedListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -24,16 +25,11 @@ public class PreferenceManager implements Notification {
     @NonNull
     private static List<OnCachePageNumChangedListener> cachePageListeners = new ArrayList<>();
 
-    private static PreferenceManager INSTANCE;
-
     private PreferenceManager() {
     }
 
     public static PreferenceManager newInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = SingleHolder.MANAGER;
-        }
-        return INSTANCE;
+        return SingleHolder.MANAGER;
     }
 
     /**
@@ -81,10 +77,9 @@ public class PreferenceManager implements Notification {
      */
     @Override
     public void notifyCardModeChanged() {
-        if (cardModeListeners.size() > 0) {
-            for(int i = 0; i< cardModeListeners.size(); i++){
-                cardModeListeners.get(i).onChanged();
-            }
+        Iterator<OnCardModeChangedListener> iterator = cardModeListeners.iterator();
+        while (iterator.hasNext()) {
+            iterator.next().onChanged();
         }
     }
 
@@ -95,11 +90,15 @@ public class PreferenceManager implements Notification {
      */
     @Override
     public void notifyCachePageChanged(int count) {
-        if (cachePageListeners.size() > 0) {
-            for (int i = 0; i < cachePageListeners.size(); i++) {
-                cachePageListeners.get(i).onChanged(count);
-            }
+        Iterator<OnCachePageNumChangedListener> iterator = cachePageListeners.iterator();
+        while (iterator.hasNext()) {
+            iterator.next().onChanged(count);
         }
+    }
+
+    public void clear() {
+        cardModeListeners.clear();
+        cachePageListeners.clear();
     }
 
     private static final class SingleHolder {

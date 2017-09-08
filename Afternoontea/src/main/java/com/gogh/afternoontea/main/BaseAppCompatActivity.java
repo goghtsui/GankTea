@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -12,8 +11,11 @@ import android.view.WindowManager;
 
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.gogh.afternoontea.R;
+import com.gogh.afternoontea.preference.PreferenceManager;
 import com.gogh.afternoontea.preference.imp.Configuration;
 import com.gogh.afternoontea.theme.ThemeManager;
+import com.gogh.afternoontea.utils.DataUtil;
+import com.gogh.afternoontea.utils.Logger;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -25,6 +27,8 @@ import com.gogh.afternoontea.theme.ThemeManager;
 public abstract class BaseAppCompatActivity extends AppCompatActivity implements ThemeManager.OnUpdateThemeListener,
         ColorChooserDialog.ColorCallback {
 
+    private static final String TAG = "BaseAppCompatActivity";
+
     protected abstract void updateThemeByChoice(int resId);
 
     @Override
@@ -32,8 +36,17 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setTheme(ATApplication.THEME);
         ThemeManager.newInstance().registerUpdateThemeListener(this);
-        new Configuration(getApplicationContext(), Configuration.FLAG_CUSTOM).setTheme(ATApplication.THEME);
         setupNoTitle();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     /**
@@ -57,32 +70,41 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
 
     @Override
     public void onColorSelection(@NonNull ColorChooserDialog dialog, @ColorInt int selectedColor) {
-        updateTheme(selectedColor);
-    }
-
-    /**
-     *  设置主题，并通知显示的activity更改主题色
-     * @param selectedColor
-     */
-    private void updateTheme(@ColorInt int selectedColor) {
         ThemeManager.newInstance().updateThemeByColor(BaseAppCompatActivity.this, selectedColor);
-        new Configuration(getApplicationContext(), Configuration.FLAG_CUSTOM).setTheme(ATApplication.THEME);
+        Configuration.newInstance().setTheme(ATApplication.THEME);
+        onUpdateByChangeTheme(selectedColor);
+        PreferenceManager.newInstance().notifyCardModeChanged();
     }
 
     @Override
     public void onUpdateTheme(int themeColor) {
+        Logger.d(TAG, "base onUpdateTheme");
         ThemeManager.newInstance().updateThemeByWeather(BaseAppCompatActivity.this, themeColor);
+        onUpdateByChangeTheme(themeColor);
+    }
+
+    /**
+     * 更新标题栏及其它外漏主题色
+     *
+     * @param themeColor
+     * @ChangeLog: <li> 高晓峰 on 9/6/2017 </li>
+     * @author 高晓峰
+     * @date 9/6/2017
+     */
+    private void onUpdateByChangeTheme(int themeColor) {
         updateThemeByChoice(themeColor);
         // 动态设置标题栏的颜色
-        getWindow().setStatusBarColor(ContextCompat.getColor(BaseAppCompatActivity.this, themeColor));
+        getWindow().setStatusBarColor(/*ContextCompat.getColor(BaseAppCompatActivity.this, themeColor)*/themeColor);
         // 动态设置导航栏的颜色
-        getWindow().setNavigationBarColor(ContextCompat.getColor(BaseAppCompatActivity.this, themeColor));
+        getWindow().setNavigationBarColor(/*ContextCompat.getColor(BaseAppCompatActivity.this, themeColor)*/themeColor);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ThemeManager.newInstance().unRegisterUpdateThemeListener(this);
+        ThemeManager.newInstance().clear();
+        PreferenceManager.newInstance().clear();
+        DataUtil.cleanApplicationData(this);
     }
 
     protected void chooseTheme() {
@@ -94,7 +116,5 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
                 .allowUserColorInputAlpha(false)
                 .show();
     }
-
-
 
 }

@@ -2,7 +2,6 @@ package com.gogh.afternoontea.utils;
 
 import android.support.annotation.NonNull;
 
-import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.entity.FloatMenu;
 
 /**

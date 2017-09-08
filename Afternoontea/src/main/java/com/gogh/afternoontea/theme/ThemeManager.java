@@ -7,7 +7,7 @@ import android.support.v4.content.ContextCompat;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.location.Weather;
-import com.gogh.afternoontea.log.Logger;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.main.ATApplication;
 
 import java.util.ArrayList;
@@ -22,8 +22,6 @@ import java.util.List;
  */
 public class ThemeManager {
 
-    @Nullable
-    private static ThemeManager INSTANCE = null;
     @NonNull
     private List<OnUpdateThemeListener> updateThemeListeners = new ArrayList<>();
 
@@ -40,10 +38,7 @@ public class ThemeManager {
      */
     @Nullable
     public static ThemeManager newInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = SingleHolder.MANAGER;
-        }
-        return INSTANCE;
+        return SingleHolder.MANAGER;
     }
 
     /**
@@ -60,7 +55,7 @@ public class ThemeManager {
 
         if (weather.equals(Weather.NIGHT)) {
             return theme.getDarkTheme();
-        } else if (weather.equals(Weather.SUNNY) || weather.contains(Weather.SUNNY)) {
+        } else if (weather.contains(Weather.SUNNY) || weather.contains(Weather.WIND)) {
             return theme.getSunnyTheme();
         } else if (weather.equals(Weather.CLOUDY) || weather.contains(Weather.CLOUDY)) {
             return theme.getCloudyTheme();
@@ -68,7 +63,7 @@ public class ThemeManager {
             return theme.getOvercastTheme();
         } else if (weather.equals(Weather.RAIN) || weather.contains(Weather.RAIN)) {
             return theme.getRainTheme();
-        } else if (weather.equals(Weather.HAILSTONES) || weather.contains(Weather.HAILSTONES)) {
+        } else if (weather.contains(Weather.HAILSTONES) || weather.contains(Weather.COLD)) {
             return theme.getHailstonesTheme();
         } else if (weather.equals(Weather.SONW) || weather.contains(Weather.SONW)) {
             return theme.getSnowTheme();
@@ -76,8 +71,10 @@ public class ThemeManager {
             return theme.getFogTheme();
         } else if (weather.equals(Weather.FOG_HAZE) || weather.contains(Weather.FOG_HAZE)) {
             return theme.getFogAnHazeTheme();
-        } else if (weather.equals(Weather.SAND_STORM) || weather.contains(Weather.SAND_STORM)) {
+        } else if (weather.contains(Weather.SAND) || weather.contains(Weather.STORM)) {
             return theme.getSandstormTheme();
+        } else if (weather.contains(Weather.HOT)) {
+            return theme.getHotTheme();
         }
 
         return theme.getDefaultTheme();
@@ -128,7 +125,7 @@ public class ThemeManager {
     /**
      * 根据选择的颜色设置对应的主题
      *
-     * @param context
+     * @param context 上下文
      * @param selectedColor 选择的颜色
      */
     public void updateThemeByColor(@NonNull Context context, int selectedColor) {
@@ -297,8 +294,14 @@ public class ThemeManager {
         } else if (weatherColor == theme.getDefaultTheme()) {
             ATApplication.THEME = R.style.DefaultTheme;
             context.setTheme(R.style.DefaultTheme);
+        } else {
+            updateThemeByColor(context, weatherColor);
         }
 
+    }
+
+    public void clear() {
+        updateThemeListeners.clear();
     }
 
     public interface OnUpdateThemeListener {

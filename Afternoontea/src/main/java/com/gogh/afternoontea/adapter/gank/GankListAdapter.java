@@ -1,9 +1,11 @@
 package com.gogh.afternoontea.adapter.gank;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -11,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.bumptech.glide.Glide;
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.adapter.holder.FooterViewHolder;
 import com.gogh.afternoontea.adapter.holder.ItemViewHolder;
@@ -19,14 +20,18 @@ import com.gogh.afternoontea.adapter.holder.NoPicViewHolder;
 import com.gogh.afternoontea.adapter.holder.WelfareViewHolder;
 import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.entity.gank.GankEntity;
-import com.gogh.afternoontea.log.Logger;
 import com.gogh.afternoontea.preference.imp.Configuration;
+import com.gogh.afternoontea.ui.GankDetailActivity;
+import com.gogh.afternoontea.ui.HomeActivity;
+import com.gogh.afternoontea.ui.ScaleImageActivity;
 import com.gogh.afternoontea.utils.DataUtil;
+import com.gogh.afternoontea.utils.ImageLoader;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.utils.NetWorkInfo;
 import com.gogh.afternoontea.utils.Resource;
-import com.gogh.afternoontea.utils.ScaleTransformation;
-import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -62,23 +67,22 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     private static final int VIEW_TYPE_FOOTER = 0x10013;
 
+    private int mViewType = -1;
+
     private Context context;
     private String resourceType;
     private boolean isScrollToBottom = false;
     private boolean isLoadingError = false;
 
     private NetWorkInfo netWorkInfo;
-    private Configuration mConfiguration;
 
     @Nullable
     private List<GankEntity.ResultsBean> datas;
-    private OnItemClickListener onItemClickListener;
 
     public GankListAdapter(@NonNull Context context, String resourceType) {
         this.context = context;
         this.resourceType = resourceType;
         netWorkInfo = new NetWorkInfo(context);
-        mConfiguration = new Configuration(context, Configuration.FLAG_SYSTEM);
     }
 
     /**
@@ -104,14 +108,16 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Logger.d("TAG", "onCreateViewHolder. ");
         if (viewType == VIEW_TYPE_NORMAL) {
+            mViewType = VIEW_TYPE_NORMAL;
             View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_list_item_layout, parent, false);
-            return new ItemViewHolder(rootView, onItemClickListener);
+            return new ItemViewHolder(rootView, context);
         } else if (viewType == VIEW_TYPE_NO_PIC) {
-            View footerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_list_item_nopic_layout, parent, false);
-            return new NoPicViewHolder(footerView, context, datas);
+            mViewType = VIEW_TYPE_NO_PIC;
+            View noPicView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_list_item_nopic_layout, parent, false);
+            return new NoPicViewHolder(noPicView, context);
         } else if (viewType == VIEW_TYPE_WELFARE) {
+            mViewType = VIEW_TYPE_WELFARE;
             View welfareView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_welfare_item_layout, parent, false);
             return new WelfareViewHolder(context, welfareView);
         } else {
@@ -171,6 +177,7 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void bindNormalData(@NonNull RecyclerView.ViewHolder holder, int position) {
         GankEntity.ResultsBean entity = datas.get(position);
         if (entity != null && holder != null) {
+            ((ItemViewHolder) holder).onUpdateByTheme();
             if (TextUtils.isEmpty(entity.getDesc())) {
                 ((ItemViewHolder) holder).titleName.setText(" ");
             } else {
@@ -198,8 +205,8 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             String imageUrl = null;
 
             if (entity.getImages() != null && entity.getImages().size() > 0) {
-                if (!mConfiguration.isNopicMode()) {
-                    if (mConfiguration.isWifiPicMode()) {
+                if (!Configuration.newInstance().isNopicMode()) {
+                    if (Configuration.newInstance().isWifiPicMode()) {
                         if (netWorkInfo.isWifi()) {
                             imageUrl = entity.getImages().get(0);
                         }
@@ -209,11 +216,24 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
             }
 
-            Glide.with(context).load(imageUrl)
-//                    .config(Bitmap.Config.ARGB_8888)
-                    .placeholder(R.mipmap.default_item_bg)
-                    .error(R.mipmap.default_item_bg)
-                    .into(((ItemViewHolder) holder).itemBgImage);
+            // placeholder(R.mipmap.default_item_bg)
+            ImageLoader.loadWithError(context, imageUrl, ((ItemViewHolder) holder).itemBgImage, R.mipmap.default_item_bg);
+
+            ((ItemViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Logger.d(TAG, "mOnItemClickListener position : " + position);
+                    GankEntity.ResultsBean data = datas.get(position);
+                    Intent intent = new Intent(context, GankDetailActivity.class);
+                    intent.putExtra(Urls.GANK_URL.BUNDLE_KEY, data);
+
+                    ActivityOptionsCompat options =
+                            ActivityOptionsCompat.makeSceneTransitionAnimation((HomeActivity) context,
+                                    ((ItemViewHolder) holder).itemBgImage, context.getResources().getString(R.string.translation_element_name));
+                    ActivityCompat.startActivity(context, intent, options.toBundle());
+                }
+            });
+
         }
     }
 
@@ -227,6 +247,7 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void bindNopicData(@NonNull RecyclerView.ViewHolder holder, int position) {
         GankEntity.ResultsBean entity = datas.get(position);
         if (entity != null && holder != null) {
+            ((NoPicViewHolder) holder).onUpdateByTheme();
             if (TextUtils.isEmpty(entity.getDesc())) {
                 ((NoPicViewHolder) holder).titleName.setText(" ");
             } else {
@@ -254,8 +275,8 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             String imageUrl = null;
 
             if (entity.getImages() != null && entity.getImages().size() > 0) {
-                if (!mConfiguration.isNopicMode()) {
-                    if (mConfiguration.isWifiPicMode()) {
+                if (!Configuration.newInstance().isNopicMode()) {
+                    if (Configuration.newInstance().isWifiPicMode()) {
                         if (netWorkInfo.isWifi()) {
                             imageUrl = entity.getImages().get(0);
                         }
@@ -265,12 +286,36 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
             }
 
-            Glide.with(context).load(imageUrl)
-//                    .config(Bitmap.Config.ARGB_8888)
-                    .placeholder(R.mipmap.gank_list_item_image_default)
-                    .error(R.mipmap.gank_list_item_image_default)
-                    .into(((NoPicViewHolder) holder).itemImage);
+            ImageLoader.load(context, imageUrl, ((NoPicViewHolder) holder).itemImage, R.mipmap.gank_list_item_image_default,
+                    R.mipmap.gank_list_item_image_default);
+
+            ((NoPicViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, GankDetailActivity.class);
+                    intent.putExtra(Urls.GANK_URL.BUNDLE_KEY, datas.get(position));
+
+                    ActivityOptionsCompat options =
+                            ActivityOptionsCompat.makeSceneTransitionAnimation((HomeActivity) context,
+                                    ((NoPicViewHolder) holder).itemImage, context.getResources().getString(R.string.translation_element_name));
+                    ActivityCompat.startActivity(context, intent, options.toBundle());
+                }
+            });
         }
+    }
+
+    private String getImageUrl(String imageUrl) {
+        String result = null;
+
+        if (Configuration.newInstance().isWifiPicMode()) {
+            if (netWorkInfo.isWifi()) {
+                result = imageUrl;
+            }
+        } else {
+            result = imageUrl;
+        }
+
+        return result;
     }
 
     /**
@@ -283,23 +328,12 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void bindWelfareData(@NonNull RecyclerView.ViewHolder holder, int position) {
         GankEntity.ResultsBean entity = datas.get(position);
         if (entity != null && holder != null) {
-
-            String imageUrl = null;
-
+            ((WelfareViewHolder) holder).onUpdateByTheme();
             if (!TextUtils.isEmpty(entity.getUrl())) {
-                ((WelfareViewHolder) holder).setupImageUrl(entity.getUrl());
-                if (mConfiguration.isWifiPicMode()) {
-                    if (netWorkInfo.isWifi()) {
-                        imageUrl = entity.getUrl();
-                    }
-                } else {
-                    imageUrl = entity.getUrl();
-                }
+                String imageUrl = getImageUrl(entity.getUrl());
 
-                Picasso.with(context).load(imageUrl)
-                        .config(Bitmap.Config.ARGB_8888)
-                        .transform(new ScaleTransformation())
-                        .into(((WelfareViewHolder) holder).mWelfareImage);
+                ImageLoader.loadWithReset(context, imageUrl, ((WelfareViewHolder) holder).mWelfareImage, R.mipmap.default_item_bg,
+                        R.mipmap.default_item_bg);
 
                 if (TextUtils.isEmpty(entity.getPublishedAt())) {
                     ((WelfareViewHolder) holder).mTitleName.setText(" ");
@@ -308,6 +342,20 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     ((WelfareViewHolder) holder).mTitleName.setVisibility(View.VISIBLE);
                     ((WelfareViewHolder) holder).mTitleName.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
                 }
+
+                ((WelfareViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!TextUtils.isEmpty(imageUrl)) {
+                            Intent intent = new Intent(context, ScaleImageActivity.class);
+                            intent.putExtra(Urls.GANK_URL.BUNDLE_KEY, imageUrl);
+
+                            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((HomeActivity) context,
+                                    ((WelfareViewHolder) holder).mWelfareImage, context.getResources().getString(R.string.translation_element_name));
+                            ActivityCompat.startActivity(context, intent, options.toBundle());
+                        }
+                    }
+                });
             }
         }
     }
@@ -319,8 +367,6 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     @Override
     public int getItemCount() {
-        Logger.d("TAG", "getItemCount. ");
-
         if (isScrollToBottom) {
             if (isLoadingError) {
                 return datas.size();
@@ -335,7 +381,6 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public int getItemViewType(int position) {
-        Logger.d("TAG", "getItemViewType. ");
         // 添加 加载更多 项
         if (position + 1 == getItemCount()) {
             return VIEW_TYPE_FOOTER;
@@ -352,7 +397,7 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (!TextUtils.isEmpty(resourceType) && resourceType.equals(Urls.GANK_URL.WELFARE)) {// 福利分类：图片瀑布流
             return VIEW_TYPE_WELFARE;
         } else {// 其他类别根据设置排版
-            if (mConfiguration.isCardMode()) {
+            if (Configuration.newInstance().isCardMode()) {
                 return VIEW_TYPE_NO_PIC;
             } else {
                 return VIEW_TYPE_NORMAL;
@@ -363,7 +408,6 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public GankEntity.ResultsBean getItem(int position) {
-        Logger.d("TAG", "getItem. ");
         return datas.get(position);
     }
 
@@ -378,14 +422,27 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void addRefreshData(List<GankEntity.ResultsBean> datas) {
-        this.datas = DataUtil.removeDuplicateData(this.datas, datas);
-        this.notifyDataSetChanged();
+        List<GankEntity.ResultsBean> resultsBeanList = DataUtil.removeDuplicateData(this.datas, datas);
+        if (resultsBeanList != null && resultsBeanList.size() > 0) {
+            for (int i = (resultsBeanList.size() - 1); i >= 0; i--) {
+                this.datas.add(0, resultsBeanList.get(i));
+                notifyItemInserted(0);
+                notifyItemChanged(0);
+            }
+        }
     }
 
     @Override
     public void addLoadMoreData(List<GankEntity.ResultsBean> datas) {
-        this.datas = DataUtil.getAvalibleData(this.datas, datas);
-        this.notifyDataSetChanged();
+        List<GankEntity.ResultsBean> resultsBeanList = DataUtil.getExtraDataWithNoDuplicated(this.datas, datas);
+        if (resultsBeanList != null && resultsBeanList.size() > 0) {
+            int oldSize = this.datas.size();
+            for (int i = 0; i < resultsBeanList.size(); i++) {
+                this.datas.add(resultsBeanList.get(i));
+                notifyItemInserted(oldSize + i);
+                notifyItemChanged(oldSize + i);
+            }
+        }
     }
 
     @Override
@@ -406,8 +463,26 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+    public void notifyByThemeChanged() {
+        List<GankEntity.ResultsBean> tampDatas = copy(datas);
+        for (int i = 0; i < tampDatas.size(); i++) {
+            this.datas.remove(0);
+            notifyItemRemoved(0);
+        }
+        for (int i = 0; i < tampDatas.size(); i++) {
+            this.datas.add(tampDatas.get(i));
+            notifyItemInserted(datas.size() - 1);
+            notifyItemChanged(datas.size() - 1);
+        }
+    }
+
+    private List<GankEntity.ResultsBean> copy(List<GankEntity.ResultsBean> oldDatas) {
+        List<GankEntity.ResultsBean> tampDatas = new ArrayList<>();
+        Iterator<GankEntity.ResultsBean> beanIterator = oldDatas.iterator();
+        while (beanIterator.hasNext()) {
+            tampDatas.add(beanIterator.next());
+        }
+        return tampDatas;
     }
 
 }
