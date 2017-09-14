@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,6 +23,8 @@ public class NoPicViewHolder extends RecyclerView.ViewHolder  {
 
     private Context context;
 
+    private CardView rootView;
+
     public ImageView itemImage;
     public AppCompatImageView itemType;
     public AppCompatImageView authorImage;
@@ -33,6 +36,7 @@ public class NoPicViewHolder extends RecyclerView.ViewHolder  {
     public NoPicViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         this.context = context;
+        rootView = (CardView) itemView.findViewById(R.id.gank_list_item_nopic_root);
         itemImage = (ImageView) itemView.findViewById(R.id.gank_list_item_nopic_default_img);
 
         itemType = (AppCompatImageView) itemView.findViewById(R.id.gank_list_item_nopic_type);
@@ -46,6 +50,7 @@ public class NoPicViewHolder extends RecyclerView.ViewHolder  {
 
     public void onUpdateByTheme() {
         int textColor = TintColor.getPrimaryTextColor(context);
+        // text
         titleName.setTextColor(TintColor.getTintList(textColor));
         itemAuthor.setTextColor(TintColor.getTintList(textColor));
         itemCreateDate.setTextColor(TintColor.getTintList(textColor));
@@ -53,6 +58,8 @@ public class NoPicViewHolder extends RecyclerView.ViewHolder  {
         itemType.setImageTintList(TintColor.getTintList(textColor));
         authorImage.setImageTintList(TintColor.getTintList(textColor));
         itemDateImage.setImageTintList(TintColor.getTintList(textColor));
+        // root background
+        rootView.setBackgroundTintList(TintColor.getTintList(TintColor.getPrimaryBackgroundColor(context)));
     }
 
 }

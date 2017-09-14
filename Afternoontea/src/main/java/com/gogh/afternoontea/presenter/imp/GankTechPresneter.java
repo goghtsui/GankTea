@@ -4,13 +4,15 @@ import android.support.annotation.NonNull;
 
 import com.gogh.afternoontea.adapter.gank.GankListAdapter;
 import com.gogh.afternoontea.entity.gank.GankEntity;
-import com.gogh.afternoontea.location.listener.OnLodingChangedListener;
 import com.gogh.afternoontea.listener.OnRefreshListener;
 import com.gogh.afternoontea.listener.OnResponListener;
-import com.gogh.afternoontea.utils.Logger;
+import com.gogh.afternoontea.location.listener.OnLodingChangedListener;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.presenter.BasePresenter;
 import com.gogh.afternoontea.request.RequestProxy;
+import com.gogh.afternoontea.utils.Logger;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.gogh.afternoontea.main.BaseFragment.ARG_SECTION_NUM;
 import static com.gogh.afternoontea.main.BaseFragment.ARG_SECTION_TYPE;
@@ -30,7 +32,7 @@ public class GankTechPresneter implements BasePresenter, OnRefreshListener {
 
     private Builder mBuilder;
 
-    private volatile int currentPage = 1;
+    private AtomicInteger count = new AtomicInteger(1);
 
     private boolean isRefreshing = false;
 
@@ -44,31 +46,19 @@ public class GankTechPresneter implements BasePresenter, OnRefreshListener {
         this.loadingChangedListener = loadingChangedListener;
     }
 
-    /**
-     * 读取当前显示的最大页面
-     *
-     * @return
-     */
-    public int getCurrentPage() {
-        return currentPage;
-    }
-
-    private void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
-
     @Override
     public void loadData(String baseUrl, int num, int page) {
         isRefreshing = true;
         if(loadingChangedListener != null){
             loadingChangedListener.onLoadingStart();
         }
+
         RequestProxy.newInstance().getDataByCategory(baseUrl, num, page, new OnResponListener<GankEntity>() {
             @Override
             public void onComplete() {
                 isRefreshing = false;
                 // 存储最大页角
-                setCurrentPage(page);
+                count.getAndSet(page);
                 if(loadingChangedListener != null){
                     loadingChangedListener.onLoadingComplete();
                 }
@@ -84,7 +74,6 @@ public class GankTechPresneter implements BasePresenter, OnRefreshListener {
 
             @Override
             public void onResponse(@NonNull GankEntity response) {
-                Logger.d(TAG, "loadData : " + mBuilder.fragment.getArguments().getString(ARG_SECTION_TYPE) + response.getResults());
                 if (response != null) {
                     mBuilder.adapter.setData(response.getResults());
                 }
@@ -123,7 +112,6 @@ public class GankTechPresneter implements BasePresenter, OnRefreshListener {
 
             @Override
             public void onResponse(@NonNull GankEntity response) {
-                Logger.d(TAG, "onSwipeRefresh : " + mBuilder.fragment.getArguments().getString(ARG_SECTION_TYPE) + response.getResults());
                 if (response != null) {
                     mBuilder.adapter.addRefreshData(response.getResults());
                 }
@@ -143,12 +131,13 @@ public class GankTechPresneter implements BasePresenter, OnRefreshListener {
         if(loadingChangedListener != null){
             loadingChangedListener.onLoadingStart();
         }
+
         RequestProxy.newInstance().getDataByCategory(mBuilder.fragment.getArguments().getString(ARG_SECTION_TYPE),
-                mBuilder.fragment.getArguments().getInt(ARG_SECTION_NUM), getCurrentPage() + 1, new OnResponListener<GankEntity>() {
+                mBuilder.fragment.getArguments().getInt(ARG_SECTION_NUM), count.get(), new OnResponListener<GankEntity>() {
                     @Override
                     public void onComplete() {
                         isLoading = false;
-                        currentPage++;
+                        count.getAndIncrement();
                         if(loadingChangedListener != null){
                             loadingChangedListener.onLoadingComplete();
                         }
@@ -164,7 +153,6 @@ public class GankTechPresneter implements BasePresenter, OnRefreshListener {
 
                     @Override
                     public void onResponse(@NonNull GankEntity response) {
-                        Logger.d(TAG, "onLoadMore : " + mBuilder.fragment.getArguments().getString(ARG_SECTION_TYPE) + response.getResults());
                         if (response != null) {
                             mBuilder.adapter.addLoadMoreData(response.getResults());
                         }

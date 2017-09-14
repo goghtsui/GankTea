@@ -7,15 +7,16 @@ import android.support.annotation.Nullable;
 import com.gogh.afternoontea.constant.Constant;
 import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.entity.gank.GankEntity;
+import com.gogh.afternoontea.entity.gank.SearchEntity;
 import com.gogh.afternoontea.entity.weather.WeatherEntity;
 import com.gogh.afternoontea.http.RequestTask;
 import com.gogh.afternoontea.listener.OnResponListener;
 import com.gogh.afternoontea.location.LocationClient;
 import com.gogh.afternoontea.location.listener.OnLocationListener;
-import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.request.Property;
 import com.gogh.afternoontea.request.Request;
 import com.gogh.afternoontea.request.RequestApi;
+import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.utils.StringUtil;
 
 import java.util.ArrayList;
@@ -40,16 +41,11 @@ public class RequestApiImp implements Request {
 
     private static final String TAG = "RequestApiImp";
 
-    private static RequestApiImp INSTANCE;
-
     private RequestApiImp() {
     }
 
     public static RequestApiImp newInstance() {
-        if (null == INSTANCE) {
-            INSTANCE = SingleHoder.REQUEST;
-        }
-        return INSTANCE;
+        return SingleHoder.REQUEST;
     }
 
     /**
@@ -87,13 +83,8 @@ public class RequestApiImp implements Request {
      */
     @Override
     public void getWeatherByCity(String city, @Nullable OnResponListener<String> responListener) {
-        List<Property> propertyList = new ArrayList<>();
-        propertyList.add(new Property(Constant.ACCEPT, Constant.ACCEPT_GSON_VALUE));
-        propertyList.add(new Property(Constant.USER_AGENT, Constant.USER_AGENT_VALUE));
-        propertyList.add(new Property(Constant.APIKEY, Constant.APIKE_VALUE));
-
         RequestTask task = RequestTask.getInstance();
-        Retrofit retrofit = task.retrofit(propertyList, Urls.Weather.BASE_URL, GsonConverterFactory.create());
+        Retrofit retrofit = task.retrofit(getProperties(), Urls.Weather.BASE_URL, GsonConverterFactory.create());
         RequestApi api = retrofit.create(RequestApi.class);
 
         Observable<WeatherEntity> observable = api.getWeatherByCity(Urls.Weather.KEY, city, Urls.Weather.LANGUAGE, Urls.Weather.UNIT);
@@ -146,12 +137,8 @@ public class RequestApiImp implements Request {
      */
     @Override
     public void getMeiziPic(@Nullable OnResponListener<String> responListener) {
-        List<Property> propertyList = new ArrayList<>();
-        propertyList.add(new Property(Constant.ACCEPT, Constant.ACCEPT_HTML_VALUE));
-        propertyList.add(new Property(Constant.USER_AGENT, Constant.USER_AGENT_VALUE));
-
         RequestTask task = RequestTask.getInstance();
-        Retrofit retrofit = task.retrofit(propertyList, Urls.Meizi.BASE_URL, ScalarsConverterFactory.create());
+        Retrofit retrofit = task.retrofit(getProperties(), Urls.Meizi.BASE_URL, ScalarsConverterFactory.create());
         RequestApi api = retrofit.create(RequestApi.class);
 
         Observable<String> observable = api.getMeiziPic();
@@ -195,13 +182,7 @@ public class RequestApiImp implements Request {
      */
     @Override
     public void getDataByCategory(String category, int num, int page, @Nullable OnResponListener<GankEntity> responListener) {
-        List<Property> propertyList = new ArrayList<>();
-        propertyList.add(new Property(Constant.ACCEPT, Constant.ACCEPT_GSON_VALUE));
-        propertyList.add(new Property(Constant.USER_AGENT, Constant.USER_AGENT_VALUE));
-
-        RequestTask task = RequestTask.getInstance();
-        Retrofit retrofit = task.retrofit(propertyList, Urls.GANK_URL.BASE_URL, GsonConverterFactory.create());
-        RequestApi requestApi = retrofit.create(RequestApi.class);
+        RequestApi requestApi = getRetrofit().create(RequestApi.class);
         Observable<GankEntity> observable = requestApi.getDataByCategory(category, num, page);
         observable
                 .subscribeOn(Schedulers.io())
@@ -234,6 +215,51 @@ public class RequestApiImp implements Request {
     }
 
     /**
+     * 搜索接口
+     *
+     * @param year
+     * @param month
+     * @param day
+     * @param onResponListener
+     * @author 高晓峰
+     * @date 9/12/2017
+     * @ChangeLog: <li> 高晓峰  on 9/12/2017 </li>
+     */
+    @Override
+    public void getSearchList(String year, String month, String day, OnResponListener<SearchEntity> onResponListener) {
+        RequestApi requestApi = getRetrofit().create(RequestApi.class);
+        Observable<SearchEntity> observable = requestApi.getSearchList(year, month, day);
+        observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<SearchEntity>() {
+                    @Override
+                    public void onCompleted() {
+                        Logger.d(TAG, "getSearchList onCompleted.");
+                        if (null != onResponListener) {
+                            onResponListener.onComplete();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Logger.d(TAG, "getSearchList onError : " + e.getMessage());
+                        if (null != onResponListener) {
+                            onResponListener.onError(e);
+                        }
+                    }
+
+                    @Override
+                    public void onNext(SearchEntity response) {
+                        Logger.d(TAG, "getSearchList onNext : " + response);
+                        if (null != onResponListener) {
+                            onResponListener.onResponse(response);
+                        }
+                    }
+                });
+    }
+
+    /**
      * 获取网页的html源码
      *
      * @param responListener
@@ -242,12 +268,8 @@ public class RequestApiImp implements Request {
     public void getHtmlByUrl(@NonNull String url, @Nullable OnResponListener<String> responListener) {
         String[] params = StringUtil.formatUrl(url);
         Logger.d(TAG,  "getHtmlByUrl: " + params[0] + ", " + params[1]);
-        List<Property> propertyList = new ArrayList<>();
-        propertyList.add(new Property(Constant.ACCEPT, Constant.ACCEPT_HTML_VALUE));
-        propertyList.add(new Property(Constant.USER_AGENT, Constant.USER_AGENT_VALUE));
-
         RequestTask task = RequestTask.getInstance();
-        Retrofit retrofit = task.retrofit(propertyList, params[0], ScalarsConverterFactory.create());
+        Retrofit retrofit = task.retrofit(getProperties(), params[0], ScalarsConverterFactory.create());
         RequestApi api = retrofit.create(RequestApi.class);
 
         Observable<String> observable = api.getHtmlByUrl(params[1]);
@@ -283,6 +305,19 @@ public class RequestApiImp implements Request {
 
     private static final class SingleHoder {
         private static final RequestApiImp REQUEST = new RequestApiImp();
+    }
+
+    private List<Property> getProperties() {
+        List<Property> propertyList = new ArrayList<>();
+        propertyList.add(new Property(Constant.ACCEPT, Constant.ACCEPT_HTML_VALUE));
+        propertyList.add(new Property(Constant.USER_AGENT, Constant.USER_AGENT_VALUE));
+        return propertyList;
+    }
+
+    private Retrofit getRetrofit() {
+        RequestTask task = RequestTask.getInstance();
+        Retrofit retrofit = task.retrofit(getProperties(), Urls.GANK_URL.BASE_URL, GsonConverterFactory.create());
+        return retrofit;
     }
 
 }

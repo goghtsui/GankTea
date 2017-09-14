@@ -6,8 +6,9 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.text.TextUtils;
-import android.util.TypedValue;
 import android.view.View;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -16,11 +17,12 @@ import android.widget.ProgressBar;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.app.WebWidget;
-import com.gogh.afternoontea.entity.gank.GankEntity;
-import com.gogh.afternoontea.ui.GankDetailActivity;
 import com.gogh.afternoontea.utils.ImageLoader;
 import com.gogh.afternoontea.utils.IntentUtils;
 import com.gogh.afternoontea.utils.StringUtil;
+import com.gogh.afternoontea.utils.TintColor;
+
+import java.lang.ref.WeakReference;
 
 import static com.gogh.afternoontea.R.id.ivImage;
 
@@ -33,15 +35,15 @@ import static com.gogh.afternoontea.R.id.ivImage;
  */
 public class PicWebview implements WebWidget {
 
-    private GankEntity.ResultsBean mData;//详情数据
-    private Context context;
+    private com.gogh.afternoontea.entity.gank.BaseEntity mData;//详情数据
+    private WeakReference<Context> referenceContext;
     private WebView mWebview;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
     private CollapsingToolbarLayout collapsing_toolbar;
 
-    public PicWebview(Context context, GankEntity.ResultsBean mData) {
-        this.context = context;
+    public PicWebview(Context context, com.gogh.afternoontea.entity.gank.BaseEntity mData) {
+        this.referenceContext = new WeakReference<>(context);
         this.mData = mData;
     }
 
@@ -61,11 +63,11 @@ public class PicWebview implements WebWidget {
      * @return
      */
     @Override
-    public void onCreateView() {
-        mImageView = (ImageView) ((GankDetailActivity) context).findViewById(ivImage);
-        collapsing_toolbar = (CollapsingToolbarLayout) ((GankDetailActivity) context).findViewById(R.id.collapsing_toolbar);
-        mProgressBar = (ProgressBar) ((GankDetailActivity) context).findViewById(R.id.progress);
-        mWebview = (WebView) ((GankDetailActivity) context).findViewById(R.id.gank_detail_webview);
+    public void onCreateView(View rootView) {
+        mImageView = (ImageView) rootView.findViewById(ivImage);
+        collapsing_toolbar = (CollapsingToolbarLayout) rootView.findViewById(R.id.collapsing_toolbar);
+        mProgressBar = (ProgressBar) rootView.findViewById(R.id.progress);
+        mWebview = (WebView) rootView.findViewById(R.id.gank_detail_webview);
         setUpWebView(mWebview);
     }
 
@@ -77,25 +79,27 @@ public class PicWebview implements WebWidget {
     @Override
     public void onBindData() {
         collapsing_toolbar.setTitle(mData.getDesc());
-        ImageLoader.load(context, mData.getImages().get(0), mImageView);
-        collapsing_toolbar.setExpandedTitleColor(getColorPrimary());// 白色背景图片下，默认白色文字看不清，故设置成主题色
+        if (mData.getImages() != null && mData.getImages().size() > 0) {
+            ImageLoader.load(referenceContext.get(), mData.getImages().get(0), mImageView);
+        }
+        collapsing_toolbar.setExpandedTitleColor(TintColor.getPrimaryColor(referenceContext.get()));// 白色背景图片下，默认白色文字看不清，故设置成主题色
         mWebview.loadUrl(mData.getUrl());
     }
 
     @Override
     public void copyContent() {
-        String copyDone = context.getResources().getString(R.string.toast_copy_done);
-        StringUtil.copyToClipBoard(context, mWebview.getUrl(), copyDone);
+        String copyDone = referenceContext.get().getResources().getString(R.string.toast_copy_done);
+        StringUtil.copyToClipBoard(referenceContext.get(), mWebview.getUrl(), copyDone);
     }
 
     @Override
     public void openBySystemBrowser() {
-        IntentUtils.openWithBrowser(mWebview.getUrl(), context);
+        IntentUtils.openWithBrowser(mWebview.getUrl(), referenceContext.get());
     }
 
     @Override
     public void shareUrl() {
-        IntentUtils.share(context, mWebview.getUrl());
+        IntentUtils.share(referenceContext.get(), mWebview.getUrl());
     }
 
     @Override
@@ -108,15 +112,16 @@ public class PicWebview implements WebWidget {
         return mWebview.canGoBack();
     }
 
-    /**
-     * 获取主题颜色
-     *
-     * @return
-     */
-    public int getColorPrimary() {
-        TypedValue typedValue = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
-        return typedValue.data;
+    @Override
+    public void onDestroy() {
+        mWebview.stopLoading();
+        mWebview.cancelPendingInputEvents();
+        mWebview.clearCache(true);
+        mWebview.clearFormData();
+        mWebview.clearHistory();
+        mWebview.clearMatches();
+        mWebview.clearSslPreferences();
+        mWebview = null;
     }
 
     /**
@@ -141,17 +146,18 @@ public class PicWebview implements WebWidget {
          * 是否使用原浏览器加载网页
          *
          * @param view
-         * @param url
+         * @param request
          * @return
          */
-        public boolean shouldOverrideUrlLoading(@NonNull WebView view, String url) {
-            if (TextUtils.isEmpty(url)) {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            if (TextUtils.isEmpty(request.getUrl().toString())) {
                 return true;
             }
-            if (Uri.parse(url).getHost().equals("github.com")) {
+            if (Uri.parse(request.getUrl().toString()).getHost().equals(referenceContext.get().getResources().getString(R.string.gank_webview_url_host))) {
                 return false;
             }
-            view.loadUrl(url);
+            view.loadUrl(request.getUrl().toString());
             return true;
         }
 
@@ -168,10 +174,11 @@ public class PicWebview implements WebWidget {
         }
 
         @Override
-        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-            super.onReceivedError(view, errorCode, description, failingUrl);
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            super.onReceivedError(view, request, error);
             mProgressBar.setVisibility(View.GONE);
         }
+
     }
 
 }

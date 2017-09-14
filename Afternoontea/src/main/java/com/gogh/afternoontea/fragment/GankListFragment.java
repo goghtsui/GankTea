@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.adapter.SpacesItemDecoration;
 import com.gogh.afternoontea.adapter.gank.GankListAdapter;
+import com.gogh.afternoontea.constant.Constant;
 import com.gogh.afternoontea.listener.OnScrollListener;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.widget.SwipeRefreshView;
@@ -101,12 +102,7 @@ public class GankListFragment extends BaseFragment {
         mSwipeRefreshView = new SwipeRefreshView(this, mReloadLayout,  mRecyclerView, mSwipeRefreshLayout);
         mSwipeRefreshView.setOnScrollListener(onScrollListener);
 
-        mRecyclerView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                requestData();
-            }
-        }, 800);
+        mRecyclerView.postDelayed(() -> requestData(), Constant.DURATION_LONG);
 
         return rootView;
     }

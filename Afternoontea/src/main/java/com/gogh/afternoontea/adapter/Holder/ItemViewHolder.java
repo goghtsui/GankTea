@@ -4,12 +4,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.app.Initializer;
 import com.gogh.afternoontea.utils.TintColor;
 
 /**
@@ -19,9 +19,11 @@ import com.gogh.afternoontea.utils.TintColor;
  * <p> ChangeLog: </p>
  * <li> 高晓峰 on 1/18/2017 do fisrt create. </li>
  */
-public class ItemViewHolder extends RecyclerView.ViewHolder implements Initializer {
+public class ItemViewHolder extends RecyclerView.ViewHolder {
 
     private Context context;
+
+    private CardView rootView;
 
     public ImageView itemBgImage;
 
@@ -39,12 +41,8 @@ public class ItemViewHolder extends RecyclerView.ViewHolder implements Initializ
         initView();
     }
 
-    @Override
-    public void init() {
-    }
-
-    @Override
     public void initView() {
+        rootView = (CardView) itemView.findViewById(R.id.gank_list_item_root);
         itemBgImage = (ImageView) itemView.findViewById(R.id.gank_item_image_bg);
 
         itemType = (AppCompatImageView) itemView.findViewById(R.id.gank_list_item_type);
@@ -58,6 +56,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder implements Initializ
 
     public void onUpdateByTheme() {
         int primaryColor = TintColor.getPrimaryTextColor(context);
+        // text
         titleName.setTextColor(TintColor.getTintList(TintColor.getPrimaryDarkColor(context)));
         itemAuthor.setTextColor(TintColor.getTintList(primaryColor));
         itemCreateDate.setTextColor(TintColor.getTintList(primaryColor));
@@ -65,6 +64,9 @@ public class ItemViewHolder extends RecyclerView.ViewHolder implements Initializ
         itemType.setImageTintList(TintColor.getTintList(primaryColor));
         authorImage.setImageTintList(TintColor.getTintList(primaryColor));
         itemDateImage.setImageTintList(TintColor.getTintList(primaryColor));
+
+        // root background
+        rootView.setBackgroundTintList(TintColor.getTintList(TintColor.getPrimaryBackgroundColor(context)));
     }
 
 }

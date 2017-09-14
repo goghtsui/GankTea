@@ -16,7 +16,6 @@ import com.gogh.afternoontea.entity.gank.GankEntity;
 import com.gogh.afternoontea.listener.OnRefreshListener;
 import com.gogh.afternoontea.listener.OnScrollListener;
 import com.gogh.afternoontea.location.listener.OnLodingChangedListener;
-import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 import com.gogh.afternoontea.presenter.imp.GankTechPresneter;
 import com.gogh.afternoontea.utils.TintColor;
@@ -68,18 +67,15 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
         @Override
         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
-            Logger.d(TAG, "mOnScrollListener onScrolled");
             mLastVisibleItemPosition = getLastVisibleItemPosition(recyclerView);
             if (recyclerView.computeVerticalScrollOffset() == 0
                     && verticalScrollOffset == SCROLL_NONE) {// 滚动到顶部
-                Logger.d(TAG, "mOnScrollListener SCROLL_TOP");
                 verticalScrollOffset = SCROLL_TOP;
                 if (onScrollListener != null) {
                     onScrollListener.onScrollToTop(mFragment.getCurrentPage());
                 }
             } else {// 滚动中（已离开顶部）
                 if (verticalScrollOffset == SCROLL_TOP) {
-                    Logger.d(TAG, "mOnScrollListener SCROLL_NONE");
                     verticalScrollOffset = SCROLL_NONE;
                     if (onScrollListener != null) {
                         onScrollListener.onScrolling(mFragment.getCurrentPage());
@@ -91,7 +87,6 @@ public class SwipeRefreshView implements SwipeRefreshLayout.OnRefreshListener,
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
-            Logger.d(TAG, "mOnScrollListener onScrollStateChanged");
             //正在滚动
             if(newState == RecyclerView.SCROLL_STATE_DRAGGING){
                 onScrollListener.onScrollStart(mFragment.getCurrentPage());

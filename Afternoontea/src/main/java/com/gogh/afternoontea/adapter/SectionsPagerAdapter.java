@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.constant.Urls;
-import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.main.BaseFragment;
 
 import java.util.List;
@@ -51,7 +50,6 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public CharSequence getPageTitle(int position) {
-        Logger.d("getPageTitle", "getPageTitle : " +fragmentList.get(position).getTitle() );
         switch (fragmentList.get(position).getTitle()) {
             case Urls.GANK_URL.ALL:
                 return context.getResources().getString(R.string.home_activity_tab_tile_recognized);

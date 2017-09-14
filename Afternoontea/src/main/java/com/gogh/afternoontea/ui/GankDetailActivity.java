@@ -6,14 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.app.Initializer;
 import com.gogh.afternoontea.app.WebWidget;
 import com.gogh.afternoontea.constant.Urls;
-import com.gogh.afternoontea.entity.gank.GankEntity;
+import com.gogh.afternoontea.entity.gank.BaseEntity;
 import com.gogh.afternoontea.main.BaseAppCompatActivity;
 import com.gogh.afternoontea.preference.imp.Configuration;
 import com.gogh.afternoontea.widget.NopicWebview;
@@ -26,10 +27,12 @@ import com.gogh.afternoontea.widget.PicWebview;
  * <p> ChangeLog: </p>
  * <li> 高晓峰 on 12/28/2016 do fisrt create. </li>
  */
-public class GankDetailActivity extends BaseAppCompatActivity implements Initializer {
+public class GankDetailActivity extends BaseAppCompatActivity {
 
-    private GankEntity.ResultsBean mData;//详情数据
+    private BaseEntity mData;//详情数据
     private WebWidget webWidget;
+
+    private View rootView;
 
     @Override
     protected void updateThemeByChoice(int resId) {
@@ -39,47 +42,44 @@ public class GankDetailActivity extends BaseAppCompatActivity implements Initial
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);// 锁定竖屏
-        resetContentView();
+        loadContentView();
     }
 
-    @Override
-    public void init() {
+    private void loadContentView() {
+        mData = (BaseEntity) getIntent().getSerializableExtra(Urls.GANK_URL.BUNDLE_KEY);
+        if (mData != null) {
+            if (Configuration.newInstance().isNopicMode()) {
+                setNoPicWebview();
+            } else {
+                setPicWebview();
+            }
+
+            webWidget.onCreateView(rootView);
+            webWidget.onBindData();
+        }
+    }
+
+    public void setNoPicWebview() {
         webWidget = new NopicWebview(GankDetailActivity.this, mData);
-        setContentView(webWidget.getLayoutResId());
+        rootView = LayoutInflater.from(this).inflate(webWidget.getLayoutResId(), null);
+        setContentView(rootView);
         setTitle(mData.getDesc());
     }
 
-    @Override
-    public void initView() {
+    public void setPicWebview() {
         webWidget = new PicWebview(GankDetailActivity.this, mData);
-        setContentView(webWidget.getLayoutResId());
+        rootView = LayoutInflater.from(this).inflate(webWidget.getLayoutResId(), null);
+        setContentView(rootView);
         setTitle(null);
     }
 
-    private void resetContentView() {
-        mData = (GankEntity.ResultsBean) getIntent().getSerializableExtra(Urls.GANK_URL.BUNDLE_KEY);
-
-        if (mData != null && mData.getImages() != null && mData.getImages().size() > 0) {
-            if (Configuration.newInstance().isNopicMode()) {
-                init();
-            } else {
-                initView();
-            }
-        } else {
-            init();
-        }
-
-        webWidget.onCreateView();
-        webWidget.onBindData();
-    }
-
     private void setTitle(String title) {
-        Toolbar mToolBar = (Toolbar) findViewById(R.id.toolbar);
-
-        if (!TextUtils.isEmpty(title)) {
-            mToolBar.setTitle(title);
+        if(TextUtils.isEmpty(title)){
+            return;
         }
 
+        Toolbar mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        mToolBar.setTitle(title);
         setSupportActionBar(mToolBar);
     }
 
@@ -119,7 +119,12 @@ public class GankDetailActivity extends BaseAppCompatActivity implements Initial
         } else {
             super.onBackPressed();
         }
-
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        webWidget.onDestroy();
+        webWidget = null;
+    }
 }

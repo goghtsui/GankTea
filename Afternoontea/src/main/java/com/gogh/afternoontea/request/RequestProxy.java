@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.gogh.afternoontea.entity.gank.GankEntity;
+import com.gogh.afternoontea.entity.gank.SearchEntity;
 import com.gogh.afternoontea.listener.OnResponListener;
 import com.gogh.afternoontea.request.imp.RequestApiImp;
 
@@ -58,6 +59,22 @@ public class RequestProxy implements Request {
     @Override
     public void getDataByCategory(String category, int num, int page, OnResponListener<GankEntity> responListener) {
         RequestApiImp.newInstance().getDataByCategory(category, num, page, responListener);
+    }
+
+    /**
+     * 搜索接口
+     *
+     * @param year
+     * @param month
+     * @param day
+     * @param onResponListener
+     * @author 高晓峰
+     * @date 9/12/2017
+     * @ChangeLog: <li> 高晓峰  on 9/12/2017 </li>
+     */
+    @Override
+    public void getSearchList(String year, String month, String day, OnResponListener<SearchEntity> onResponListener) {
+        RequestApiImp.newInstance().getSearchList(year, month, day, onResponListener);
     }
 
     /**

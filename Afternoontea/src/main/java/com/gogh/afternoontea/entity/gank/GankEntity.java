@@ -43,21 +43,11 @@ public class GankEntity implements Serializable {
         this.results = results;
     }
 
+    public static class ResultsBean implements com.gogh.afternoontea.entity.gank.BaseEntity{
 
-    public static class ResultsBean implements Serializable{
+        private static final String TAG = "ResultsBean";
+
         private static final long serialVersionUID = 6772674961097610569L;
-        /**
-         * _id : 5861d017421aa97240ef9f41
-         * createdAt : 2016-12-27T10:21:11.590Z
-         * desc : macOS 10.12 Picture-in-Picture 快速实现
-         * images : ["http://img.gank.io/1d556c90-396c-4dae-a3d3-5cb3db7fab97"]
-         * publishedAt : 2016-12-27T12:06:15.638Z
-         * source : chrome
-         * type : iOS
-         * url : https://github.com/insidegui/PIPContainer
-         * used : true
-         * who : 代码家
-         */
 
         private String _id;
         private String createdAt;
@@ -70,90 +60,112 @@ public class GankEntity implements Serializable {
         private String who;
         private List<String> images;
 
+        public ResultsBean() {
+        }
+
+        @Override
         public String get_id() {
             return _id;
         }
 
+        @Override
         public void set_id(String _id) {
             this._id = _id;
         }
 
+        @Override
         public String getCreatedAt() {
             return createdAt;
         }
 
+        @Override
         public void setCreatedAt(String createdAt) {
             this.createdAt = createdAt;
         }
 
+        @Override
         public String getDesc() {
             return desc;
         }
 
+        @Override
         public void setDesc(String desc) {
             this.desc = desc;
         }
 
+        @Override
         public String getPublishedAt() {
             return publishedAt;
         }
 
+        @Override
         public void setPublishedAt(String publishedAt) {
             this.publishedAt = publishedAt;
         }
 
-        public String getSource() {
-            return source;
-        }
-
-        public void setSource(String source) {
-            this.source = source;
-        }
-
+        @Override
         public String getType() {
             return type;
         }
 
+        @Override
         public void setType(String type) {
             this.type = type;
         }
 
+        @Override
         public String getUrl() {
             return url;
         }
 
+        @Override
         public void setUrl(String url) {
             this.url = url;
         }
 
+        @Override
         public boolean isUsed() {
             return used;
         }
 
+        @Override
         public void setUsed(boolean used) {
             this.used = used;
         }
 
+        @Override
         public String getWho() {
             return who;
         }
 
+        @Override
         public void setWho(String who) {
             this.who = who;
         }
 
+        @Override
+        public String getSource() {
+            return source;
+        }
+
+        @Override
+        public void setSource(String source) {
+            this.source = source;
+        }
+
+        @Override
         public List<String> getImages() {
             return images;
         }
 
+        @Override
         public void setImages(List<String> images) {
             this.images = images;
         }
 
-        @NonNull
         @Override
         public String toString() {
-            return "ResultsBean{" +
+            return "AndroidBean{" +
                     "_id='" + _id + '\'' +
                     ", createdAt='" + createdAt + '\'' +
                     ", desc='" + desc + '\'' +
@@ -166,6 +178,7 @@ public class GankEntity implements Serializable {
                     ", images=" + images +
                     '}';
         }
+
     }
 
     @NonNull

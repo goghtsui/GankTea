@@ -121,7 +121,6 @@ public class Configuration implements Preference {
 
     @Override
     public void setTheme(int theme) {
-        Logger.d("Configuration","setTheme : " + theme);
         userEditor.putInt(Constant.THEME_KEY, theme);
         userEditor.commit();
     }

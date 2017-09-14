@@ -3,6 +3,7 @@ package com.gogh.afternoontea.request;
 import android.content.Context;
 
 import com.gogh.afternoontea.entity.gank.GankEntity;
+import com.gogh.afternoontea.entity.gank.SearchEntity;
 import com.gogh.afternoontea.listener.OnResponListener;
 
 /**
@@ -45,6 +46,17 @@ public interface Request {
      * @param responListener
      */
     void getDataByCategory(String category, int num, int page, OnResponListener<GankEntity> responListener);
+
+    /**
+     * 搜索接口
+     *
+     * @param date
+     * @param onResponListener
+     * @author 高晓峰
+     * @date 9/12/2017
+     * @ChangeLog: <li> 高晓峰  on 9/12/2017 </li>
+     */
+    void getSearchList(String year, String month, String day, OnResponListener<SearchEntity> onResponListener);
 
     /**
      *  获取网页的html源码

@@ -5,8 +5,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.TypedValue;
 import android.view.View;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,10 +15,10 @@ import android.widget.ProgressBar;
 
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.app.WebWidget;
-import com.gogh.afternoontea.entity.gank.GankEntity;
-import com.gogh.afternoontea.ui.GankDetailActivity;
 import com.gogh.afternoontea.utils.IntentUtils;
 import com.gogh.afternoontea.utils.StringUtil;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -28,13 +29,13 @@ import com.gogh.afternoontea.utils.StringUtil;
  */
 public class NopicWebview implements WebWidget {
 
-    private GankEntity.ResultsBean mData;//详情数据
-    private Context context;
+    private com.gogh.afternoontea.entity.gank.BaseEntity mData;//详情数据
+    private WeakReference<Context> referenceContext;
     private WebView mWebview;
     private ProgressBar mProgressBar;
 
-    public NopicWebview(Context activity, GankEntity.ResultsBean mData) {
-        this.context = activity;
+    public NopicWebview(Context context, com.gogh.afternoontea.entity.gank.BaseEntity mData) {
+        this.referenceContext = new WeakReference<>(context);
         this.mData = mData;
     }
 
@@ -54,9 +55,9 @@ public class NopicWebview implements WebWidget {
      * @return
      */
     @Override
-    public void onCreateView() {
-        mProgressBar = (ProgressBar) ((GankDetailActivity) context).findViewById(R.id.progress);
-        mWebview = (WebView) ((GankDetailActivity) context).findViewById(R.id.gank_detail_webview);
+    public void onCreateView(View rootView) {
+        mProgressBar = (ProgressBar) rootView.findViewById(R.id.progress);
+        mWebview = (WebView) rootView.findViewById(R.id.gank_detail_webview);
         setUpWebView(mWebview);
     }
 
@@ -72,18 +73,18 @@ public class NopicWebview implements WebWidget {
 
     @Override
     public void copyContent() {
-        String copyDone = context.getResources().getString(R.string.toast_copy_done);
-        StringUtil.copyToClipBoard(context, mWebview.getUrl(), copyDone);
+        String copyDone = referenceContext.get().getResources().getString(R.string.toast_copy_done);
+        StringUtil.copyToClipBoard(referenceContext.get(), mWebview.getUrl(), copyDone);
     }
 
     @Override
     public void openBySystemBrowser() {
-        IntentUtils.openWithBrowser(mWebview.getUrl(), context);
+        IntentUtils.openWithBrowser(mWebview.getUrl(), referenceContext.get());
     }
 
     @Override
     public void shareUrl() {
-        IntentUtils.share(context, mWebview.getUrl());
+        IntentUtils.share(referenceContext.get(), mWebview.getUrl());
     }
 
     @Override
@@ -94,18 +95,6 @@ public class NopicWebview implements WebWidget {
     @Override
     public boolean canGoBack() {
         return mWebview.canGoBack();
-    }
-
-
-    /**
-     * 获取主题颜色
-     *
-     * @return
-     */
-    public int getColorPrimary() {
-        TypedValue typedValue = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
-        return typedValue.data;
     }
 
     /**
@@ -124,23 +113,29 @@ public class NopicWebview implements WebWidget {
         webView.setWebViewClient(new GankWebViewClient());
     }
 
+    @Override
+    public void onDestroy() {
+        mWebview.stopLoading();
+        mWebview.cancelPendingInputEvents();
+        mWebview.clearCache(true);
+        mWebview.clearFormData();
+        mWebview.clearHistory();
+        mWebview.clearMatches();
+        mWebview.clearSslPreferences();
+        mWebview = null;
+    }
+
     private class GankWebViewClient extends WebViewClient {
 
-        /**
-         * 是否使用原浏览器加载网页
-         *
-         * @param view
-         * @param url
-         * @return
-         */
-        public boolean shouldOverrideUrlLoading(@NonNull WebView view, String url) {
-            if (TextUtils.isEmpty(url)) {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            if (TextUtils.isEmpty(request.getUrl().toString())) {
                 return true;
             }
-            if (Uri.parse(url).getHost().equals("github.com")) {
+            if (Uri.parse(request.getUrl().toString()).getHost().equals(referenceContext.get().getResources().getString(R.string.gank_webview_url_host))) {
                 return false;
             }
-            view.loadUrl(url);
+            view.loadUrl(request.getUrl().toString());
             return true;
         }
 
@@ -157,10 +152,11 @@ public class NopicWebview implements WebWidget {
         }
 
         @Override
-        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-            super.onReceivedError(view, errorCode, description, failingUrl);
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            super.onReceivedError(view, request, error);
             mProgressBar.setVisibility(View.GONE);
         }
+
     }
 
 }

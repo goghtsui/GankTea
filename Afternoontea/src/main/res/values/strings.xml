@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">无极</string>
+    <string name="app_name">极客头条</string>
     <string name="action_settings">设置</string>
 
     <string name="notifyTitle">提示</string>
@@ -12,8 +12,11 @@
     <string name="translation_element_name">translation_element_name</string>
 
     <string name="action_share_url">分享</string>
+    <string name="action_share_to">分享到</string>
     <string name="action_copy_url">复制链接</string>
     <string name="action_open_url">从浏览器打开链接</string>
+    <string name="action_mailto">mailto:xiaofeng355@sina.com</string>
+    <string name="gank_webview_url_host">github.com</string>
 
     <string name="toast_copy_done">复制成功</string>
     <string name="toast_open_fail">打开链接失败</string>
@@ -100,5 +103,8 @@
     <string name="home_contribute_email_content">你只需要提供相关文章的链接地址，并简单说明文章主题及类型，原创文章或者Github开源库，提交人写你的网络名称即可，请按照以下格式填写，勿删！！！&lt;br&gt;文章链接地址：&lt;br&gt;文章内容描述：&lt;br&gt;文章提交作者：&lt;br&gt;文章分类（Android | iOS | 视频 | 福利 | 拓展资源 | 前端 | 瞎推荐 | App）：&lt;br&gt;</string>
 
     <string name="home_contribute_emial_title">发表文章</string>
+
+    <!--搜索提示-->
+    <string name="gank_search_input_error_alarm">该日期没有资源发布，看看其它时间吧！</string>
 
 </resources>

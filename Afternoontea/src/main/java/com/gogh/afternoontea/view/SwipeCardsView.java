@@ -265,7 +265,7 @@ public class SwipeCardsView extends LinearLayout {
     }
 
     private boolean canMoveCard() {
-        return !mRetainLastCard || mRetainLastCard && mShowingIndex != mCount - 1;
+        return !mRetainLastCard || (mRetainLastCard && mShowingIndex != mCount - 1);
     }
 
     public void enableSwipe(boolean enable) {
@@ -767,6 +767,8 @@ public class SwipeCardsView extends LinearLayout {
             case RIGHT:
                 finalX = mWidth;
                 break;
+            default:
+                break;
         }
         if (finalX != 0) {
             startScrollTopView(finalX, initTop + mHeight, SCROLL_DURATION, type);
@@ -796,6 +798,7 @@ public class SwipeCardsView extends LinearLayout {
      * 卡片回调接口
      */
     public interface CardsSlideListener {
+
         /**
          * 新卡片显示回调
          *

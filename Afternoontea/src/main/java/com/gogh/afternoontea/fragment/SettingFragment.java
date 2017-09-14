@@ -82,7 +82,6 @@ public class SettingFragment extends PreferenceFragment implements SharedPrefere
                 Configuration.newInstance().setTheme(R.style.DarkTheme);
                 resetColor();
             } else {
-                //                ATApplication.THEME = new Configuration(getActivity().getApplicationContext(), Configuration.FLAG_CUSTOM).getTheme();
                 getActivity().setTheme(R.style.DefaultTheme);
                 ThemeManager.newInstance().setThemeColor(R.color.colorDefaultPrimary);
                 Configuration.newInstance().setTheme(R.style.DefaultTheme);

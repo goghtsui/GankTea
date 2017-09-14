@@ -67,8 +67,6 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     private static final int VIEW_TYPE_FOOTER = 0x10013;
 
-    private int mViewType = -1;
-
     private Context context;
     private String resourceType;
     private boolean isScrollToBottom = false;
@@ -109,15 +107,12 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_NORMAL) {
-            mViewType = VIEW_TYPE_NORMAL;
             View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_list_item_layout, parent, false);
             return new ItemViewHolder(rootView, context);
         } else if (viewType == VIEW_TYPE_NO_PIC) {
-            mViewType = VIEW_TYPE_NO_PIC;
             View noPicView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_list_item_nopic_layout, parent, false);
             return new NoPicViewHolder(noPicView, context);
         } else if (viewType == VIEW_TYPE_WELFARE) {
-            mViewType = VIEW_TYPE_WELFARE;
             View welfareView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_welfare_item_layout, parent, false);
             return new WelfareViewHolder(context, welfareView);
         } else {
@@ -149,7 +144,6 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public void onBindViewHolder(@Nullable RecyclerView.ViewHolder holder, int position) {
-        Logger.d("TAG", "onBindViewHolder. ");
         if (holder != null && holder instanceof ItemViewHolder) {
             bindNormalData(holder, position);
         } else if (holder != null && holder instanceof NoPicViewHolder) {
@@ -196,7 +190,7 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((ItemViewHolder) holder).itemCreateDate.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
             }
 
-            if (!TextUtils.isEmpty(resourceType) && resourceType.equals("all")
+            if (!TextUtils.isEmpty(resourceType) && resourceType.equals(Urls.GANK_URL.ALL)
                     && !TextUtils.isEmpty(entity.getType())) {
                 ((ItemViewHolder) holder).itemType.setVisibility(View.VISIBLE);
                 ((ItemViewHolder) holder).itemType.setImageResource(Resource.getResIdByType(entity.getType()));
@@ -222,10 +216,8 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((ItemViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Logger.d(TAG, "mOnItemClickListener position : " + position);
-                    GankEntity.ResultsBean data = datas.get(position);
                     Intent intent = new Intent(context, GankDetailActivity.class);
-                    intent.putExtra(Urls.GANK_URL.BUNDLE_KEY, data);
+                    intent.putExtra(Urls.GANK_URL.BUNDLE_KEY, entity);
 
                     ActivityOptionsCompat options =
                             ActivityOptionsCompat.makeSceneTransitionAnimation((HomeActivity) context,
@@ -266,7 +258,7 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((NoPicViewHolder) holder).itemCreateDate.setText(entity.getPublishedAt().replace("T", " ").replace("Z", " "));
             }
 
-            if (!TextUtils.isEmpty(resourceType) && resourceType.equals("all")
+            if (!TextUtils.isEmpty(resourceType) && resourceType.equals(Urls.GANK_URL.ALL)
                     && !TextUtils.isEmpty(entity.getType())) {
                 ((NoPicViewHolder) holder).itemType.setVisibility(View.VISIBLE);
                 ((NoPicViewHolder) holder).itemType.setImageResource(Resource.getResIdByType(entity.getType()));
@@ -293,7 +285,7 @@ public class GankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, GankDetailActivity.class);
-                    intent.putExtra(Urls.GANK_URL.BUNDLE_KEY, datas.get(position));
+                    intent.putExtra(Urls.GANK_URL.BUNDLE_KEY, entity);
 
                     ActivityOptionsCompat options =
                             ActivityOptionsCompat.makeSceneTransitionAnimation((HomeActivity) context,

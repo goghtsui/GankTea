@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Infinite</string>
+    <string name="app_name">GeekHeadlines</string>
     <string name="action_settings">Settigns</string>
 
     <string name="notifyTitle">Tips</string>
@@ -12,8 +12,11 @@
     <string name="translation_element_name">translation_element_name</string>
 
     <string name="action_share_url">Share</string>
+    <string name="action_share_to">Share to</string>
     <string name="action_copy_url">Copy link</string>
     <string name="action_open_url">Open the link from the browser</string>
+    <string name="action_mailto">mailto:xiaofeng355@sina.com</string>
+    <string name="gank_webview_url_host">github.com</string>
 
     <string name="toast_copy_done">Copy success</string>
     <string name="toast_open_fail">Open the link failure</string>
@@ -100,5 +103,8 @@
     <string name="home_contribute_email_content">You only need to provide relevant article link address, and describe the subject and type for the article, Orignal article or Github open source, author name written your network name, Please fill in according to the following format, Don\'t delete!!! &lt;br&gt;The article links: &lt;br&gt;The article content description: &lt;br&gt;The article author: &lt;br&gt;The article category(Android | iOS | Video | Welfare | Expand source | Web | Recommend | App): &lt;br&gt;</string>
 
     <string name="home_contribute_emial_title">publish an article</string>
+
+    <!--搜索提示-->
+    <string name="gank_search_input_error_alarm">The resource was not found, try to have a look at other time!</string>
 
 </resources>

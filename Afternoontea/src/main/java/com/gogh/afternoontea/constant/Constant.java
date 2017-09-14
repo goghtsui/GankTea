@@ -9,6 +9,10 @@ package com.gogh.afternoontea.constant;
  */
 public interface Constant {
 
+    int DURATION_LONG = 800;
+    int DURATION_MID = 600;
+    int DURATION_SHORT = 300;
+
     String ACCEPT = "Accept";
     String USER_AGENT = "User-Agent";
     String APIKEY = "apikey";

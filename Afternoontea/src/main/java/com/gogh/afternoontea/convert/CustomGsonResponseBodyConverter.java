@@ -42,7 +42,7 @@ final class CustomGsonResponseBodyConverter<T> implements Converter<ResponseBody
 
         MediaType contentType = value.contentType();
         Charset charset = contentType != null ? contentType.charset(UTF_8) : UTF_8;
-        InputStream inputStream = new ByteArrayInputStream(response.getBytes());
+        InputStream inputStream = new ByteArrayInputStream(response.getBytes(charset));
         Reader reader = new InputStreamReader(inputStream, charset);
         JsonReader jsonReader = gson.newJsonReader(reader);
         jsonReader.setLenient(true);

@@ -25,6 +25,7 @@ public interface BaseGankAdapter<T> {
     boolean isScrolledToBottom();
 
     void setScrollToBottom(boolean isBottom);
+
     void setLoadingError(boolean isLoadingError);
 
     void notifyByThemeChanged();

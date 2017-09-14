@@ -6,10 +6,56 @@
     <dimen name="float_menu_margin">20dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
 
+    <!-- custom magins, don't modity them. -->
+    <dimen name="gank_margin_none">0dp</dimen>
+    <dimen name="gank_margin_small">5dp</dimen>
+    <dimen name="gank_margin_xsmall">10dp</dimen>
+    <dimen name="gank_margin_xxsmall">15dp</dimen>
+    <dimen name="gank_margin_middle">20dp</dimen>
+    <dimen name="gank_margin_large">30dp</dimen>
+    <dimen name="gank_margin_xlarge">40dp</dimen>
+    <dimen name="gank_margin_xxlarge">50dp</dimen>
+
     <dimen name="gank_list_item_standard_margin_left">5dp</dimen>
 
     <dimen name="gank_list_item_nopic_author_text">14sp</dimen>
 
     <dimen name="gank_list_item_title_text">20sp</dimen>
+
+    <dimen name="gank_search_type_text">16sp</dimen>
+
+    <dimen name="gank_search_type_margin_vertical">6dp</dimen>
+    <dimen name="gank_search_type_margin_horizontal">13dp</dimen>
+
+    <!--gank_detail_layout-->
+    <dimen name="gank_detail_layout_appbar_height">256dp</dimen>
+    <dimen name="gank_detail_layout_toolbar_expand">20dp</dimen>
+
+    <!--gank-detail_nopic-->
+    <dimen name="gank_list_footer_padding">12dp</dimen>
+
+    <!--gank_list_item_layout-->
+    <dimen name="gank_list_item_layout_height">240dp</dimen>
+    <dimen name="gank_list_item_layout_margin">8dp</dimen>
+    <dimen name="gank_list_item_layout_corner">6dp</dimen>
+    <dimen name="gank_list_item_layout_elevation">10dp</dimen>
+    <dimen name="gank_list_item_layout_pic_height">200dp</dimen>
+    <dimen name="gank_list_item_layout_pic_margin_bottom">40dp</dimen>
+
+    <!--gank_list_item_nopic_layout-->
+    <dimen name="gank_list_item_nopic_layout_margin">8dp</dimen>
+    <dimen name="gank_list_item_nopic_layout_pic_width">70dp</dimen>
+
+    <!--gank_search_layout-->
+    <dimen name="gank_search_layout_margin">3dp</dimen>
+    <dimen name="gank_search_layout_corner">3dp</dimen>
+    <dimen name="gank_search_layout_elevation">5dp</dimen>
+    <dimen name="gank_search_layout_pic">48dp</dimen>
+    <dimen name="gank_search_layout_pic_padding">8dp</dimen>
+
+    <!--gank_welfare_item-->
+    <dimen name="gank_welfare_item_margin">8dp</dimen>
+    <dimen name="gank_welfare_item_corner">4dp</dimen>
+    <dimen name="gank_welfare_item_elevation">6dp</dimen>
 
 </resources>

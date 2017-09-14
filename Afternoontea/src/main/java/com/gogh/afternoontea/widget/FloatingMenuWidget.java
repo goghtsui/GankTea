@@ -10,6 +10,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.RelativeLayout;
 
 import com.gogh.afternoontea.app.Initializer;
+import com.gogh.afternoontea.constant.Constant;
 import com.gogh.afternoontea.entity.FloatMenu;
 import com.gogh.afternoontea.utils.AndroidUtil;
 import com.gogh.afternoontea.utils.MathUtil;
@@ -26,10 +27,6 @@ import java.util.List;
  */
 public class FloatingMenuWidget implements Initializer{
 
-    /**
-     * duration of animations, in milliseconds
-     */
-    protected static final int DURATION = 800;
     private Context context;
     private List<View> mTargetViews;
     private RelativeLayout floatMenuContainer;
@@ -71,7 +68,7 @@ public class FloatingMenuWidget implements Initializer{
             PropertyValuesHolder alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 1);
 
             ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(mTargetViews.get(index), translationX, translationY, rotation, scaleX, scaleY, alpha);
-            animation.setDuration(DURATION);
+            animation.setDuration(Constant.DURATION_LONG);
             animation.setInterpolator(new OvershootInterpolator(0.9f));
             int finalIndex = index;
             animation.addListener(new Animator.AnimatorListener() {
@@ -108,7 +105,7 @@ public class FloatingMenuWidget implements Initializer{
             PropertyValuesHolder alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 0);
 
             ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(mTargetViews.get(index), translationX, translationY, rotation, scaleX, scaleY, alpha);
-            animation.setDuration(DURATION);
+            animation.setDuration(Constant.DURATION_LONG);
             animation.setInterpolator(new OvershootInterpolator(0.9f));
             int finalIndex = index;
             animation.addListener(new Animator.AnimatorListener() {

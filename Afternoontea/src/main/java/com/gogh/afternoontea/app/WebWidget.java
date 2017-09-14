@@ -1,5 +1,7 @@
 package com.gogh.afternoontea.app;
 
+import android.view.View;
+
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
  * <p> Description: </p>
@@ -19,7 +21,7 @@ public interface WebWidget {
      * 创建view
      * @return
      */
-    void onCreateView();
+    void onCreateView(View rootView);
 
     /**
      * 绑定数据到view
@@ -36,4 +38,6 @@ public interface WebWidget {
     void onBackPressed();
 
     boolean canGoBack();
+
+    void onDestroy();
 }

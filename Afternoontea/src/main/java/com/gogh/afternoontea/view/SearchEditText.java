@@ -1,9 +1,12 @@
 package com.gogh.afternoontea.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
-import android.view.View;
+import android.view.MotionEvent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import com.gogh.afternoontea.app.Initializer;
 
@@ -16,19 +19,13 @@ import com.gogh.afternoontea.app.Initializer;
  */
 public class SearchEditText extends android.support.v7.widget.AppCompatEditText implements Initializer {
 
+    private static final String TAG = "SearchEditText";
+
     private OnKeyboardSearchKeyClickListener mSearchKeyListener;
+
+    private OnDrawableClickedListener onDrawableClickedListener;
+
     private OnKeyboardDismissedListener mOnKeyboardDismissedListener;
-
-    private OnKeyListener mOnKeyListener = new OnKeyListener() {
-        public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-
-            if (keyCode == KeyEvent.KEYCODE_ENTER && mSearchKeyListener != null) {
-                mSearchKeyListener.onSearchKeyClicked();
-                return true;
-            }
-            return false;
-        }
-    };
 
     public SearchEditText(Context context) {
         this(context, null);
@@ -43,11 +40,20 @@ public class SearchEditText extends android.support.v7.widget.AppCompatEditText 
         init();
     }
 
-
-
     @Override
     public void init() {
-        setOnKeyListener(mOnKeyListener);
+        setOnEditorActionListener(new OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if (mSearchKeyListener != null) {
+                        mSearchKeyListener.onSearchKeyClicked(v.getText().toString());
+                    }
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -70,11 +76,84 @@ public class SearchEditText extends android.support.v7.widget.AppCompatEditText 
         mSearchKeyListener = searchKeyListener;
     }
 
+    public void setOnDrawableClickedListener(OnDrawableClickedListener onDrawableClickedListener) {
+        this.onDrawableClickedListener = onDrawableClickedListener;
+    }
+
     public interface OnKeyboardDismissedListener {
         void onKeyboardDismissed();
     }
 
-    public interface OnKeyboardSearchKeyClickListener {
-        void onSearchKeyClicked();
+    /**
+     * 判断DrawableLeft/DrawableRight是否被点击
+     *
+     * @param event
+     * @author 高晓峰
+     * @date 9/12/2017
+     * @ChangeLog: <li> 高晓峰 on 9/12/2017 </li>
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // 触摸状态
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            // 监听DrawableLeft
+            if (onDrawableClickedListener != null) {
+                // 判断DrawableLeft是否被点击
+                Drawable drawableLeft = getCompoundDrawables()[0];
+                // 当按下的位置 < 在EditText的到左边间距+图标的宽度+Padding
+                if (drawableLeft != null && event.getRawX() <= (getLeft() + getTotalPaddingLeft() + drawableLeft.getBounds().width())) {
+                    // 执行DrawableLeft点击事件
+                    onDrawableClickedListener.onDrawableLeftClick();
+                    return true;
+                }
+            }
+
+            // 监听DrawableRight
+            if (onDrawableClickedListener != null) {
+                Drawable drawableRight = getCompoundDrawables()[2];
+                // 当按下的位置 > 在EditText的到右边间距-图标的宽度-Padding
+                if (drawableRight != null && event.getRawX() >= (getRight() - getTotalPaddingRight() - drawableRight.getBounds().width())) {
+                    // 执行DrawableRight点击事件
+                    onDrawableClickedListener.onDrawableRightClick();
+                    return true;
+                }
+            }
+        }
+
+        return super.onTouchEvent(event);
     }
+
+    public interface OnKeyboardSearchKeyClickListener {
+        void onSearchKeyClicked(String searchText);
+    }
+
+
+    /**
+     * 开头或者结尾设置的图标的点击事件
+     *
+     * @author 高晓峰
+     * @date 9/12/2017
+     * @ChangeLog: <li> 高晓峰 on 9/12/2017 </li>
+     */
+    public interface OnDrawableClickedListener {
+
+        /**
+         * 左侧图标点击事件
+         *
+         * @author 高晓峰
+         * @date 9/12/2017
+         * @ChangeLog: <li> 高晓峰 on 9/12/2017 </li>
+         */
+        void onDrawableLeftClick();
+
+        /**
+         * 右侧图标点击事件
+         *
+         * @author 高晓峰
+         * @date 9/12/2017
+         * @ChangeLog: <li> 高晓峰 on 9/12/2017 </li>
+         */
+        void onDrawableRightClick();
+    }
+
 }

@@ -2,21 +2,26 @@ package com.gogh.afternoontea.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.gogh.afternoontea.BuildConfig;
 import com.gogh.afternoontea.R;
+import com.gogh.afternoontea.constant.Constant;
 import com.gogh.afternoontea.listener.OnCachePageNumChangedListener;
 import com.gogh.afternoontea.listener.OnMultipleClickListener;
-import com.gogh.afternoontea.utils.Logger;
 import com.gogh.afternoontea.main.BaseAppCompatActivity;
 import com.gogh.afternoontea.preference.PreferenceManager;
+import com.gogh.afternoontea.theme.ThemeManager;
+import com.gogh.afternoontea.utils.DataUtil;
 import com.gogh.afternoontea.utils.IntentUtils;
 import com.gogh.afternoontea.utils.TintColor;
 import com.gogh.afternoontea.view.FloatMenuButton;
@@ -50,16 +55,40 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
     private FloatingMenuWidget mFloatingMenuWidget;
 
     @Override
+    protected void updateThemeByChoice(int themeColor) {
+        // 动态设置滚动条的颜色
+        //        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(HomeActivity.this, themeStyleId));
+        //        tabLayout.setSelectedTabIndicatorColor(TintColor.getAccentColor(HomeActivity.this));
+        floatMenuButton.resetFloatMenuBackground(themeColor);
+        TintColor.setBackgroundTintList(floatingActionButton, ContextCompat.getColor(HomeActivity.this, themeColor));
+        // 动态设置tab背景颜色
+        tabLayout.setBackgroundColor(ContextCompat.getColor(HomeActivity.this, themeColor));
+        // 设置页面背景色
+        mViewPager.setBackgroundColor(ContextCompat.getColor(HomeActivity.this, themeColor));
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Logger.d(TAG, "HomeActivity  onCreate.");
         setContentView(R.layout.home_activity_layout);
         PreferenceManager.newInstance().registerCachePageNumChangedListener(this);
         initView();
+        if (BuildConfig.DEBUG) {
+            // 内存泄露检查案例
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectActivityLeaks()
+                    .penaltyLog()
+                    .build());
+
+            // 资源引用没有关闭检查案例
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectLeakedClosableObjects()
+                    .penaltyLog()
+                    .build());
+        }
     }
 
     private void initView() {
-        Logger.d(TAG, "HomeActivity  initView.");
          /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
         CoordinatorLayout rootView = (CoordinatorLayout) findViewById(R.id.main_content);
@@ -84,30 +113,17 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
         // 设置悬浮菜单的背景颜色
         floatMenuButton.initFloatMenuBackground(TintColor.getPrimaryColor(HomeActivity.this));
 
-    }
-
-    @Override
-    protected void updateThemeByChoice(int themeColor) {
-        Logger.d(TAG, "HomeActivity updateThemeByChoice  : " + themeColor);
-        // 动态设置滚动条的颜色
-        //        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(HomeActivity.this, themeStyleId));
-        floatMenuButton.resetFloatMenuBackground(themeColor);
-        TintColor.setBackgroundTintList(floatingActionButton, themeColor/*ContextCompat.getColor(HomeActivity.this, themeColor)*/);
-        // 动态设置tab背景颜色
-        tabLayout.setBackgroundColor(themeColor);
         // 设置页面背景色
-//        mViewPager.setBackgroundColor(themeColor);
+        mViewPager.setBackgroundColor(TintColor.getPrimaryColor(HomeActivity.this));
     }
 
     @Override
     public void onClickListener(View view) {
-        Logger.d(TAG, "onClickListener");
         mFloatingMenuWidget.autoBootMenu();
     }
 
     @Override
     public void onLongClickListener(View view) {
-        Logger.d(TAG, "onLongClickListener");
         mFloatingMenuWidget.autoBootMenu();
     }
 
@@ -130,11 +146,16 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
     @Override
     public void onSearchListener(View v) {
         mFloatingMenuWidget.closeMenu();
-        Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
-        ActivityOptionsCompat options =
-                ActivityOptionsCompat.makeSceneTransitionAnimation(HomeActivity.this,
-                        v, getResources().getString(R.string.app_name));// 不需要联动
-        ActivityCompat.startActivity(HomeActivity.this, intent, options.toBundle());
+        mViewPager.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+                ActivityOptionsCompat options =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(HomeActivity.this,
+                                v, getResources().getString(R.string.app_name));// 不需要联动
+                ActivityCompat.startActivity(HomeActivity.this, intent, options.toBundle());
+            }
+        }, Constant.DURATION_SHORT);
     }
 
     /**
@@ -152,8 +173,7 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
                 .onPositive((dialog, which) -> {
                     IntentUtils.contibuteByEmail(HomeActivity.this, getResources().getString(R.string.home_contribute_emial_title),
                             getResources().getString(R.string.home_contribute_email_content));
-                    /*StringUtil.copyToClipBoard(HomeActivity.this,
-                        getResources().getString(R.string.home_contribute_dialog_clipboard_content), null);*/})
+                })
                 .show();
         mFloatingMenuWidget.closeMenu();
     }
@@ -185,5 +205,13 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
     @Override
     public void onChanged(int count) {
         mViewPager.setOffscreenPageLimit(count);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ThemeManager.newInstance().clear();
+        PreferenceManager.newInstance().clear();
+        DataUtil.cleanApplicationData(this);
     }
 }

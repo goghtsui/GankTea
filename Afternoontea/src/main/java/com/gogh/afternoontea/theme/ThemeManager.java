@@ -1,6 +1,7 @@
 package com.gogh.afternoontea.theme;
 
 import android.content.Context;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -21,6 +22,8 @@ import java.util.List;
  * <li> 高晓峰 on 12/21/2016 do fisrt create. </li>
  */
 public class ThemeManager {
+
+    private static final String TAG = "ThemeManager";
 
     @NonNull
     private List<OnUpdateThemeListener> updateThemeListeners = new ArrayList<>();
@@ -95,10 +98,11 @@ public class ThemeManager {
         }
     }
 
-    public void setThemeColor(int colorResId) {
-        Logger.d("ThemeManager", "setTheme color : " + colorResId);
+    public void setThemeColor(@ColorInt int colorResId) {
+        Logger.d("ThemeManager", "setThemeColor color : " + colorResId);
         if (updateThemeListeners != null && updateThemeListeners.size() > 0) {
             for (OnUpdateThemeListener themeListener : updateThemeListeners) {
+                Logger.d("ThemeManager", "setThemeColor  callback. ");
                 themeListener.onUpdateTheme(colorResId);
             }
         }
@@ -115,6 +119,7 @@ public class ThemeManager {
     }
 
     public void registerUpdateThemeListener(OnUpdateThemeListener updateThemeListener) {
+        Logger.d("ThemeManager", "registerUpdateThemeListener");
         updateThemeListeners.add(updateThemeListener);
     }
 
@@ -128,7 +133,7 @@ public class ThemeManager {
      * @param context 上下文
      * @param selectedColor 选择的颜色
      */
-    public void updateThemeByColor(@NonNull Context context, int selectedColor) {
+    public void updateThemeByColor(@NonNull Context context, @ColorInt int selectedColor) {
         if (selectedColor == ContextCompat.getColor(context, R.color.colorBluePrimary)) {
             ATApplication.THEME = R.style.BlueTheme;
             context.setTheme(R.style.BlueTheme);
@@ -189,6 +194,8 @@ public class ThemeManager {
             ATApplication.THEME = R.style.CyanTheme;
             context.setTheme(R.style.CyanTheme);
             this.setThemeColor(R.color.colorCyanPrimary);
+        } else {
+            Logger.d(TAG, "updateThemeByColor no match color.");
         }
     }
 
@@ -301,6 +308,7 @@ public class ThemeManager {
     }
 
     public void clear() {
+        Logger.d(TAG, "updateThemeListeners clear.");
         updateThemeListeners.clear();
     }
 

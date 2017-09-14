@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.gogh.afternoontea.R;
-import com.gogh.afternoontea.app.Initializer;
 import com.gogh.afternoontea.utils.TintColor;
 
 /**
@@ -17,7 +16,7 @@ import com.gogh.afternoontea.utils.TintColor;
  * <p> ChangeLog: </p>
  * <li> 高晓峰 on 1/19/2017 do fisrt create. </li>
  */
-public class WelfareViewHolder extends RecyclerView.ViewHolder implements Initializer {
+public class WelfareViewHolder extends RecyclerView.ViewHolder {
 
     private Context context;
 
@@ -30,11 +29,6 @@ public class WelfareViewHolder extends RecyclerView.ViewHolder implements Initia
         initView();
     }
 
-    @Override
-    public void init() {
-    }
-
-    @Override
     public void initView() {
         mTitleName = (AppCompatTextView) itemView.findViewById(R.id.gank_welfare_item_title);
         mWelfareImage = (ImageView) itemView.findViewById(R.id.gank_welfare_item_imageview);

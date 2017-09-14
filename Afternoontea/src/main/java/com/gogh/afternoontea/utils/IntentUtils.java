@@ -34,15 +34,15 @@ public class IntentUtils {
     public static void share(@NonNull Context context, String text) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "分享到");
+        intent.putExtra(Intent.EXTRA_SUBJECT, context.getResources().getString(R.string.action_share_to));
         intent.putExtra(Intent.EXTRA_TEXT, text);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(Intent.createChooser(intent, "分享到"));
+        context.startActivity(Intent.createChooser(intent, context.getResources().getString(R.string.action_share_to)));
     }
 
     public static void contibuteByEmail(Context context, String emailTitle, String emailContent){
         Intent intent=new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:xiaofeng355@sina.com"));
+        intent.setData(Uri.parse(context.getResources().getString(R.string.action_mailto)));
         intent.putExtra(Intent.EXTRA_SUBJECT, emailTitle);
         intent.putExtra(Intent.EXTRA_TEXT, emailContent);
         context.startActivity(intent);
@@ -72,7 +72,7 @@ public class IntentUtils {
     }
 
     private ArrayList<Uri> getUriListForImages(@NonNull Context context) {
-        ArrayList<Uri> myList = new ArrayList<Uri>();
+        ArrayList<Uri> myList = new ArrayList<>();
         String imageDirectoryPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/100ANDRO/";
         File imageDirectory = new File(imageDirectoryPath);
         String[] fileList = imageDirectory.list();

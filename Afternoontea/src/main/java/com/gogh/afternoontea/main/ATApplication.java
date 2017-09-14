@@ -1,7 +1,10 @@
 package com.gogh.afternoontea.main;
 
 import android.app.Application;
+import android.os.Build;
+import android.os.StrictMode;
 
+import com.gogh.afternoontea.BuildConfig;
 import com.gogh.afternoontea.R;
 import com.gogh.afternoontea.app.Initializer;
 import com.gogh.afternoontea.location.Weather;
@@ -34,17 +37,52 @@ public class ATApplication extends Application implements Initializer {
     }
 
     @Override
-    public void initView() {
+    public void onCreate() {
+        super.onCreate();
+        if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            // 案例1
+//            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
+//            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
+
+            // 案例2
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectCustomSlowCalls() //API等级11，使用StrictMode.noteSlowCode
+                    .detectDiskReads()
+                    .detectDiskWrites()
+                    .detectNetwork()   // or .detectAll() for all detectable problems
+//                    .penaltyDialog() //弹出违规提示对话框
+                    .penaltyLog() //在Logcat 中打印违规异常信息
+                    .penaltyFlashScreen() //API等级11
+                    .build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectLeakedSqlLiteObjects()
+                    .detectLeakedClosableObjects() //API等级11
+                    .penaltyLog()
+                    .penaltyDeath()
+                    .build());
+
+            /*// 网络连接
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectNetwork()
+                    .penaltyLog()
+                    .build());
+
+            // 磁盘读写检测
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectDiskWrites()
+                    .detectDiskReads()
+                    .penaltyLog()
+                    .build());*/
+
+        }
+        // FIXME: 9/11/2017 在主线程初始化，会造成卡顿，待修复
+        Configuration.newInstance().init(ATApplication.this);
+        THEME = Configuration.newInstance().getTheme();
+        init();
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        Logger.d(TAG, "ATApplication  onCreate.");
-//        LeakCanary.install(this);
-        Configuration.newInstance().init(this);
-        THEME = Configuration.newInstance().getTheme();
-        init();
+    public void initView() {
     }
 
     @Override

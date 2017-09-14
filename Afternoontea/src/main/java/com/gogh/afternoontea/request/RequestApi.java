@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.gogh.afternoontea.constant.Urls;
 import com.gogh.afternoontea.entity.gank.GankEntity;
+import com.gogh.afternoontea.entity.gank.SearchEntity;
 import com.gogh.afternoontea.entity.weather.WeatherEntity;
 
 import retrofit2.http.GET;
@@ -38,6 +39,10 @@ public interface RequestApi {
     @GET("data/{category}/{num}/{page}")
     Observable<GankEntity> getDataByCategory(@Path("category") String category
             , @Path("num") int num, @Path("page") int page);
+
+    @NonNull
+    @GET("day/{year}/{month}/{day}")
+    Observable<SearchEntity> getSearchList(@Path("year") String year, @Path("month") String month, @Path("day") String day);
 
     @NonNull
     @GET("{params}")

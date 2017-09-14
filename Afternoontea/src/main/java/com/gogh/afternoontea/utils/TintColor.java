@@ -8,6 +8,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.util.TypedValue;
+import android.view.View;
 
 import com.gogh.afternoontea.R;
 
@@ -22,6 +23,10 @@ public class TintColor {
 
     public static void setBackgroundTintList(@NonNull FloatingActionButton floatingActionButton, @ColorInt int color) {
         floatingActionButton.setBackgroundTintList(getTintList(color));
+    }
+
+    public static void setBackgroundTintList(@NonNull View view, @ColorInt int color) {
+        view.setBackgroundTintList(getTintList(color));
     }
 
     public static void setTintList(@NonNull Drawable drawable, @ColorInt int color) {
@@ -131,6 +136,12 @@ public class TintColor {
     public static int getPrimaryTextColor(@NonNull Context context) {
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorPrimaryText, typedValue, true);
+        return typedValue.data;
+    }
+
+    public static int getPrimaryBackgroundColor(@NonNull Context context) {
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(R.attr.colorPrimaryBackground, typedValue, true);
         return typedValue.data;
     }
 

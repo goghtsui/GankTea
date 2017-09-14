@@ -1,9 +1,12 @@
 package com.gogh.afternoontea.utils;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Copyright (c) 2016 All rights reserved by gaoxiaofeng
@@ -42,6 +45,19 @@ public class Utility {
         }
         Logger.d(TAG, "is not night time.");
         return false;
+    }
+
+    public static String format(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return null;
+        }
+        /*Pattern pattern = Pattern.compile("[0-9]*");
+        Matcher isNum = pattern.matcher(str);
+        return isNum.matches();*/
+
+        Pattern pattern = Pattern.compile("[^0-9]");
+        Matcher matcher = pattern.matcher(str);
+        return matcher.replaceAll("").trim();
     }
 
 }

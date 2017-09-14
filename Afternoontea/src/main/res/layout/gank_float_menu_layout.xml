@@ -5,8 +5,7 @@
     android:id="@+id/home_activity_float_menu_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alpha="0.9"
-    android:background="@android:color/white">
+    android:background="@color/colorTransparent">
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -16,13 +15,13 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_float_theme"/>
 
-    <!--<android.support.design.widget.FloatingActionButton
+    <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_float_search"/>-->
+        app:srcCompat="@drawable/ic_float_search"/>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

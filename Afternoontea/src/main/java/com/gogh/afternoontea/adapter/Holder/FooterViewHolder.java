@@ -13,10 +13,7 @@ import android.view.View;
  */
 public class FooterViewHolder extends RecyclerView.ViewHolder {
 
-    public View itemView;
-
     public FooterViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.itemView = itemView;
     }
 }
