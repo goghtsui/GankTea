@@ -214,4 +214,5 @@ public class HomeActivity extends BaseAppCompatActivity implements OnMultipleCli
         PreferenceManager.newInstance().clear();
         DataUtil.cleanApplicationData(this);
     }
+
 }

@@ -3,7 +3,7 @@ apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.gogh.afternoontea"
@@ -24,7 +24,7 @@ android {
         debug {
             // 调式模式开启日志显示
             buildConfigField "boolean", "LOG_ENABLE", "true"
-            shrinkResources true
+            shrinkResources false
             minifyEnabled false
             zipAlignEnabled true
         }
